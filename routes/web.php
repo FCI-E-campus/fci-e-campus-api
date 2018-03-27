@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/studentLogin/{userName}/{password}',['uses'=>'StudentController@show']);
+
+Route::get('/studentSignUP/{userName}/{password}/{email}/{phoneNumber}/{facultyId}/{isModerator}',['uses'=>'StudentController@store']);
