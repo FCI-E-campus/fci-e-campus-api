@@ -48,6 +48,7 @@ class TeacherController extends Controller
             $teacher->LASTNAME = $request['LASTNAME'];
             $teacher->EMAIL = $request['EMAIL'];
             $teacher->PHONENUMBER = $request['PHONENUMBER'];
+            $teacher->DATEOFBIRTH = null;
             $teacher->save();
             return redirect('/');
         }

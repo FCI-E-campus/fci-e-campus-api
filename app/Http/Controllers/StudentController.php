@@ -48,9 +48,10 @@ class StudentController extends Controller
             $student->LASTNAME = $request['LASTNAME'];
             $student->EMAIL = $request['EMAIL'];
             $student->PHONENUMBER = $request['PHONENUMBER'];
+            $student->DATEOFBIRTH = null;
             $student->FACULTYID = $request['FACULTYID'];
             $student->ISMODERATOR = $request['ISMODERATOR'];
-            $student->save();
+             $student->save();
             return redirect('/');
         }
         return "this user name is exist, select anther user name";

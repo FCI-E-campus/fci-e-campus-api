@@ -39,7 +39,7 @@ class DepartmentController extends Controller
         $dep->DEPTID=$request['DEPTID'];
         $dep->DEPARTMENTNAME=$request['DEPARTMENTNAME'];
         $dep->DESCRIPTION=$request['DESCRIPTION'];
-        return $dep;
+        //return $dep;
         $dep->save();
         return $dep;
     }

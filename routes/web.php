@@ -17,10 +17,10 @@ Route::get('/', function () {
 
 Route::get('/studentLogin/{STUDUSERNAME}/{STUDPASSWORD}',['uses'=>'StudentController@show']);
 
-Route::get('/studentSignUP/{STUDUSERNAME}/{DEPTID}/{DEP_DEPTID}/{STUDPASSWORD}/{FIRSTNAME}/{LASTNAME}/{EMAIL}/{PHONENUMBER}/{FACULTYID}/{ISMODERATOR}',
+Route::get('/studentSignUP/{STUDUSERNAME}/{DEPTID}/{DEP_DEPTID}/{STUDPASSWORD}/{FIRSTNAME}/{LASTNAME}/{EMAIL}/{PHONENUMBER}/{DATEOFBIRTH}/{FACULTYID}/{ISMODERATOR}',
     ['uses'=>'StudentController@store']);
 
-Route::get('/teacherSignUP/{PROFUSERNAME}/{DEPTID}/{PROFPASSWORD}/{FIRSTNAME}/{LASTNAME}/{EMAIL}/{PHONENUMBER}',
+Route::get('/teacherSignUP/{PROFUSERNAME}/{DEPTID}/{PROFPASSWORD}/{FIRSTNAME}/{LASTNAME}/{EMAIL}/{PHONENUMBER}/{DATEOFBIRTH}',
     ['uses'=>'TeacherController@store']);
 
 Route::get('/teacherLogin/{PROFUSERNAME}/{PROFPASSWORD}',['uses'=>'TeacherController@show']);
