@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
 use Illuminate\Http\Request;
-use App\Student;
+use App\Department;
 use DB;
-class StudentController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,25 +35,13 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        if(Student::find($request['STUDUSERNAME'])=="") {
-            $student = new Student;
-            $student->STUDUSERNAME = $request['STUDUSERNAME'];
-            $student->DEPTID = $request['DEPTID'];
-            $student->DEP_DEPTID = $request['DEP_DEPTID'];
-            $student->STUDPASSWORD = $request['STUDPASSWORD'];
-            $student->FIRSTNAME = $request['FIRSTNAME'];
-            $student->LASTNAME = $request['LASTNAME'];
-            $student->EMAIL = $request['EMAIL'];
-            $student->PHONENUMBER = $request['PHONENUMBER'];
-            $student->FACULTYID = $request['FACULTYID'];
-            $student->ISMODERATOR = $request['ISMODERATOR'];
-            $student->save();
-            return redirect('/');
-        }
-        return "this user name is exist, select anther user name";
-
+        $dep = new Department;
+        $dep->DEPTID=$request['DEPTID'];
+        $dep->DEPARTMENTNAME=$request['DEPARTMENTNAME'];
+        $dep->DESCRIPTION=$request['DESCRIPTION'];
+        return $dep;
+        $dep->save();
+        return $dep;
     }
 
     /**
@@ -63,16 +50,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        if(Student::find($request['STUDUSERNAME'])=="")
-            return "this student not exist";
-
-        $temp = 0;
-        $temp= DB::table('student')->where('STUDUSERNAME',$request['STUDUSERNAME'])->where('STUDPASSWORD' , $request['STUDPASSWORD'])->count();
-        if($temp==0)
-            return "incorrect password";
-        return Student::find($request['STUDUSERNAME']);
+        //
     }
 
     /**

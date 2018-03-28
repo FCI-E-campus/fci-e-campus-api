@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    protected $table='students';
-    public $primaryKey='userName';
-    public $timestamps=true;
+    protected $table='student';
+    public $primaryKey='STUDUSERNAME';
+    public $timestamps=false;
 }

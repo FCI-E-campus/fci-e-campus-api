@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
 use Illuminate\Http\Request;
-use App\Student;
+use App\Teacher;
 use DB;
-class StudentController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,25 +35,23 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        if(Student::find($request['STUDUSERNAME'])=="") {
-            $student = new Student;
-            $student->STUDUSERNAME = $request['STUDUSERNAME'];
-            $student->DEPTID = $request['DEPTID'];
-            $student->DEP_DEPTID = $request['DEP_DEPTID'];
-            $student->STUDPASSWORD = $request['STUDPASSWORD'];
-            $student->FIRSTNAME = $request['FIRSTNAME'];
-            $student->LASTNAME = $request['LASTNAME'];
-            $student->EMAIL = $request['EMAIL'];
-            $student->PHONENUMBER = $request['PHONENUMBER'];
-            $student->FACULTYID = $request['FACULTYID'];
-            $student->ISMODERATOR = $request['ISMODERATOR'];
-            $student->save();
+        $email=$request['EMAIL'];
+        $check = substr($email, strpos($email, '@') , 14);
+        if(strcmp($check,"@fci-cu.edu.eg")!=0)
+            return "this not academic mail";
+        if(Teacher::find($request['PROFUSERNAME'])=="") {
+            $teacher = new Teacher;
+            $teacher->PROFUSERNAME = $request['PROFUSERNAME'];
+            $teacher->DEPTID=$request['DEPTID'];
+            $teacher->PROFPASSWORD = $request['PROFPASSWORD'];
+            $teacher->FIRSTNAME = $request['FIRSTNAME'];
+            $teacher->LASTNAME = $request['LASTNAME'];
+            $teacher->EMAIL = $request['EMAIL'];
+            $teacher->PHONENUMBER = $request['PHONENUMBER'];
+            $teacher->save();
             return redirect('/');
         }
         return "this user name is exist, select anther user name";
-
     }
 
     /**
@@ -65,14 +62,14 @@ class StudentController extends Controller
      */
     public function show(Request $request)
     {
-        if(Student::find($request['STUDUSERNAME'])=="")
-            return "this student not exist";
+        if(Teacher::find($request['PROFUSERNAME'])=="")
+            return "this Teacher not exist";
 
         $temp = 0;
-        $temp= DB::table('student')->where('STUDUSERNAME',$request['STUDUSERNAME'])->where('STUDPASSWORD' , $request['STUDPASSWORD'])->count();
+        $temp= DB::table('professor')->where('PROFUSERNAME',$request['PROFUSERNAME'])->where('PROFPASSWORD' , $request['PROFPASSWORD'])->count();
         if($temp==0)
             return "incorrect password";
-        return Student::find($request['STUDUSERNAME']);
+        return Teacher::find($request['PROFUSERNAME']);
     }
 
     /**

@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/studentLogin/{userName}/{password}',['uses'=>'StudentController@show']);
+Route::get('/studentLogin/{STUDUSERNAME}/{STUDPASSWORD}',['uses'=>'StudentController@show']);
 
-Route::get('/studentSignUP/{userName}/{password}/{email}/{phoneNumber}/{facultyId}/{isModerator}',['uses'=>'StudentController@store']);
+Route::get('/studentSignUP/{STUDUSERNAME}/{DEPTID}/{DEP_DEPTID}/{STUDPASSWORD}/{FIRSTNAME}/{LASTNAME}/{EMAIL}/{PHONENUMBER}/{FACULTYID}/{ISMODERATOR}',
+    ['uses'=>'StudentController@store']);
+
+Route::get('/teacherSignUP/{PROFUSERNAME}/{DEPTID}/{PROFPASSWORD}/{FIRSTNAME}/{LASTNAME}/{EMAIL}/{PHONENUMBER}',
+    ['uses'=>'TeacherController@store']);
+
+Route::get('/teacherLogin/{PROFUSERNAME}/{PROFPASSWORD}',['uses'=>'TeacherController@show']);
+
+Route::get('/addDepartment/{DEPTID}/{DEPARTMENTNAME}/{DESCRIPTION}',['uses'=>'DepartmentController@store']);
