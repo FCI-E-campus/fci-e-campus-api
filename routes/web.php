@@ -26,3 +26,18 @@ Route::get('/teacherSignUP/{PROFUSERNAME}/{DEPTID}/{PROFPASSWORD}/{FIRSTNAME}/{L
 Route::get('/teacherLogin/{PROFUSERNAME}/{PROFPASSWORD}',['uses'=>'TeacherController@show']);
 
 Route::get('/addDepartment/{DEPTID}/{DEPARTMENTNAME}/{DESCRIPTION}',['uses'=>'DepartmentController@store']);
+
+Route::get('/addCourse/{COURSECODE}/{DEPTID}/{COURSETITLE}/{DESCRIPTION}/{STARTDATE}/{ENDDATE}/{PASSCODE}',
+    ['uses'=>'CourseController@store']);
+
+Route::get('/assignTeacher/{COURSECODE}/{PROFUSERNAME}', ['uses'=>'AdminController@assignTeacherToCourse']);
+
+Route::get('/deleteCourse/{COURSECODE}', ['uses'=>'AdminController@deleteCourse']);
+
+Route::get('/deleteStudent/{STUDUSERNAME}', ['uses'=>'AdminController@deleteStudent']);
+
+Route::get('/deleteProfessor/{PROFUSERNAME}', ['uses'=>'AdminController@deleteTeacher']);
+
+Route::get('/addAnnouncement/{ANNOUNCEMENTID}/{ADMINUSERNAME}/{ANNOUNCEMENTTITLE}/{ANNOUNCEMENTBODY}/{DATEPUBLISHED}', ['uses'=>'AdminController@addAnnouncement']);
+
+
