@@ -15,29 +15,47 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/studentLogin/{STUDUSERNAME}/{STUDPASSWORD}',['uses'=>'StudentController@show']);
+Route::post('/studentLogin','StudentController@show');
 
-Route::get('/studentSignUP/{STUDUSERNAME}/{DEPTID}/{DEP_DEPTID}/{STUDPASSWORD}/{FIRSTNAME}/{LASTNAME}/{EMAIL}/{PHONENUMBER}/{DATEOFBIRTH}/{FACULTYID}/{ISMODERATOR}',
-    ['uses'=>'StudentController@store']);
+Route::post('/teacherLogin','TeacherController@show');
 
-Route::get('/teacherSignUP/{PROFUSERNAME}/{DEPTID}/{PROFPASSWORD}/{FIRSTNAME}/{LASTNAME}/{EMAIL}/{PHONENUMBER}/{DATEOFBIRTH}',
-    ['uses'=>'TeacherController@store']);
+Route::post('/adminLogin','AdminController@show');
 
-Route::get('/teacherLogin/{PROFUSERNAME}/{PROFPASSWORD}',['uses'=>'TeacherController@show']);
+Route::post('/studentSignUP','StudentController@store');
 
-Route::get('/addDepartment/{DEPTID}/{DEPARTMENTNAME}/{DESCRIPTION}',['uses'=>'DepartmentController@store']);
+Route::post('/teacherSignUP','TeacherController@store');
 
-Route::get('/addCourse/{COURSECODE}/{DEPTID}/{COURSETITLE}/{DESCRIPTION}/{STARTDATE}/{ENDDATE}/{PASSCODE}',
-    ['uses'=>'CourseController@store']);
+Route::post('/addDepartment','DepartmentController@store');
 
-Route::get('/assignTeacher/{COURSECODE}/{PROFUSERNAME}', ['uses'=>'AdminController@assignTeacherToCourse']);
+Route::post('/addCourse','CourseController@store');
 
-Route::get('/deleteCourse/{COURSECODE}', ['uses'=>'AdminController@deleteCourse']);
+Route::post('/assignTeacher','AdminController@assignTeacherToCourse');
 
-Route::get('/deleteStudent/{STUDUSERNAME}', ['uses'=>'AdminController@deleteStudent']);
+Route::post('/deleteCourse','AdminController@deleteCourse');
 
-Route::get('/deleteProfessor/{PROFUSERNAME}', ['uses'=>'AdminController@deleteTeacher']);
+Route::post('/deleteStudent','AdminController@deleteStudent');
 
-Route::get('/addAnnouncement/{ANNOUNCEMENTID}/{ADMINUSERNAME}/{ANNOUNCEMENTTITLE}/{ANNOUNCEMENTBODY}/{DATEPUBLISHED}', ['uses'=>'AdminController@addAnnouncement']);
+Route::post('/deleteProfessor','AdminController@deleteTeacher');
+
+Route::post('/addAnnouncement','AdminController@addAnnouncement');
+
+Route::post('/addTask','CourseController@addTask');
+
+Route::post('/deletePost','CourseController@deletePost');
+
+
+Route::post('/showCoursesForStudent','CourseController@showCoursesForStudent');
+
+Route::post('/showCoursesOnTheSystem','CourseController@showCoursesOnTheSystem');
+
+
+
+
+
+
+
+
+
+
 
 

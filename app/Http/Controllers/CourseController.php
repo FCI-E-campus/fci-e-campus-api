@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Post;
+use App\StudentCourse;
+use App\Task;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -33,22 +36,42 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //call add course from course class model
     public function store(Request $request)
     {
-        if(Course::find($request['COURSECODE'])=="") {
-            $course = new Course();
-            $course->COURSECODE = $request['COURSECODE'];
-            $course->DEPTID = $request['DEPTID'];
-            $course->COURSETITLE = $request['COURSETITLE'];
-            $course->DESCRIPTION = $request['DESCRIPTION'];
-            $course->STARTDATE = '1989/11/25';
-            $course->ENDDATE = '1989/11/25';
-            $course->PASSCODE = $request['PASSCODE'];
-            $course->save();
-            return redirect('/');
-        }
-        return "this course is exist";
+        $course = new Course();
+        return $course->addCourse($request['COURSECODE'],$request['DEPTID'],$request['COURSETITLE'],$request['DESCRIPTION'],
+        $request['STARTDATE'],$request['ENDDATE'],$request['PASSCODE']);
     }
+    //call add task from course class model
+    public function addTask(Request $request)
+    {
+        $course = new Course();
+        return $course->addTask($request['TASKID'],$request['COURSECODE'],$request['CREATORID'],$request['TASKNAME'],
+            $request['DESCRIPTION'],$request['DUEDATE'],$request['DATECREATED'],$request['WEIGHT']);
+
+    }
+    //call delete post from course class model
+    public function deletePost(Request $request)
+    {
+        $course = new Course();
+        return $course->deletePost($request['POSTID']);
+    }
+    //call show courses for student from course class model
+    public function showCoursesForStudent(Request $request)
+    {
+        $course = new Course();
+        return $course->showCoursesForStudent($request['STUDUSERNAME']);
+    }
+
+
+    public function showCoursesOnTheSystem(Request $request)
+    {
+        $course = new Course();
+        return $course->showCoursesOnTheSystem();
+    }
+
 
     /**
      * Display the specified resource.

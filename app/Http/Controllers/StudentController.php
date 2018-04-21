@@ -34,28 +34,14 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //call add student from student class model
     public function store(Request $request)
     {
-
-
-        if(Student::find($request['STUDUSERNAME'])=="") {
-            $student = new Student;
-            $student->STUDUSERNAME = $request['STUDUSERNAME'];
-            $student->DEPTID = $request['DEPTID'];
-            $student->DEP_DEPTID = $request['DEP_DEPTID'];
-            $student->STUDPASSWORD = $request['STUDPASSWORD'];
-            $student->FIRSTNAME = $request['FIRSTNAME'];
-            $student->LASTNAME = $request['LASTNAME'];
-            $student->EMAIL = $request['EMAIL'];
-            $student->PHONENUMBER = $request['PHONENUMBER'];
-            $student->DATEOFBIRTH = null;
-            $student->FACULTYID = $request['FACULTYID'];
-            $student->ISMODERATOR = $request['ISMODERATOR'];
-             $student->save();
-            return redirect('/');
-        }
-        return "this user name is exist, select anther user name";
-
+        $student = new Student();
+        return $student->addStudent($request['STUDUSERNAME'],$request['DEPTID'],$request['DEP_DEPTID'],
+            $request['STUDPASSWORD'],$request['FIRSTNAME'],$request['LASTNAME'],
+            $request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH'],$request['FACULTYID'],$request['ISMODERATOR']
+            );
     }
 
     /**
@@ -64,16 +50,11 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //call show user from student class model
     public function show(Request $request)
     {
-        if(Student::find($request['STUDUSERNAME'])=="")
-            return "this student not exist";
-
-        $temp = 0;
-        $temp= DB::table('student')->where('STUDUSERNAME',$request['STUDUSERNAME'])->where('STUDPASSWORD' , $request['STUDPASSWORD'])->count();
-        if($temp==0)
-            return "incorrect password";
-        return Student::find($request['STUDUSERNAME']);
+        $student = new Student();
+        return $student->showUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
     }
 
     /**

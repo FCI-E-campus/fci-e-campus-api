@@ -33,26 +33,13 @@ class TeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //call add teacher from teacher class model
     public function store(Request $request)
     {
-        $email=$request['EMAIL'];
-        $check = substr($email, strpos($email, '@') , 14);
-        if(strcmp($check,"@fci-cu.edu.eg")!=0)
-            return "this not academic mail";
-        if(Teacher::find($request['PROFUSERNAME'])=="") {
-            $teacher = new Teacher;
-            $teacher->PROFUSERNAME = $request['PROFUSERNAME'];
-            $teacher->DEPTID=$request['DEPTID'];
-            $teacher->PROFPASSWORD = $request['PROFPASSWORD'];
-            $teacher->FIRSTNAME = $request['FIRSTNAME'];
-            $teacher->LASTNAME = $request['LASTNAME'];
-            $teacher->EMAIL = $request['EMAIL'];
-            $teacher->PHONENUMBER = $request['PHONENUMBER'];
-            $teacher->DATEOFBIRTH = null;
-            $teacher->save();
-            return redirect('/');
-        }
-        return "this user name is exist, select anther user name";
+        $teacher = new Teacher();
+        return $teacher->addTeacher($request['PROFUSERNAME'],$request['DEPTID'],$request['PROFPASSWORD'],
+        $request['FIRSTNAME'],$request['LASTNAME'],$request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH']
+        );
     }
 
     /**
@@ -61,16 +48,11 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // call show teacher from teacher class model
     public function show(Request $request)
     {
-        if(Teacher::find($request['PROFUSERNAME'])=="")
-            return "this Teacher not exist";
-
-        $temp = 0;
-        $temp= DB::table('professor')->where('PROFUSERNAME',$request['PROFUSERNAME'])->where('PROFPASSWORD' , $request['PROFPASSWORD'])->count();
-        if($temp==0)
-            return "incorrect password";
-        return Teacher::find($request['PROFUSERNAME']);
+        $teacher = new Teacher();
+        return $teacher->showTeacher($request['PROFUSERNAME'],$request['PROFPASSWORD']);
     }
 
     /**

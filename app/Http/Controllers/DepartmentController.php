@@ -33,15 +33,11 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //this function call add epartment from Department model class
     public function store(Request $request)
     {
-        $dep = new Department;
-        $dep->DEPTID=$request['DEPTID'];
-        $dep->DEPARTMENTNAME=$request['DEPARTMENTNAME'];
-        $dep->DESCRIPTION=$request['DESCRIPTION'];
-        //return $dep;
-        $dep->save();
-        return $dep;
+        $department = new Department();
+        return $department->addDepartment($request['DEPTID'],$request['DEPARTMENTNAME'],$request['DESCRIPTION']);
     }
 
     /**
