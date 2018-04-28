@@ -12,10 +12,12 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'http://localhost/E-campus/public/studentLogin',
-        'http://localhost/E-campus/public/teacherLogin',
-        'http://localhost/E-campus/public/adminLogin',
-        'http://localhost/E-campus/public/studentSignUP',
-        'http://localhost/E-campus/public/teacherSignUP',
+        'http://localhost/E-campus/public/student/login',
+        'http://localhost/E-campus/public/student/signup',
+        'http://localhost/E-campus/public/professor/login',
+        'http://localhost/E-campus/public/professor/signup',
+        'http://localhost/E-campus/public/ta/login',
+        'http://localhost/E-campus/public/ta/signup',
+        'http://localhost/E-campus/public/admin/login',
     ];
 }

@@ -10,24 +10,24 @@ class Admin extends Model
     public $primaryKey='ADMINUSERNAME';
     public $timestamps=false;
 
-    //assign teacher to course in DB
-    public function assignTeacherToCourse($crsCode,$un)
+    //assign professor to course in DB
+    public function assignProfessorToCourse($crsCode,$un)
     {
         if(Course::find($crsCode)=="")
         {
             $json = array("status"=>"failed","error_msg"=>"this course not exist");
             return $json;
         }
-        if(Teacher::find($un)=="")
+        if(Professor::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this teacher not exist");
+            $json = array("status"=>"failed","error_msg"=>"this professor not exist");
             return $json;
         }
         $temp = 0;
         $temp= DB::table('professorcourse')->where('COURSECODE',$crsCode)->where('PROFUSERNAME' , $un)->count();
         if($temp>0)
         {
-            $json = array("status"=>"failed","error_msg"=>"this teacher assigned before for this course");
+            $json = array("status"=>"failed","error_msg"=>"this professor assigned before for this course");
             return $json;
         }
         $assignTeaacher = new ProfessorCource();
@@ -91,12 +91,12 @@ class Admin extends Model
 
     }
 
-    //delete teacher from DB
-    public function deleteTeacher($un)
+    //delete professor from DB
+    public function deleteProfessor($un)
     {
-        if(Teacher::find($un)!="") {
+        if(Professor::find($un)!="") {
             ProfessorCource::where('PROFUSERNAME', '=', [$un])->delete();
-            Teacher::where('PROFUSERNAME', '=', [$un])->delete();
+            Professor::where('PROFUSERNAME', '=', [$un])->delete();
             $json = array("status"=>"success");
             return $json;
         }

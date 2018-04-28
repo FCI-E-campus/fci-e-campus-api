@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class Teacher extends Model
+class Professor extends Model
 {
     protected $table='professor';
     public $primaryKey = 'PROFUSERNAME';
     public $timestamps=false;
-    //this function add teacher in DB
-    public function addTeacher($un,$dID,$pass,$fn,$ln,$em,$pn,$DB)
+    //this function add professor in DB
+    public function addProfessor($un,$dID,$pass,$fn,$ln,$em,$pn,$DB)
     {
         $email=$em;
         $check = substr($email, strpos($email, '@') , 14);
@@ -19,17 +19,17 @@ class Teacher extends Model
             $json = array("status"=>"failed","error_msg"=>"this not academic mail");
             return $json;
         }
-        if(Teacher::find($un)=="") {
-            $teacher = new Teacher;
-            $teacher->PROFUSERNAME = $un;
-            $teacher->DEPTID=$dID;
-            $teacher->PROFPASSWORD = $pass;
-            $teacher->FIRSTNAME = $fn;
-            $teacher->LASTNAME = $ln;
-            $teacher->EMAIL = $em;
-            $teacher->PHONENUMBER = $pn;
-            $teacher->DATEOFBIRTH = null;
-            $teacher->save();
+        if(Professor::find($un)=="") {
+            $professor = new Professor();
+            $professor->PROFUSERNAME = $un;
+            $professor->DEPTID=$dID;
+            $professor->PROFPASSWORD = $pass;
+            $professor->FIRSTNAME = $fn;
+            $professor->LASTNAME = $ln;
+            $professor->EMAIL = $em;
+            $professor->PHONENUMBER = $pn;
+            $professor->DATEOFBIRTH = null;
+            $professor->save();
             $json = array("status"=>"success","token"=>csrf_token());
             return $json;
         }
@@ -37,13 +37,13 @@ class Teacher extends Model
         return $json;
     }
 
-    //select teacher from DB
-    public  function showTeacher($un,$pass)
+    //select professor from DB
+    public  function showProfessor($un,$pass)
     {
 
-        if(Teacher::find($un)=="")
+        if(Professor::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this Teacher not exist");
+            $json = array("status"=>"failed","error_msg"=>"this professor not exist");
             return $json;
         }
 

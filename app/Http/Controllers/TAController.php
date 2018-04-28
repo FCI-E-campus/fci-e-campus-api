@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\TA;
 use Illuminate\Http\Request;
-use App\Teacher;
-use DB;
-class TeacherController extends Controller
+
+class TAController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,12 +33,12 @@ class TeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //call add teacher from teacher class model
+    //call add TA from TA class model
     public function store(Request $request)
     {
-        $teacher = new Teacher();
-        return $teacher->addTeacher($request['PROFUSERNAME'],$request['DEPTID'],$request['PROFPASSWORD'],
-        $request['FIRSTNAME'],$request['LASTNAME'],$request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH']
+        $ta = new TA();
+        return $ta->addTA($request['TAUSERNAME'],$request['DEPTID'],$request['TAPASSWORD'],
+            $request['FIRSTNAME'],$request['LASTNAME'],$request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH']
         );
     }
 
@@ -48,11 +48,11 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // call show teacher from teacher class model
+    // call show TA from TA class model
     public function show(Request $request)
     {
-        $teacher = new Teacher();
-        return $teacher->showTeacher($request['PROFUSERNAME'],$request['PROFPASSWORD']);
+        $ta = new TA();
+        return $ta->showTA($request['TAUSERNAME'],$request['TAPASSWORD']);
     }
 
     /**

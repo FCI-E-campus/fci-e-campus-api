@@ -48,8 +48,8 @@ class Course extends Model
             $task->CREATORID = $cId;
             $task->TASKNAME = $tN;
             $task->DESCRIPTION = $desc;
-            $task->DUEDATE = '2000-01-01 00:00:00';
-            $task->DATECREATED = '2000-01-01 00:00:00';
+            $task->DUEDATE = $DD;
+            $task->DATECREATED = $DC;
             $task->WEIGHT = $W;
             $task->save();
             $json = array("status"=>"success");

@@ -16,7 +16,7 @@ use App\StudentCourse;
 use App\TACourse;
 use App\TAGroupCourse;
 use App\Task;
-use App\Teacher;
+use App\Professor;
 use Illuminate\Http\Request;
 use App\Admin;
 use App\ProfessorCource;
@@ -53,12 +53,12 @@ class AdminController extends Controller
     {
         //
     }
-    //call assign teacher to course from admin class model
-    public function assignTeacherToCourse(Request $request)
+    //call assign professor to course from admin class model
+    public function assignProfessorToCourse(Request $request)
     {
 
         $admin = new Admin();
-        return $admin->assignTeacherToCourse($request['COURSECODE'],$request['PROFUSERNAME']);
+        return $admin->assignProfessorToCourse($request['COURSECODE'],$request['PROFUSERNAME']);
     }
     //call delete course from admin class model
     public function deleteCourse(Request $request)
@@ -72,11 +72,11 @@ class AdminController extends Controller
         $admin = new Admin();
         return $admin->deleteStudent($request['STUDUSERNAME']);
     }
-    //call delete teacher from admin cllass model
-    public function deleteTeacher(Request $request)
+    //call delete professor from admin cllass model
+    public function deleteProfessor(Request $request)
     {
         $admin = new Admin();
-        return $admin->deleteTeacher($request['PROFUSERNAME']);
+        return $admin->deleteProfessor($request['PROFUSERNAME']);
     }
     //call add anniuncement from admin class model
     public function addAnnouncement(Request $request)
