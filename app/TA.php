@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Mail;
 class TA extends Model
 {
     protected $table='ta';
@@ -29,12 +30,53 @@ class TA extends Model
             $ta->EMAIL = $em;
             $ta->PHONENUMBER = $pn;
             $ta->DATEOFBIRTH = $DB;
+            $code="";
+            for ($i=0 ; $i < 7 ; $i++)
+            {
+                $code = $code.mt_rand(0,9);
+            }
+            $ta->ActivationCode=$code;
+            $ta->isActiveted = 0;
+            $this->sendMail($code,$em);
             $ta->save();
-            $json = array("status"=>"success","token"=>csrf_token());
+            $json = array("status"=>"success");
             return $json;
         }
         $json = array("status"=>"failed","error_msg"=>"this user name is exist, select anther user name");
         return $json;
+    }
+
+    public function sendMail($ActivationCode , $to){
+        $date = ["code"=>$ActivationCode,"to"=>$to];
+        Mail::send("Email",$date,function ($message)use($date){
+            $message->from("campus5553@gmail.com","E-campus");
+            $message->to($date['to']);
+            $message->subject("E-compus activation code");
+        });
+    }
+
+    public function activate($un,$code){
+
+
+        if(TA::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_msg"=>"this user name not exist");
+            return $json;
+        }
+        $temp = 0;
+        $temp= DB::table('ta')->where('TAUSERNAME',$un)->where('ActivationCode' , $code)->count();
+        if($temp==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>"incorrect activation code");
+            return $json;
+        }
+        $ta = new TA();
+        $ta = TA::find($un);
+        $ta->isActiveted=1;
+        $ta->save();
+        $json = array("status"=>"success","token"=>csrf_token());
+        return $json;
+
     }
 
     //select ta from DB

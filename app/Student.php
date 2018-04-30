@@ -57,7 +57,7 @@ class Student extends Model
 
         if(Student::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this student not exist");
+            $json = array("status"=>"failed","error_msg"=>"this user name not exist");
             return $json;
         }
         $temp = 0;

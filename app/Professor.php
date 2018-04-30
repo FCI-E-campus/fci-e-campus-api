@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Mail;
 class Professor extends Model
 {
     protected $table='professor';
@@ -28,15 +29,55 @@ class Professor extends Model
             $professor->LASTNAME = $ln;
             $professor->EMAIL = $em;
             $professor->PHONENUMBER = $pn;
-            $professor->DATEOFBIRTH = null;
+            $professor->DATEOFBIRTH = $DB;
+            $code="";
+            for ($i=0 ; $i < 7 ; $i++)
+            {
+                $code = $code.mt_rand(0,9);
+            }
+            $professor->ActivationCode=$code;
+            $professor->isActiveted = 0;
+            $this->sendMail($code,$em);
             $professor->save();
-            $json = array("status"=>"success","token"=>csrf_token());
+            $json = array("status"=>"success");
             return $json;
         }
         $json = array("status"=>"failed","error_msg"=>"this user name is exist, select anther user name");
         return $json;
     }
 
+    public function sendMail($ActivationCode , $to){
+        $date = ["code"=>$ActivationCode,"to"=>$to];
+        Mail::send("Email",$date,function ($message)use($date){
+            $message->from("campus5553@gmail.com","E-campus");
+            $message->to($date['to']);
+            $message->subject("E-compus activation code");
+        });
+    }
+
+    public function activate($un,$code){
+
+
+        if(Professor::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_msg"=>"this user name not exist");
+            return $json;
+        }
+        $temp = 0;
+        $temp= DB::table('professor')->where('PROFUSERNAME',$un)->where('ActivationCode' , $code)->count();
+        if($temp==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>"incorrect activation code");
+            return $json;
+        }
+        $professor = new Professor();
+        $professor = Professor::find($un);
+        $professor->isActiveted=1;
+        $professor->save();
+        $json = array("status"=>"success","token"=>csrf_token());
+        return $json;
+
+    }
     //select professor from DB
     public  function showProfessor($un,$pass)
     {
@@ -54,7 +95,18 @@ class Professor extends Model
             $json = array("status"=>"failed","error_msg"=>"incorrect password");
             return $json;
         }
-        $json = array("status"=>"success","token"=>csrf_token());
-        return $json;;
+
+        $professor = new Professor();
+        $professor =Professor::find($un);
+        if($professor->isActiveted)
+        {
+            $json = array("status"=>"success","token"=>csrf_token());
+            return $json;
+        }
+        else
+        {
+            $json = array("status"=>"failed","error_msg"=>"incorrect activation code");
+            return $json;
+        }
     }
 }
