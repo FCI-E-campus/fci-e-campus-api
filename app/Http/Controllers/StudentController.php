@@ -40,8 +40,9 @@ class StudentController extends Controller
         $student = new Student();
         return $student->addStudent($request['STUDUSERNAME'],$request['DEPTID'],$request['DEP_DEPTID'],
             $request['STUDPASSWORD'],$request['FIRSTNAME'],$request['LASTNAME'],
-            $request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH'],$request['FACULTYID'],$request['ISMODERATOR']
+            $request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH'],$request['FACULTYID']
             );
+
     }
 
     /**
@@ -63,9 +64,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $student = new Student();
+        return $student->activate("samehh","9263200");
     }
 
     /**
@@ -90,4 +92,7 @@ class StudentController extends Controller
     {
         //
     }
+
+
+
 }

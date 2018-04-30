@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::post('/w','StudentController@edit');
 
 Route::prefix('student')->group(function() {
     Route::post('/login','StudentController@show');

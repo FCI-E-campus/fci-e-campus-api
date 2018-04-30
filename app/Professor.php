@@ -43,7 +43,7 @@ class Professor extends Model
 
         if(Professor::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this professor not exist");
+            $json = array("status"=>"failed","error_msg"=>"this user name not exist");
             return $json;
         }
 

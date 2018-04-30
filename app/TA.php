@@ -43,7 +43,7 @@ class TA extends Model
 
         if(TA::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this TA not exist");
+            $json = array("status"=>"failed","error_msg"=>"this user name not exist");
             return $json;
         }
 
