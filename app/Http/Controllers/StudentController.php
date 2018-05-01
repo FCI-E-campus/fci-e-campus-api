@@ -66,8 +66,7 @@ class StudentController extends Controller
      */
     public function edit()
     {
-        $student = new Student();
-        return $student->activate("samehh","9263200");
+      
     }
 
     /**
