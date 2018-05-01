@@ -16,7 +16,7 @@ For more information about the project check our [documentation repo](https://gi
 
 ## Other Resources
 * [Our Services API][4]
-* [Error Codes List] [5]
+* [Error Codes List][5]
 
 ## License
 This project is licensed under the [GPLv3](https://github.com/FCI-E-campus/fci-e-campus-api/blob/master/LICENSE) license.
