@@ -39,7 +39,7 @@ class Student extends Model
           $json = array("status"=>"success");
           return $json;
         }
-        $json = array("status"=>"failed","error_msg"=>"this user name is exist, select anther user name");
+        $json = array("status"=>"failed","error_code"=>4);
         return $json;
     }
 
@@ -57,14 +57,14 @@ class Student extends Model
 
         if(Student::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this user name not exist");
+            $json = array("status"=>"failed","error_code"=>1);
             return $json;
         }
         $temp = 0;
         $temp= DB::table('student')->where('STUDUSERNAME',$un)->where('ActivationCode' , $code)->count();
         if($temp==0)
         {
-            $json = array("status"=>"failed","error_msg"=>"incorrect activation code");
+            $json = array("status"=>"failed","error_code"=>17);
             return $json;
         }
         $student = new Student();
@@ -80,7 +80,7 @@ class Student extends Model
     public function showUser($un,$pass){
         if(Student::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this user name not exist");
+            $json = array("status"=>"failed","error_code"=>1);
             return $json;
         }
 
@@ -88,7 +88,7 @@ class Student extends Model
         $temp= DB::table('student')->where('STUDUSERNAME',$un)->where('STUDPASSWORD' , $pass)->count();
         if($temp==0)
         {
-            $json = array("status"=>"failed","error_msg"=>"incorrect password");
+            $json = array("status"=>"failed","error_code"=>2);
             return $json;
         }
         $student = new Student();
@@ -100,7 +100,7 @@ class Student extends Model
         }
         else
         {
-            $json = array("status"=>"failed","error_msg"=>"incorrect activation code");
+            $json = array("status"=>"failed","error_code"=>17);
             return $json;
         }
 

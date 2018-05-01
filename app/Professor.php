@@ -17,7 +17,7 @@ class Professor extends Model
         $check = substr($email, strpos($email, '@') , 14);
         if(strcmp($check,"@fci-cu.edu.eg")!=0)
         {
-            $json = array("status"=>"failed","error_msg"=>"this not academic mail");
+            $json = array("status"=>"failed","error_code"=>5);
             return $json;
         }
         if(Professor::find($un)=="") {
@@ -42,7 +42,7 @@ class Professor extends Model
             $json = array("status"=>"success");
             return $json;
         }
-        $json = array("status"=>"failed","error_msg"=>"this user name is exist, select anther user name");
+        $json = array("status"=>"failed","error_code"=>4);
         return $json;
     }
 
@@ -60,14 +60,14 @@ class Professor extends Model
 
         if(Professor::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this user name not exist");
+            $json = array("status"=>"failed","error_code"=>1);
             return $json;
         }
         $temp = 0;
         $temp= DB::table('professor')->where('PROFUSERNAME',$un)->where('ActivationCode' , $code)->count();
         if($temp==0)
         {
-            $json = array("status"=>"failed","error_msg"=>"incorrect activation code");
+            $json = array("status"=>"failed","error_code"=>17);
             return $json;
         }
         $professor = new Professor();
@@ -84,7 +84,7 @@ class Professor extends Model
 
         if(Professor::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this user name not exist");
+            $json = array("status"=>"failed","error_code"=>1);
             return $json;
         }
 
@@ -92,7 +92,7 @@ class Professor extends Model
         $temp= DB::table('professor')->where('PROFUSERNAME',$un)->where('PROFPASSWORD' , $pass)->count();
         if($temp==0)
         {
-            $json = array("status"=>"failed","error_msg"=>"incorrect password");
+            $json = array("status"=>"failed","error_code"=>2);
             return $json;
         }
 
@@ -105,7 +105,7 @@ class Professor extends Model
         }
         else
         {
-            $json = array("status"=>"failed","error_msg"=>"incorrect activation code");
+            $json = array("status"=>"failed","error_code"=>17);
             return $json;
         }
     }

@@ -55,6 +55,12 @@ class TAController extends Controller
         return $ta->showTA($request['TAUSERNAME'],$request['TAPASSWORD']);
     }
 
+    public function activate(Request $request)
+    {
+        $ta = new TA();
+        $ta->activate($request['TAUSERNAME'],$request['ActivationCode']);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

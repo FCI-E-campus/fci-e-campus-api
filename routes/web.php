@@ -18,18 +18,21 @@ Route::get('/', function () {
 Route::prefix('student')->group(function() {
     Route::post('/login','StudentController@show');
     Route::post('/signup','StudentController@store');
+    Route::post('/activate','StudentController@activate');
 });
 
 Route::prefix('professor')->group(function() {
     Route::post('/login','ProfessorController@show');
     Route::post('/signup','ProfessorController@store');
     Route::post('/addTask','CourseController@addTask');
+    Route::post('/activate','ProfessorController@activate');
 });
 
 Route::prefix('ta')->group(function() {
     Route::post('/login','TAController@show');
     Route::post('/signup','TAController@store');
     Route::post('/addTask','CourseController@addTask');
+    Route::post('/activate','TAController@activate');
 });
 
 Route::prefix('department')->group(function() {

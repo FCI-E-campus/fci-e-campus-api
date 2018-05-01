@@ -56,6 +56,12 @@ class ProfessorController extends Controller
         return $professor->showProfessor($request['PROFUSERNAME'],$request['PROFPASSWORD']);
     }
 
+    public function activate(Request $request)
+    {
+        $professor = new Professor();
+        $professor->activate($request['PROFUSERNAME'],$request['ActivationCode']);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
