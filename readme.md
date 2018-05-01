@@ -14,9 +14,15 @@ For more information about the project check our [documentation repo](https://gi
 * [PhpStorm IDE][1]
 * [XAMPP][3]
 
+## Other Resources
+* [Our Services API][4]
+* [Error Codes List] [5]
+
 ## License
 This project is licensed under the [GPLv3](https://github.com/FCI-E-campus/fci-e-campus-api/blob/master/LICENSE) license.
 
 [1]: https://www.jetbrains.com/phpstorm/
 [2]: https://forum.laragon.org/topic/755/laragon-3-2-released-php-7-2-0-vc15-apache-to-2-4-29-vc15-node-js-8-9-1-yarn-1-3-2-composer-1-5-3
 [3]: https://www.apachefriends.org/index.html
+[4]: https://docs.google.com/spreadsheets/d/12oJT6K_Ro3iUQTGtptA-S58y6XOoY3JMpALKvhp0Y5A/edit?usp=sharing
+[5]: https://docs.google.com/spreadsheets/d/1N5ENS7LvRVv7fsDIcq9Ipt2u7FMSlqkx4dvLzV9uURI/edit?usp=sharing
