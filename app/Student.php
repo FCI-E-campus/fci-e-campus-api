@@ -14,66 +14,76 @@ class Student extends Model
     //this function add student in DB
     public function addStudent($un,$dID,$ddID,$pass,$fn,$ln,$em,$pn,$DB,$FID)
     {
-        if(Student::find($un)=="") {
-          $student = new Student();
-          $student->STUDUSERNAME = $un;
-          $student->DEPTID = $dID;
-          $student->DEP_DEPTID = $ddID;
-          $student->STUDPASSWORD = $pass;
-          $student->FIRSTNAME = $fn;
-          $student->LASTNAME = $ln;
-          $student->EMAIL = $em;
-          $student->PHONENUMBER = $pn;
-          $student->DATEOFBIRTH = $DB;
-          $student->FACULTYID = $FID;
-          $student->ISMODERATOR = 0;
-          $code="";
-          for ($i=0 ; $i < 7 ; $i++)
-          {
-              $code = $code.mt_rand(0,9);
-          }
-          $student->ActivationCode=$code;
-          $student->isActiveted = 0;
-          $this->sendMail($code,$em);
-          $student->save();
-          $json = array("status"=>"success");
-          return $json;
-        }
-        $json = array("status"=>"failed","error_code"=>4);
-        return $json;
-    }
-
-    public function sendMail($ActivationCode , $to){
-        $date = ["code"=>$ActivationCode,"to"=>$to];
-        Mail::send("Email",$date,function ($message)use($date){
-            $message->from("campus5553@gmail.com","E-campus");
-            $message->to($date['to']);
-            $message->subject("E-compus activation code");
-        });
-    }
-
-    public function activate($un,$code){
-
-
-        if(Student::find($un)=="")
+        if($un=="")
         {
-            $json = array("status"=>"failed","error_code"=>1);
+            $json = array("status"=>"failed","error_code"=>18);
             return $json;
         }
-        $temp = 0;
-        $temp= DB::table('student')->where('STUDUSERNAME',$un)->where('ActivationCode' , $code)->count();
-        if($temp==0)
+        if($dID=="" || $ddID=="")
         {
-            $json = array("status"=>"failed","error_code"=>17);
+            $json = array("status"=>"failed","error_code"=>19);
+            return $json;
+        }
+        if($pass=="")
+        {
+            $json = array("status"=>"failed","error_code"=>21);
+            return $json;
+        }
+        if($fn=="" || $ln=="")
+        {
+            $json = array("status"=>"failed","error_code"=>22);
+            return $json;
+        }
+        if($em=="")
+        {
+            $json = array("status"=>"failed","error_code"=>23);
+            return $json;
+        }
+        if($pn=="")
+        {
+            $json = array("status"=>"failed","error_code"=>24);
+            return $json;
+        }
+        if($DB=="")
+        {
+            $json = array("status"=>"failed","error_code"=>25);
+            return $json;
+        }
+        if($FID=="")
+        {
+            $json = array("status"=>"failed","error_code"=>26);
+            return $json;
+        }
+        if(Student::find($un)!="") 
+        {
+            $json = array("status"=>"failed","error_code"=>4);
+            return $json;
+        }
+        if($dID==$ddID)
+        {
+            $json = array("status"=>"failed","error_code"=>20);
+            return $json;
+        }
+        if(Department::find($dID)=="" || Department::find($ddID)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>27);
             return $json;
         }
         $student = new Student();
-        $student = Student::find($un);
-        $student->isActiveted=1;
+        $student->STUDUSERNAME = $un;
+        $student->DEPTID = $dID;
+        $student->DEP_DEPTID = $ddID;
+        $student->STUDPASSWORD = $pass;
+        $student->FIRSTNAME = $fn;
+        $student->LASTNAME = $ln;
+        $student->EMAIL = $em;
+        $student->PHONENUMBER = $pn;
+        $student->DATEOFBIRTH = $DB;
+        $student->FACULTYID = $FID;
+        $student->ISMODERATOR = 0;
         $student->save();
-        $json = array("status"=>"success","token"=>csrf_token());
+        $json = array("status"=>"success");
         return $json;
-
     }
 
     //this function select student from DB
@@ -93,17 +103,8 @@ class Student extends Model
         }
         $student = new Student();
         $student =Student::find($un);
-        if($student->isActiveted)
-        {
             $json = array("status"=>"success","token"=>csrf_token());
             return $json;
-        }
-        else
-        {
-            $json = array("status"=>"failed","error_code"=>17);
-            return $json;
-        }
-
 
     }
 }

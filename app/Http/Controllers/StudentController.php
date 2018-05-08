@@ -58,12 +58,6 @@ class StudentController extends Controller
         return $student->showUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
     }
 
-    public function activate(Request $request)
-    {
-        $student = new Student();
-        return $student->activate($request['STUDUSERNAME'],$request['ActivationCode']);
-    }
-
     /**
      * Show the form for editing the specified resource.
      *

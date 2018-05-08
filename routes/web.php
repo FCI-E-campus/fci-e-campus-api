@@ -18,7 +18,6 @@ Route::get('/', function () {
 Route::prefix('student')->group(function() {
     Route::post('/login','StudentController@show');
     Route::post('/signup','StudentController@store');
-    Route::post('/activate','StudentController@activate');
 });
 
 Route::prefix('professor')->group(function() {

@@ -129,7 +129,7 @@ class Admin extends Model
     {
         if(Admin::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this admin not exist");
+            $json = array("status"=>"failed","error_msg"=>1);
             return $json;
         }
 
@@ -137,7 +137,7 @@ class Admin extends Model
         $temp= DB::table('admin')->where('ADMINUSERNAME',$un)->where('ADMINPASSWORD' , $pass)->count();
         if($temp==0)
         {
-            $json = array("status"=>"failed","error_msg"=>"incorrect password");
+            $json = array("status"=>"failed","error_msg"=>2);
             return $json;
         }
         $json = array("status"=>"success","token"=>csrf_token());

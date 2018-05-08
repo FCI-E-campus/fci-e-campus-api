@@ -59,7 +59,7 @@ class ProfessorController extends Controller
     public function activate(Request $request)
     {
         $professor = new Professor();
-        $professor->activate($request['PROFUSERNAME'],$request['ActivationCode']);
+        return $professor->activate($request['PROFUSERNAME'],$request['ActivationCode']);
     }
 
     /**

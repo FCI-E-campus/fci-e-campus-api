@@ -13,6 +13,40 @@ class TA extends Model
     //this function add ta in DB
     public function addTA($un,$dID,$pass,$fn,$ln,$em,$pn,$DB)
     {
+        if($un=="")
+        {
+            $json = array("status"=>"failed","error_code"=>18);
+            return $json;
+        }
+        if($dID=="")
+        {
+            $json = array("status"=>"failed","error_code"=>19);
+            return $json;
+        }
+        if($pass=="")
+        {
+            $json = array("status"=>"failed","error_code"=>21);
+            return $json;
+        }
+        if($fn=="" || $ln=="")
+        {
+            $json = array("status"=>"failed","error_code"=>22);
+            return $json;
+        }
+        if($pn=="")
+        {
+            $json = array("status"=>"failed","error_code"=>24);
+            return $json;
+        }
+        if($DB=="")
+        {
+            $json = array("status"=>"failed","error_code"=>25);
+            return $json;
+        }
+        if(TA::find($un)!="") {
+            $json = array("status"=>"failed","error_code"=>4);
+            return $json;
+        }
         $email=$em;
         $check = substr($email, strpos($email, '@') , 14);
         if(strcmp($check,"@fci-cu.edu.eg")!=0)
@@ -20,7 +54,12 @@ class TA extends Model
             $json = array("status"=>"failed","error_code"=>5);
             return $json;
         }
-        if(TA::find($un)=="") {
+        if(Department::find($dID)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>27);
+            return $json;
+        }
+
             $ta = new TA();
             $ta->TAUSERNAME = $un;
             $ta->DEPTID=$dID;
@@ -41,9 +80,6 @@ class TA extends Model
             $ta->save();
             $json = array("status"=>"success");
             return $json;
-        }
-        $json = array("status"=>"failed","error_code"=>4);
-        return $json;
     }
 
     public function sendMail($ActivationCode , $to){
@@ -56,8 +92,6 @@ class TA extends Model
     }
 
     public function activate($un,$code){
-
-
         if(TA::find($un)=="")
         {
             $json = array("status"=>"failed","error_code"=>1);
@@ -82,7 +116,6 @@ class TA extends Model
     //select ta from DB
     public  function showTA($un,$pass)
     {
-
         if(TA::find($un)=="")
         {
             $json = array("status"=>"failed","error_code"=>1);
@@ -96,8 +129,18 @@ class TA extends Model
             $json = array("status"=>"failed","error_code"=>2);
             return $json;
         }
-        $json = array("status"=>"success","token"=>csrf_token());
-        return $json;;
+        $ta = new TA();
+        $ta = TA::find($un);
+        if($ta->isActiveted)
+        {
+            $json = array("status"=>"success","token"=>csrf_token());
+            return $json;
+        }
+        else
+        {
+            $json = array("status"=>"failed","error_code"=>3);
+            return $json;
+        }
     }
 
 }

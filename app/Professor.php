@@ -13,6 +13,40 @@ class Professor extends Model
     //this function add professor in DB
     public function addProfessor($un,$dID,$pass,$fn,$ln,$em,$pn,$DB)
     {
+        if($un=="")
+        {
+            $json = array("status"=>"failed","error_code"=>18);
+            return $json;
+        }
+        if($dID=="")
+        {
+            $json = array("status"=>"failed","error_code"=>19);
+            return $json;
+        }
+        if($pass=="")
+        {
+            $json = array("status"=>"failed","error_code"=>21);
+            return $json;
+        }
+        if($fn=="" || $ln=="")
+        {
+            $json = array("status"=>"failed","error_code"=>22);
+            return $json;
+        }
+        if($pn=="")
+        {
+            $json = array("status"=>"failed","error_code"=>24);
+            return $json;
+        }
+        if($DB=="")
+        {
+            $json = array("status"=>"failed","error_code"=>25);
+            return $json;
+        }
+        if(Professor::find($un)!="") {
+            $json = array("status"=>"failed","error_code"=>4);
+            return $json;
+        }
         $email=$em;
         $check = substr($email, strpos($email, '@') , 14);
         if(strcmp($check,"@fci-cu.edu.eg")!=0)
@@ -20,7 +54,11 @@ class Professor extends Model
             $json = array("status"=>"failed","error_code"=>5);
             return $json;
         }
-        if(Professor::find($un)=="") {
+        if(Department::find($dID)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>27);
+            return $json;
+        }
             $professor = new Professor();
             $professor->PROFUSERNAME = $un;
             $professor->DEPTID=$dID;
@@ -41,9 +79,6 @@ class Professor extends Model
             $professor->save();
             $json = array("status"=>"success");
             return $json;
-        }
-        $json = array("status"=>"failed","error_code"=>4);
-        return $json;
     }
 
     public function sendMail($ActivationCode , $to){
@@ -56,8 +91,6 @@ class Professor extends Model
     }
 
     public function activate($un,$code){
-
-
         if(Professor::find($un)=="")
         {
             $json = array("status"=>"failed","error_code"=>1);
@@ -81,13 +114,11 @@ class Professor extends Model
     //select professor from DB
     public  function showProfessor($un,$pass)
     {
-
         if(Professor::find($un)=="")
         {
             $json = array("status"=>"failed","error_code"=>1);
             return $json;
         }
-
         $temp = 0;
         $temp= DB::table('professor')->where('PROFUSERNAME',$un)->where('PROFPASSWORD' , $pass)->count();
         if($temp==0)
@@ -105,7 +136,7 @@ class Professor extends Model
         }
         else
         {
-            $json = array("status"=>"failed","error_code"=>17);
+            $json = array("status"=>"failed","error_code"=>3);
             return $json;
         }
     }

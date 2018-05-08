@@ -58,7 +58,7 @@ class TAController extends Controller
     public function activate(Request $request)
     {
         $ta = new TA();
-        $ta->activate($request['TAUSERNAME'],$request['ActivationCode']);
+        return $ta->activate($request['TAUSERNAME'],$request['ActivationCode']);
     }
 
     /**
