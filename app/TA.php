@@ -47,6 +47,7 @@ class TA extends Model
             $json = array("status"=>"failed","error_code"=>4);
             return $json;
         }
+        /*
         $email=$em;
         $check = substr($email, strpos($email, '@') , 14);
         if(strcmp($check,"@fci-cu.edu.eg")!=0)
@@ -54,6 +55,7 @@ class TA extends Model
             $json = array("status"=>"failed","error_code"=>5);
             return $json;
         }
+        */
         if(Department::find($dID)=="")
         {
             $json = array("status"=>"failed","error_code"=>27);
