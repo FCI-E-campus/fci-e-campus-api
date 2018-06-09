@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::prefix('student')->group(function() {
     Route::post('/login','StudentController@show');
     Route::post('/signup','StudentController@store');
+    Route::post('/updatePass','StudentController@update');
 });
 
 Route::prefix('professor')->group(function() {
@@ -25,6 +26,7 @@ Route::prefix('professor')->group(function() {
     Route::post('/signup','ProfessorController@store');
     Route::post('/addTask','CourseController@addTask');
     Route::post('/activate','ProfessorController@activate');
+    Route::post('/updatePass','ProfessorController@update');
 });
 
 Route::prefix('ta')->group(function() {
@@ -32,6 +34,7 @@ Route::prefix('ta')->group(function() {
     Route::post('/signup','TAController@store');
     Route::post('/addTask','CourseController@addTask');
     Route::post('/activate','TAController@activate');
+    Route::post('/updatePass','TAController@update');
 });
 
 Route::prefix('department')->group(function() {

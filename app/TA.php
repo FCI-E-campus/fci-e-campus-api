@@ -145,4 +145,19 @@ class TA extends Model
         }
     }
 
+    public function updateUser($un,$pass){
+
+        $ta =TA::find($un);
+        if($pass=="")
+        {
+            $json = array("status"=>"failed","error_code"=>21);
+            return $json;
+        }
+        $ta->TAPASSWORD = $pass;
+        $ta->save();
+        $json = array("status"=>"success");
+        return $json;
+
+    }
+
 }

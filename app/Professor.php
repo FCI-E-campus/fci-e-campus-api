@@ -141,4 +141,19 @@ class Professor extends Model
             return $json;
         }
     }
+
+    public function updateUser($un,$pass){
+
+        $prof =Professor::find($un);
+        if($pass=="")
+        {
+            $json = array("status"=>"failed","error_code"=>21);
+            return $json;
+        }
+        $prof->PROFPASSWORD = $pass;
+        $prof->save();
+        $json = array("status"=>"success");
+        return $json;
+
+    }
 }

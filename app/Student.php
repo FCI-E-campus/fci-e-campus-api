@@ -107,4 +107,18 @@ class Student extends Model
             return $json;
 
     }
+    public function updateUser($un,$pass){
+
+        $student =Student::find($un);
+        if($pass=="")
+        {
+            $json = array("status"=>"failed","error_code"=>21);
+            return $json;
+        }
+        $student->STUDPASSWORD = $pass;
+        $student->save();
+        $json = array("status"=>"success");
+        return $json;
+
+    }
 }
