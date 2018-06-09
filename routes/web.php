@@ -39,6 +39,7 @@ Route::prefix('department')->group(function() {
 
 });
 
+
     Route::prefix('admin')->group(function() {
     Route::post('/assignProfessor','AdminController@assignProfessorToCourse');
     Route::post('/login','AdminController@show');
@@ -55,7 +56,10 @@ Route::prefix('course')->group(function(){
     Route::post('/add','CourseController@store');
 });
 
+Route::prefix('announcement')->group(function() {
+    Route::post('/showAnnouncements','AnnouncementsControl@showِAnnouncemnt');
 
+});
 
 
 
