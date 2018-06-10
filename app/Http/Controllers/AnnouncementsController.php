@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Announcement;
 
-class AnnouncementsControl extends Controller
+class AnnouncementsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,7 +42,7 @@ class AnnouncementsControl extends Controller
 
 
     //call show announcement
-    public function showِAnnouncemnt(Request $request)
+    public function showAnnouncements(Request $request)
     {
         $announcement = new Announcement();
         return $announcement->all();
