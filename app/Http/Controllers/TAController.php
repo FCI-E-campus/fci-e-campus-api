@@ -81,9 +81,8 @@ class TAController extends Controller
      */
     public function update(Request $request)
     {
-
         $ta = new TA();
-        return $ta->updateUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
+        return $ta->updateUser($request['TAUSERNAME'],$request['TAPASSWORD']);
     }
 
     /**

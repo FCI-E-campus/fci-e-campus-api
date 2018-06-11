@@ -82,9 +82,8 @@ class ProfessorController extends Controller
      */
     public function update(Request $request)
     {
-
         $prof = new Professor();
-        return $prof->updateUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
+        return $prof->updateUser($request['PROFUSERNAME'],$request['PROFPASSWORD']);
     }
 
     /**

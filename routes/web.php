@@ -61,7 +61,7 @@ Route::prefix('course')->group(function(){
 });
 
 Route::prefix('announcement')->group(function() {
-    Route::post('/showAnnouncements','AnnouncementsControl@showِAnnouncemnt');
+    Route::post('/showAnnouncements','AnnouncementsController@showAnnouncements');
 
 });
 
