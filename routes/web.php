@@ -57,6 +57,7 @@ Route::prefix('course')->group(function(){
     Route::post('/delete','AdminController@deleteCourse');
     Route::post('/showCoursesOnTheSystem','CourseController@showCoursesOnTheSystem');
     Route::post('/add','CourseController@store');
+    Route::post('/showCourse','CourseController@showCoursebycode');
 });
 
 Route::prefix('announcement')->group(function() {

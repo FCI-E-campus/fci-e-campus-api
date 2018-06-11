@@ -49,6 +49,10 @@ class VerifyCsrfToken extends Middleware
         'http://10.0.3.2/E-campus/public/professor/activate',
 
 
-        'http://localhost/E-campus/public/admin/login'
+        'http://localhost/E-campus/public/admin/login',
+
+        'http://localhost/E-campus/public/course/showCourse',
+        'http://10.0.2.2/E-campus/public/course/showCourse',
+        'http://10.0.3.2/E-campus/public/course/showCourse'
     ];
 }

@@ -85,6 +85,16 @@ class Course extends Model
         return StudentCourse::where('STUDUSERNAME',$un)->get();
     }
 
+
+    public function showCourse($courseCode)
+    {
+        if(Course::find($courseCode)=="")
+        {
+            $json = array("status"=>"failed","error_msg"=>"8");
+            return $json;
+        }
+        return Course::where('COURSECODE',$courseCode)->get();
+    }
     //retrieve courses on the system
     public function showCoursesOnTheSystem()
     {

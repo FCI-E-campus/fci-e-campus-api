@@ -65,7 +65,11 @@ class CourseController extends Controller
         return $course->showCoursesForStudent($request['STUDUSERNAME']);
     }
 
-
+    public function showCoursebycode(Request $request)
+    {
+        $course = new Course();
+        return $course->showCourse($request['COURSECODE']);
+    }
     public function showCoursesOnTheSystem(Request $request)
     {
         $course = new Course();
