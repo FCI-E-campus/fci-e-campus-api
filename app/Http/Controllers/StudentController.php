@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
 use Illuminate\Http\Request;
-use App\Student;
-use DB;
+
 class StudentController extends Controller
 {
     /**
