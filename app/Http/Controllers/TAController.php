@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
+use App\TA;
 use Illuminate\Http\Request;
-use App\Student;
-use DB;
-class StudentController extends Controller
+
+class TAController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,15 +33,13 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //call add student from student class model
+    //call add TA from TA class model
     public function store(Request $request)
     {
-        $student = new Student();
-        return $student->addStudent($request['STUDUSERNAME'],$request['DEPTID'],$request['DEP_DEPTID'],
-            $request['STUDPASSWORD'],$request['FIRSTNAME'],$request['LASTNAME'],
-            $request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH'],$request['FACULTYID']
-            );
-
+        $ta = new TA();
+        return $ta->addTA($request['TAUSERNAME'],$request['DEPTID'],$request['TAPASSWORD'],
+            $request['FIRSTNAME'],$request['LASTNAME'],$request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH']
+        );
     }
 
     /**
@@ -51,11 +48,17 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //call show user from student class model
+    // call show TA from TA class model
     public function show(Request $request)
     {
-        $student = new Student();
-        return $student->showUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
+        $ta = new TA();
+        return $ta->showTA($request['TAUSERNAME'],$request['TAPASSWORD']);
+    }
+
+    public function activate(Request $request)
+    {
+        $ta = new TA();
+        return $ta->activate($request['TAUSERNAME'],$request['ActivationCode']);
     }
 
     /**
@@ -64,9 +67,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -78,9 +81,8 @@ class StudentController extends Controller
      */
     public function update(Request $request)
     {
-
-        $student = new Student();
-        return $student->updateUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
+        $ta = new TA();
+        return $ta->updateUser($request['TAUSERNAME'],$request['TAPASSWORD']);
     }
 
     /**

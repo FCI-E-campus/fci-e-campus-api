@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
 use Illuminate\Http\Request;
-use App\Student;
-use DB;
-class StudentController extends Controller
+use App\Professor;
+
+
+class ProfessorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,15 +34,13 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //call add student from student class model
+    //call add professor from professor class model
     public function store(Request $request)
     {
-        $student = new Student();
-        return $student->addStudent($request['STUDUSERNAME'],$request['DEPTID'],$request['DEP_DEPTID'],
-            $request['STUDPASSWORD'],$request['FIRSTNAME'],$request['LASTNAME'],
-            $request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH'],$request['FACULTYID']
-            );
-
+        $professor = new Professor();
+        return $professor->addProfessor($request['PROFUSERNAME'],$request['DEPTID'],$request['PROFPASSWORD'],
+            $request['FIRSTNAME'],$request['LASTNAME'],$request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH']
+        );
     }
 
     /**
@@ -51,11 +49,17 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //call show user from student class model
+    // call show professor from professor class model
     public function show(Request $request)
     {
-        $student = new Student();
-        return $student->showUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
+        $professor = new Professor();
+        return $professor->showProfessor($request['PROFUSERNAME'],$request['PROFPASSWORD']);
+    }
+
+    public function activate(Request $request)
+    {
+        $professor = new Professor();
+        return $professor->activate($request['PROFUSERNAME'],$request['ActivationCode']);
     }
 
     /**
@@ -64,9 +68,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -78,9 +82,8 @@ class StudentController extends Controller
      */
     public function update(Request $request)
     {
-
-        $student = new Student();
-        return $student->updateUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
+        $prof = new Professor();
+        return $prof->updateUser($request['PROFUSERNAME'],$request['PROFPASSWORD']);
     }
 
     /**

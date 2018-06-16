@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
 use Illuminate\Http\Request;
-use App\Student;
-use DB;
-class StudentController extends Controller
+use App\Announcement;
+
+class AnnouncementsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,28 +33,29 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //call add student from student class model
+
+    //call add announcement from course class model
     public function store(Request $request)
     {
-        $student = new Student();
-        return $student->addStudent($request['STUDUSERNAME'],$request['DEPTID'],$request['DEP_DEPTID'],
-            $request['STUDPASSWORD'],$request['FIRSTNAME'],$request['LASTNAME'],
-            $request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH'],$request['FACULTYID']
-            );
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    //call show user from student class model
-    public function show(Request $request)
+
+    //call show announcement
+    public function showAnnouncements(Request $request)
     {
-        $student = new Student();
-        return $student->showUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
+        $announcement = new Announcement();
+        return $announcement->all();
+    }
+
+
+
+
+
+
+    public function show($id)
+    {
+        //
     }
 
     /**
@@ -64,9 +64,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -76,11 +76,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-
-        $student = new Student();
-        return $student->updateUser($request['STUDUSERNAME'],$request['STUDPASSWORD']);
+        //
     }
 
     /**
