@@ -66,7 +66,8 @@ class StudentController extends Controller
      */
     public function edit()
     {
-
+            $students = Student::all();
+            return $student;
     }
 
     /**

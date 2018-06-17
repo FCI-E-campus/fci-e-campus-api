@@ -21,6 +21,8 @@ Route::prefix('student')->group(function() {
     Route::post('/updatePass','StudentController@update');
 });
 
+Route::get('/user/test', 'StudentController@edit');
+
 Route::prefix('professor')->group(function() {
     Route::post('/login','ProfessorController@show');
     Route::post('/signup','ProfessorController@store');
