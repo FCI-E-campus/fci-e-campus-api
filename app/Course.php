@@ -82,6 +82,8 @@ class Course extends Model
             $json = array("status"=>"failed","error_msg"=>"this student is not exist");
             return $json;
         }
+        $st=StudentCourse::where('STUDUSERNAME',$un)->get();
+
         return StudentCourse::where('STUDUSERNAME',$un)->get();
     }
 
@@ -93,12 +95,43 @@ class Course extends Model
             $json = array("status"=>"failed","error_msg"=>"8");
             return $json;
         }
+
         return Course::where('COURSECODE',$courseCode)->get();
     }
     //retrieve courses on the system
     public function showCoursesOnTheSystem()
     {
+
         return Course::all();
+
+    }
+
+    public function joinCourse($courseCode ,$un,$passCode)
+    {
+        if(Course::find($courseCode)=="")
+        {
+            $json = array("status"=>"failed","error_msg"=>"8");
+            return $json;
+        }
+        if(Student::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_msg"=>"1");
+            return $json;
+        }
+        $co=Course::where('PASSCODE',$passCode)->get();
+        if ($co == null){
+            $json = array("status"=>"failed","error_msg"=>"28");
+            return $json;
+
+        }
+
+            $course = new StudentCourse();
+            $course->COURSECODE = $courseCode;
+            $course->STUDUSERNAME=$un;
+            $course->save();
+            $json = array("status"=>"success");
+            return $json;
+
     }
 
 
