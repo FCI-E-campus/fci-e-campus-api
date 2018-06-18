@@ -75,6 +75,11 @@ class Course extends Model
     }
 
     //retrieve courses for specific student
+
+    /**
+     * @param $un
+     * @return array
+     */
     public function showCoursesForStudent($un)
     {
         if(Student::find($un)=="")
@@ -82,9 +87,15 @@ class Course extends Model
             $json = array("status"=>"failed","error_msg"=>"this student is not exist");
             return $json;
         }
-        $st=StudentCourse::where('STUDUSERNAME',$un)->get();
 
-        return StudentCourse::where('STUDUSERNAME',$un)->get();
+
+        $sql = 'SELECT co.COURSECODE, co.COURSETITLE 
+FROM Course co join StudentCourse b 
+on co.COURSECODE = b.COURSECODE
+ WHERE b.STUDUSERNAME = \''. $un. '\'';
+
+        return  DB::select($sql);
+
     }
 
 

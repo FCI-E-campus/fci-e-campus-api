@@ -62,6 +62,7 @@ class CourseController extends Controller
     public function showCoursesForStudent(Request $request)
     {
         $course = new Course();
+
         return $course->showCoursesForStudent($request['STUDUSERNAME']);
     }
 
