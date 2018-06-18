@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignKeyToCourse extends Migration
+class AddForeignKeyToPrerequisitecourse extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddForeignKeyToCourse extends Migration
      */
     public function up()
     {
-        Schema::table('course', function (Blueprint $table) {
-            $table->string('preCourseCode',50);
+        Schema::table('prerequisitecourse', function (Blueprint $table) {
+            $table->string('COU_COURSECODE',50);
 
-            $table->foreign('preCourseCode')
+            $table->foreign('COU_COURSECODE')
                 ->references('COURSECODE')->on('course');
         });
     }

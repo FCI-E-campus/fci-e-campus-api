@@ -44,6 +44,12 @@ class VerifyCsrfToken extends Middleware
         'http://10.0.2.2/E-campus/public/ta/activate',
         'http://10.0.3.2/E-campus/public/ta/activate',
 
+
+
+        'http://10.0.3.2/E-campus/public/department/add/new',
+
+
+
         'http://localhost/E-campus/public/professor/activate',
         'http://10.0.2.2/E-campus/public/professor/activate',
         'http://10.0.3.2/E-campus/public/professor/activate',

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use DB;
 class Course extends Model
 {
@@ -28,6 +29,35 @@ class Course extends Model
         }
         $json = array("status"=>"failed","error_msg"=>"this course id is exist");
         return $json;
+    }
+    //get All Forum Posts For Specific Course
+    public function getAllForumPostsForSpecificCourse($crsCode)
+    {
+        $num = Forum::where('COURSECODE',$crsCode)->count();
+        if($num==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>8);
+            return $json;
+        }
+        $forum = Forum::where('COURSECODE',$crsCode)->get();
+        foreach($forum as $tempForum)
+        {
+            $posts = Post::where('FORUMID','=',[$tempForum->FORUMID])->get();
+        }
+        $allPosts = new Collection();
+        $subJason;
+        foreach($posts as $post)
+        {
+            $temp=Author::find([$post->AUTHORID]);
+            foreach($temp as $tetemp)
+            {
+                $subJason =array("post_title"=>$post->POSTTITLE,"post_body"=>$post->POSTBODY,
+                "date_published"=>$post->DATEPUBLISHED,"author_username"=>$tetemp->AUTHORUSERNAME,
+                "author_type"=>$tetemp->AUTHORTYPE,"post_id"=>$post->POSTID,"answered"=>$post->ANSWERED);
+            }
+            $allPosts->push($subJason);
+        }
+        return $allPosts;
     }
 
     //add task to DB

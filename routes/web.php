@@ -21,7 +21,6 @@ Route::prefix('student')->group(function() {
     Route::post('/updatePass','StudentController@update');
 });
 
-Route::get('/user/test', 'StudentController@edit');
 Route::prefix('professor')->group(function() {
     Route::post('/login','ProfessorController@show');
     Route::post('/signup','ProfessorController@store');
@@ -59,6 +58,7 @@ Route::prefix('course')->group(function(){
     Route::post('/showCoursesOnTheSystem','CourseController@showCoursesOnTheSystem');
     Route::post('/add','CourseController@store');
     Route::post('/showCourse','CourseController@showCoursebycode');
+    Route::post('/getAllForumPostsForSpecificCourse','CourseController@getAllForumPostsForSpecificCourse');
 });
 
 Route::prefix('announcement')->group(function() {
