@@ -22,7 +22,6 @@ Route::prefix('student')->group(function() {
 });
 
 Route::get('/user/test', 'StudentController@edit');
-
 Route::prefix('professor')->group(function() {
     Route::post('/login','ProfessorController@show');
     Route::post('/signup','ProfessorController@store');
@@ -41,7 +40,7 @@ Route::prefix('ta')->group(function() {
 
 Route::prefix('department')->group(function() {
     Route::post('/add','DepartmentController@store');
-
+    Route::get('/add/new','DepartmentController@show');
 });
 
 
