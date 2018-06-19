@@ -66,6 +66,20 @@ class CourseController extends Controller
         return $course->showCoursesForStudent($request['STUDUSERNAME']);
     }
 
+    public function showCoursesForTA(Request $request)
+    {
+        $course = new Course();
+
+        return $course->showCoursesForTA($request['TAUSERNAME']);
+    }
+
+    public function showCoursesForProf(Request $request)
+    {
+        $course = new Course();
+
+        return $course->showCoursesForTA($request['PROFUSERNAME']);
+    }
+
     public function showCoursebycode(Request $request)
     {
         $course = new Course();

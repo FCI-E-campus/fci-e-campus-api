@@ -98,7 +98,41 @@ on co.COURSECODE = b.COURSECODE
 
     }
 
+    public function showCoursesForTA($un)
+    {
+        if(TA::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_msg"=>"this TA is not exist");
+            return $json;
+        }
 
+
+        $sql = 'SELECT co.COURSECODE, co.COURSETITLE 
+FROM Course co join TaCourse b 
+on co.COURSECODE = b.COURSECODE
+ WHERE b.TAUSERNAME = \''. $un. '\'';
+
+        return  DB::select($sql);
+
+    }
+
+    public function showCoursesForProf($un)
+    {
+        if(Professor::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_msg"=>"this TA is not exist");
+            return $json;
+        }
+
+
+        $sql = 'SELECT co.COURSECODE, co.COURSETITLE 
+FROM Course co join TaCourse b 
+on co.COURSECODE = b.COURSECODE
+ WHERE b.PROFUSERNAME = \''. $un. '\'';
+
+        return  DB::select($sql);
+
+    }
     public function showCourse($courseCode)
     {
         if(Course::find($courseCode)=="")
