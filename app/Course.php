@@ -45,12 +45,13 @@ class Course extends Model
             return $json;
         }
         $forum = Forum::where('COURSECODE',$crsCode)->get();
+        $posts = array();
         foreach($forum as $tempForum)
         {
             $posts = Post::where('FORUMID','=',[$tempForum->FORUMID])->get();
         }
         $allPosts = new Collection();
-
+        $subJason= array();
         foreach($posts as $post)
         {
             $author=Author::find([$post->AUTHORID]);
