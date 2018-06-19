@@ -92,9 +92,9 @@ class Course extends Model
     }
 
     //add task to DB
-    public function addTask($id,$crsCode,$cId,$tN,$desc,$DD,$DC,$W)
+    public function addTask($crsCode,$cId,$tN,$desc,$DD,$DC,$W)
     {
-        if(Task::find($id)=="") {
+
             if(Course::find($crsCode)=="")
             {
                 return "this course not exist";
@@ -115,12 +115,8 @@ class Course extends Model
             $task->save();
             $json = array("status"=>"success");
             return $json;
-        }
-        else
-        {
-            $json = array("status"=>"failed","error_msg"=>"this task id is exist");
-            return $json;
-        }
+
+
     }
 
     //delete post from DB

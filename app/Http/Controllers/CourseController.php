@@ -60,7 +60,7 @@ class CourseController extends Controller
     public function addTask(Request $request)
     {
         $course = new Course();
-        return $course->addTask($request['TASKID'],$request['COURSECODE'],$request['CREATORID'],$request['TASKNAME'],
+        return $course->addTask($request['COURSECODE'],$request['CREATORID'],$request['TASKNAME'],
             $request['DESCRIPTION'],$request['DUEDATE'],$request['DATECREATED'],$request['WEIGHT']);
 
     }
