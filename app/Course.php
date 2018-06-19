@@ -76,7 +76,7 @@ class Course extends Model
         }
         $tasks = Task::where('COURSECODE',$crsCode)->get();
         $allTasks = new Collection();
-
+        $subJason= array();
         foreach($tasks as $task)
         {
             $taskCreator=TaskCreator::find([$task->CREATORID]);
