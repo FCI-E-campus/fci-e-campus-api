@@ -223,13 +223,20 @@ on co.COURSECODE = b.COURSECODE
             $json = array("status"=>"failed","error_msg"=>"1");
             return $json;
         }
-        $co=Course::where('PASSCODE',$passCode)->get();
-        if ($co == null){
+        $co=Course::where('PASSCODE',$passCode)->count();
+
+        if ($co == 0){
             $json = array("status"=>"failed","error_msg"=>"28");
             return $json;
 
         }
+        $st=StudentCourse::where("COURSECODE" , $courseCode)->where("STUDUSERNAME",$un)->count();
+        if ($st!=0){
+            $json = array("status"=>"failed","error_msg"=>"29");
+            return $json;
 
+
+        }
             $course = new StudentCourse();
             $course->COURSECODE = $courseCode;
             $course->STUDUSERNAME=$un;
