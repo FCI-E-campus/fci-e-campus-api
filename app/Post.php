@@ -27,7 +27,7 @@ class Post extends Model
             $comments = Comment::where('POSTID','=',[$ppost->POSTID])->get();
         }
         $allComments = new Collection();
-        $subJason;
+
         foreach($comments as $comment)
         {
             $temp=Author::find([$comment->AUTHORID]);

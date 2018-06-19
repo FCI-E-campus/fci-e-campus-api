@@ -31,6 +31,11 @@ class Course extends Model
         return $json;
     }
     //get All Forum Posts For Specific Course
+
+    /**
+     * @param $crsCode
+     * @return array|Collection
+     */
     public function getAllForumPostsForSpecificCourse($crsCode)
     {
         $num = Forum::where('COURSECODE',$crsCode)->count();
@@ -45,7 +50,7 @@ class Course extends Model
             $posts = Post::where('FORUMID','=',[$tempForum->FORUMID])->get();
         }
         $allPosts = new Collection();
-        $subJason;
+
         foreach($posts as $post)
         {
             $author=Author::find([$post->AUTHORID]);
@@ -70,7 +75,7 @@ class Course extends Model
         }
         $tasks = Task::where('COURSECODE',$crsCode)->get();
         $allTasks = new Collection();
-        $subJason;
+
         foreach($tasks as $task)
         {
             $taskCreator=TaskCreator::find([$task->CREATORID]);
