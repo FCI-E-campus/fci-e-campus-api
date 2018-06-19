@@ -39,7 +39,7 @@ Route::prefix('ta')->group(function() {
 
 Route::prefix('department')->group(function() {
     Route::post('/add','DepartmentController@store');
-
+    Route::get('/add/new','DepartmentController@show');
 });
 
 
@@ -55,11 +55,19 @@ Route::prefix('course')->group(function(){
     Route::post('/showCoursesForStudent','CourseController@showCoursesForStudent');
     Route::post('/showCoursesForTA','CourseController@showCoursesForTA');
     Route::post('/showCoursesForProf','CourseController@showCoursesForProf');
+
+
     Route::post('/deletePost','CourseController@deletePost');
+
+
+
     Route::post('/delete','AdminController@deleteCourse');
     Route::post('/showCoursesOnTheSystem','CourseController@showCoursesOnTheSystem');
     Route::post('/add','CourseController@store');
     Route::post('/showCourse','CourseController@showCoursebycode');
+    Route::post('/getAllForumPostsForSpecificCourse','CourseController@getAllForumPostsForSpecificCourse');
+    Route::post('/showAllTasksForSpecificCourse','CourseController@showAllTasksForSpecificCourse');
+
     Route::post('/joinCourse','CourseController@joinCourse');
 });
 
@@ -68,6 +76,14 @@ Route::prefix('announcement')->group(function() {
 
 });
 
+Route::prefix('post')->group(function() {
+    Route::post('/showSpecificPostComments','PostController@showSpecificPostComments');
+    Route::post('/addComment','PostController@addComment');
+});
+
+Route::prefix('forum')->group(function() {
+    Route::post('/addPost','ForumController@addPost');
+});
 
 
 

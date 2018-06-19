@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use DB;
 class Course extends Model
 {
@@ -28,6 +29,60 @@ class Course extends Model
         }
         $json = array("status"=>"failed","error_msg"=>"this course id is exist");
         return $json;
+    }
+    //get All Forum Posts For Specific Course
+    public function getAllForumPostsForSpecificCourse($crsCode)
+    {
+        $num = Forum::where('COURSECODE',$crsCode)->count();
+        if($num==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>8);
+            return $json;
+        }
+        $forum = Forum::where('COURSECODE',$crsCode)->get();
+        foreach($forum as $tempForum)
+        {
+            $posts = Post::where('FORUMID','=',[$tempForum->FORUMID])->get();
+        }
+        $allPosts = new Collection();
+        $subJason;
+        foreach($posts as $post)
+        {
+            $author=Author::find([$post->AUTHORID]);
+            foreach($author as $aauthor)
+            {
+                $subJason =array("post_title"=>$post->POSTTITLE,"post_body"=>$post->POSTBODY,
+                "date_published"=>$post->DATEPUBLISHED,"author_username"=>$aauthor->AUTHORUSERNAME,
+                "author_type"=>$aauthor->AUTHORTYPE,"post_id"=>$post->POSTID,"answered"=>$post->ANSWERED);
+            }
+            $allPosts->push($subJason);
+        }
+        return $allPosts;
+    }
+
+    public function showAllTasksForSpecificCourse($crsCode)
+    {
+        $num = Course::where('COURSECODE',$crsCode)->count();
+        if($num==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>8);
+            return $json;
+        }
+        $tasks = Task::where('COURSECODE',$crsCode)->get();
+        $allTasks = new Collection();
+        $subJason;
+        foreach($tasks as $task)
+        {
+            $taskCreator=TaskCreator::find([$task->CREATORID]);
+            foreach($taskCreator as $ttaskCreator)
+            {
+                $subJason =array("task_name"=>$task->TASKNAME,"description"=>$task->DESCRIPTION,
+                "date_created"=>$task->DATECREATED,"creator_username"=>$ttaskCreator->CREATORUSERNAME,
+                "creator_type"=>$ttaskCreator->CREATORTYPE,"due_date"=>$task->DUEDATE,"weight"=>$task->WEIGHT);
+            }
+            $allTasks->push($subJason);
+        }
+        return $allTasks;
     }
 
     //add task to DB

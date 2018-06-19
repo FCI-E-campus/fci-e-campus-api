@@ -36,6 +36,18 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //call getAllForumPostsForSpecificCourse from course class model
+    public function getAllForumPostsForSpecificCourse(Request $request)
+    {
+        $course = new Course();
+        return $course->getAllForumPostsForSpecificCourse($request['course_code']);
+    }
+
+    public function showAllTasksForSpecificCourse(Request $request)
+    {
+        $course = new Course();
+        return $course->showAllTasksForSpecificCourse($request['course_code']);
+    }
 
     //call add course from course class model
     public function store(Request $request)
