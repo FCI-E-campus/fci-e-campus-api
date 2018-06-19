@@ -38,7 +38,7 @@ class Course extends Model
      */
     public function getAllForumPostsForSpecificCourse($crsCode)
     {
-        $num = Forum::where('COURSECODE',$crsCode)->count();
+        $num = Course::where('COURSECODE',$crsCode)->count();
         if($num==0)
         {
             $json = array("status"=>"failed","error_msg"=>8);
