@@ -59,6 +59,8 @@ Route::prefix('course')->group(function(){
     Route::post('/add','CourseController@store');
     Route::post('/showCourse','CourseController@showCoursebycode');
     Route::post('/getAllForumPostsForSpecificCourse','CourseController@getAllForumPostsForSpecificCourse');
+    Route::post('/showAllTasksForSpecificCourse','CourseController@showAllTasksForSpecificCourse');
+    
 });
 
 Route::prefix('announcement')->group(function() {
@@ -66,7 +68,14 @@ Route::prefix('announcement')->group(function() {
 
 });
 
+Route::prefix('post')->group(function() {
+    Route::post('/showSpecificPostComments','PostController@showSpecificPostComments');
+    Route::post('/addComment','PostController@addComment');
+});
 
+Route::prefix('forum')->group(function() {
+    Route::post('/addPost','ForumController@addPost');
+});
 
 
 

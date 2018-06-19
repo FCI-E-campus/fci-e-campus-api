@@ -48,16 +48,41 @@ class Course extends Model
         $subJason;
         foreach($posts as $post)
         {
-            $temp=Author::find([$post->AUTHORID]);
-            foreach($temp as $tetemp)
+            $author=Author::find([$post->AUTHORID]);
+            foreach($author as $aauthor)
             {
                 $subJason =array("post_title"=>$post->POSTTITLE,"post_body"=>$post->POSTBODY,
-                "date_published"=>$post->DATEPUBLISHED,"author_username"=>$tetemp->AUTHORUSERNAME,
-                "author_type"=>$tetemp->AUTHORTYPE,"post_id"=>$post->POSTID,"answered"=>$post->ANSWERED);
+                "date_published"=>$post->DATEPUBLISHED,"author_username"=>$aauthor->AUTHORUSERNAME,
+                "author_type"=>$aauthor->AUTHORTYPE,"post_id"=>$post->POSTID,"answered"=>$post->ANSWERED);
             }
             $allPosts->push($subJason);
         }
         return $allPosts;
+    }
+
+    public function showAllTasksForSpecificCourse($crsCode)
+    {
+        $num = Course::where('COURSECODE',$crsCode)->count();
+        if($num==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>8);
+            return $json;
+        }
+        $tasks = Task::where('COURSECODE',$crsCode)->get();
+        $allTasks = new Collection();
+        $subJason;
+        foreach($tasks as $task)
+        {
+            $taskCreator=TaskCreator::find([$task->CREATORID]);
+            foreach($taskCreator as $ttaskCreator)
+            {
+                $subJason =array("task_name"=>$task->TASKNAME,"description"=>$task->DESCRIPTION,
+                "date_created"=>$task->DATECREATED,"creator_username"=>$ttaskCreator->CREATORUSERNAME,
+                "creator_type"=>$ttaskCreator->CREATORTYPE,"due_date"=>$task->DUEDATE,"weight"=>$task->WEIGHT);
+            }
+            $allTasks->push($subJason);
+        }
+        return $allTasks;
     }
 
     //add task to DB

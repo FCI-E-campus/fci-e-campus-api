@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Department;
-use App\Post;
+use App\Author;
+use App\Task;
 use DB;
 class DepartmentController extends Controller
 {
@@ -86,7 +87,37 @@ class DepartmentController extends Controller
         $course->save();
         return "success";
         */
-    }
+        /*
+        $comment = new Comment();
+        $comment->COMMENTID=6;
+        $comment->AUTHORID=2;
+        $comment->POSTID=3;
+        $comment->COMMENTTEXT="test";
+        $comment->COMMENTTIME="2018-06-20 00:00:00";
+        $comment->save();
+        return 1;
+        */
+        /*
+        $author = new Author();
+        $author->AUTHORUSERNAME="abod";
+        $author->AUTHORTYPE="n";
+        $author->save();
+        return 1;
+        */
+        
+/*
+        $task = new Task();
+        $task->COURSECODE="is123";
+        $task->CREATORID=2;
+        $task->TASKNAME="assignment 3";
+        $task->DESCRIPTION="a3";
+        $task->DUEDATE="2018-06-13 00:00:00";
+        $task->DATECREATED="2018-06-13 00:00:00";
+        $task->WEIGHT=5;
+        $task->save();
+        return 1;
+        */
+        }
 
     /**
      * Show the form for editing the specified resource.
