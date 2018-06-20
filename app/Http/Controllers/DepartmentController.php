@@ -50,6 +50,7 @@ class DepartmentController extends Controller
      */
     public function show()
     {
+        return Department::all();
         /*
         $department = new Department();
         $department->DEPTID=6;
