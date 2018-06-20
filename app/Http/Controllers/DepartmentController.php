@@ -50,15 +50,34 @@ class DepartmentController extends Controller
      */
     public function show()
     {
-        return Department::all();
-        /*
+        
         $department = new Department();
-        $department->DEPTID=6;
-        $department->DEPARTMENTNAME="hardware";
-        $department->DESCRIPTION="hardware Engineering";
+        $department->DEPARTMENTNAME="General";
+        $department->DESCRIPTION="general department";
         $department->save();
-        return 1;
-        */
+        $department = new Department();
+        $department->DEPARTMENTNAME="General";
+        $department->DESCRIPTION="general department";
+        $department->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="Computer Science";
+        $department->DESCRIPTION="CS department";
+        $department->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="Information System";
+        $department->DESCRIPTION="IS department";
+        $department->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="Information Technology";
+        $department->DESCRIPTION="IT department";
+        $department->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="Decision Support";
+        $department->DESCRIPTION="DS department";
+        $department->save();
+        
+        return Department::all();
+        
 /*
         $course = new Course();
         $course->COURSECODE="se";
