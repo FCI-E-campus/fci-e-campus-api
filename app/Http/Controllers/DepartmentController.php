@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Department;
 use App\Author;
-use App\Task;
+use App\Course;
+use App\Student;
 use DB;
 class DepartmentController extends Controller
 {
@@ -50,7 +51,121 @@ class DepartmentController extends Controller
      */
     public function show()
     {
+
+        $author = new Author();
+        $author->AUTHORUSERNAME="abod";
+        $author->AUTHORTYPE="prof";
+        $author->save();
+        $author = new Author();
+        $author->AUTHORUSERNAME="ahmed";
+        $author->AUTHORTYPE="stud";
+        $author->save();
+        $author = new Author();
+        $author->AUTHORUSERNAME="abdullah";
+        $author->AUTHORTYPE="ta";
+        $author->save();
         
+        $course = new Course();
+        $course->COURSECODE="CS123";
+        $course->DEPTID=3;
+        $course->COURSETITLE="algorithms";
+        $course->DESCRIPTION="how to build more algorithms";
+        $course->STARTDATE="2018-09-21 00:00:00";
+        $course->ENDDATE="2019-01-03 00:00:00";
+        $course->PASSCODE="ag123";
+        $course->save();
+        $course = new Course();
+        $course->COURSECODE="IT123";
+        $course->DEPTID=5;
+        $course->COURSETITLE="networks";
+        $course->DESCRIPTION="how to build more networks";
+        $course->STARTDATE="2018-09-21 00:00:00";
+        $course->ENDDATE="2019-01-03 00:00:00";
+        $course->PASSCODE="ad123";
+        $course->save();
+        $course = new Course();
+        $course->COURSECODE="IS123";
+        $course->DEPTID=4;
+        $course->COURSETITLE="analysis";
+        $course->DESCRIPTION="how to build more analysis to data";
+        $course->STARTDATE="2018-09-21 00:00:00";
+        $course->ENDDATE="2019-01-03 00:00:00";
+        $course->PASSCODE="as123";
+        $course->save();
+        $course = new Course();
+        $course->COURSECODE="DS123";
+        $course->DEPTID=6;
+        $course->COURSETITLE="excel";
+        $course->DESCRIPTION="how to build more excel operations";
+        $course->STARTDATE="2018-09-21 00:00:00";
+        $course->ENDDATE="2019-01-03 00:00:00";
+        $course->PASSCODE="aw123";
+        $course->save();
+        $course = new Course();
+        $course->COURSECODE="G123";
+        $course->DEPTID=1;
+        $course->COURSETITLE="english";
+        $course->DESCRIPTION="how to speak english";
+        $course->STARTDATE="2018-09-21 00:00:00";
+        $course->ENDDATE="2019-01-03 00:00:00";
+        $course->PASSCODE="az123";
+        $course->save();
+        $course = new Course();
+        $course->COURSECODE="G124";
+        $course->DEPTID=2;
+        $course->COURSETITLE="math";
+        $course->DESCRIPTION="how to make math operations";
+        $course->STARTDATE="2018-09-21 00:00:00";
+        $course->ENDDATE="2019-01-03 00:00:00";
+        $course->PASSCODE="ap123";
+        $course->save();
+        
+        $student = new Student();
+        $student->STUDUSERNAME="abod";
+        $student->DEPTID=1;
+        $student->DEP_DEPTID=2;
+        $student->STUDPASSWORD="123";
+        $student->FIRSTNAME="abdelrahman";
+        $student->LASTNAME="mahmoud";
+        $student->EMAIL="abodMahmoud@gmail.com";
+        $student->PHONENUMBER="01156784567";
+        $student->DATEOFBIRTH="1996-06-12";
+        $student->FACULTYID="20140191";
+        $student->ISMODERATOR=0;
+        $student->save();
+
+        $student = new Student();
+        $student->STUDUSERNAME="ahmed";
+        $student->DEPTID=3;
+        $student->DEP_DEPTID=4;
+        $student->STUDPASSWORD="123";
+        $student->FIRSTNAME="ahmed";
+        $student->LASTNAME="mohsen";
+        $student->EMAIL="ahmedMohsen@gmail.com";
+        $student->PHONENUMBER="01151234567";
+        $student->DATEOFBIRTH="1996-07-12";
+        $student->FACULTYID="20140192";
+        $student->ISMODERATOR=1;
+        $student->save();
+/*
+        $ta = new TA();
+        $ta->TAUSERNAME="zizo";
+        $ta->DEPTID=3;
+        $ta->TAPASSWORD="123";
+        $ta->FIRSTNAME="abdelaziz";
+        $ta->LASTNAME="mahmoud";
+        $ta->EMAIL="zizoMahmoud";
+        $ta->PHONENUMBER="01151234567";
+        $ta->DATEOFBIRTH="1990-07-12";
+        $ta->ActivationCode="";
+        $ta->isActiveted=0;
+        $ta->save();
+        */
+
+
+
+
+        /*
         $department = new Department();
         $department->DEPARTMENTNAME="General";
         $department->DESCRIPTION="general department";
@@ -77,7 +192,7 @@ class DepartmentController extends Controller
         $department->save();
         
         return Department::all();
-        
+        */
 /*
         $course = new Course();
         $course->COURSECODE="se";
