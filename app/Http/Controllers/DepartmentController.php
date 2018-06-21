@@ -7,6 +7,8 @@ use App\Department;
 use App\Author;
 use App\Course;
 use App\Student;
+use App\Forum;
+use App\Post;
 use DB;
 class DepartmentController extends Controller
 {
@@ -52,7 +54,28 @@ class DepartmentController extends Controller
     public function show()
     {
 
-        return Department::all();
+        $forum = new Forum();
+        $forum->COURSECODE="CS123";
+        $forum->save();
+        $forum = new Forum();
+        $forum->COURSECODE="DS123";
+        $forum->save();
+        $forum = new Forum();
+        $forum->COURSECODE="IS123";
+        $forum->save();
+        $forum = new Forum();
+        $forum->COURSECODE="IT123";
+        $forum->save();
+
+        $post = new Post();
+        $post->FORUMID=1;
+        $post->AUTHORID=1;
+        $post->POSTTITLE="connection to DB";
+        $post->POSTBODY="how to do DB connecction";
+        $post->ANSWERED=0;
+        $post->DATEPUBLISHED="2018-06-21 00:00:00";
+        $post->save();
+
 /*
         $author = new Author();
         $author->AUTHORUSERNAME="abod";
