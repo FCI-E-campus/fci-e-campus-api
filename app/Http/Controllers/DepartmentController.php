@@ -51,6 +51,8 @@ class DepartmentController extends Controller
      */
     public function show()
     {
+
+        return Department::all();
 /*
         $author = new Author();
         $author->AUTHORUSERNAME="abod";
