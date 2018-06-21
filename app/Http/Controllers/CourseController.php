@@ -160,7 +160,14 @@ class CourseController extends Controller
     public function  joinCourse(Request $request){
 
    $course = new Course();
-  return  $course->joinCourse($request['CourseCode'],$request['Username'],$request['PassCode']);
+  return  $course->joinCourse($request['CourseCode'],$request['GROUPID'],$request['Username'],$request['PassCode']);
+
+    }
+
+    public function  showscheduleforcourse(Request $request){
+        $course = new Course();
+
+        return $course->showscheduleforcourse($request['COURSECODE']);
 
     }
 }

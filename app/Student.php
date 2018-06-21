@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use PhpParser\PrettyPrinter\Standard;
+use Illuminate\Database\Eloquent\Collection;
 use DB;
 use Mail;
 class Student extends Model
@@ -119,6 +120,44 @@ class Student extends Model
         $student->save();
         $json = array("status"=>"success");
         return $json;
+
+    }
+    public function  showStudentSchedule($un){
+
+        if(Student::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>"1");
+            return $json;
+        }
+        $st=StudentCourse::where("STUDUSERNAME",$un)->count();
+        if ($st==0){
+            $json = array("status"=>"failed","error_code"=>"30");
+            return $json;
+
+
+        }
+        $st=StudentCourse::where("STUDUSERNAME",$un)->get();
+
+        $allSlotsForCourses = array();
+
+        foreach($st as $item)
+        {
+
+            $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("GROUPNUM",$item["GROUPID"])->get();
+           // $allSlots->push($slot);
+           // array_push($allSlots,$slot);
+            $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","1")->get();
+            $subJason =array("COURSECODE"=>$item['COURSECODE'],"labs"=>$labs,
+                "lecture"=>$lec);
+            array_push($allSlotsForCourses,$subJason);
+           // $allSlots->push($slot);
+           // array_push($allSlots,$slot);
+            //array_push($allSlotsForCourses);
+        }
+
+  return $allSlotsForCourses;
+
+
 
     }
 

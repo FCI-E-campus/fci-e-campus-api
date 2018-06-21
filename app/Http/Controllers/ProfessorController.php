@@ -78,7 +78,7 @@ class ProfessorController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsephp artisan migrate
      */
     public function update(Request $request)
     {

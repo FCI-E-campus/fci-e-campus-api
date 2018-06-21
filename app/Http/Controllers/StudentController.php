@@ -92,4 +92,10 @@ class StudentController extends Controller
     {
         //
     }
+
+public function  showStudentSchedule(Request $request){
+   $st = new Student();
+   return $st->showStudentSchedule($request["STUDUSERNAME"]);
+
+}
 }

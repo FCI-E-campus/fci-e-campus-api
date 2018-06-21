@@ -14,6 +14,9 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'http://e-campus.herokuapp.com/student/login',
 
+        'http://localhost/E-campus/public/student/login',
+        'http://localhost/E-campus/public/student/signup',
+
         'http://e-campus.herokuapp.com/student/signup',
 
         'http://e-campus.herokuapp.com/professor/login',

@@ -97,14 +97,15 @@ class Course extends Model
 
             if(Course::find($crsCode)=="")
             {
-                return "this course not exist";
+                $json = array("status"=>"failed","error_msg"=>"8");
+                return $json;
             }
             if(TaskCreator::find($cId)=="")
             {
                 return "this task creator not exist";
             }
             $task = new Task();
-            $task->TASKID = $id;
+
             $task->COURSECODE = $crsCode;
             $task->CREATORID = $cId;
             $task->TASKNAME = $tN;
@@ -141,7 +142,7 @@ class Course extends Model
     {
         if(Student::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this student is not exist");
+            $json = array("status"=>"failed","error_msg"=>"1");
             return $json;
         }
 
@@ -159,7 +160,7 @@ on co.COURSECODE = b.COURSECODE
     {
         if(TA::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this TA is not exist");
+            $json = array("status"=>"failed","error_msg"=>"1");
             return $json;
         }
 
@@ -177,7 +178,7 @@ on co.COURSECODE = b.COURSECODE
     {
         if(Professor::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"this TA is not exist");
+            $json = array("status"=>"failed","error_msg"=>"1");
             return $json;
         }
 
@@ -208,40 +209,63 @@ on co.COURSECODE = b.COURSECODE
 
     }
 
-    public function joinCourse($courseCode ,$un,$passCode)
+    /**
+     * @param $courseCode
+     * @param $groubid
+     * @param $un
+     * @param $passCode
+     * @return array
+     */
+    public function joinCourse($courseCode, $groubid , $un, $passCode)
     {
         if(Course::find($courseCode)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"8");
+            $json = array("status"=>"failed","error_code"=>"8");
             return $json;
         }
         if(Student::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"1");
+            $json = array("status"=>"failed","error_code"=>"1");
             return $json;
         }
         $co=Course::where('PASSCODE',$passCode)->count();
 
         if ($co == 0){
-            $json = array("status"=>"failed","error_msg"=>"28");
+            $json = array("status"=>"failed","error_code"=>"28");
             return $json;
 
         }
         $st=StudentCourse::where("COURSECODE" , $courseCode)->where("STUDUSERNAME",$un)->count();
         if ($st!=0){
-            $json = array("status"=>"failed","error_msg"=>"29");
+            $json = array("status"=>"failed","error_code"=>"29");
             return $json;
 
 
         }
             $course = new StudentCourse();
+            $course->GROUPID=$groubid;
             $course->COURSECODE = $courseCode;
             $course->STUDUSERNAME=$un;
+
             $course->save();
             $json = array("status"=>"success");
             return $json;
 
     }
+
+public function  showscheduleforcourse($courscode){
+    if(Course::find($courscode)=="")
+    {
+        $json = array("status"=>"failed","error_code"=>"8");
+        return $json;
+    }
+
+
+    $slot = Slots::where('COURSECODE',$courscode)->get();
+    return $slot;
+
+
+}
 
 
 

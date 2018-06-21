@@ -19,6 +19,7 @@ Route::prefix('student')->group(function() {
     Route::post('/login','StudentController@show');
     Route::post('/signup','StudentController@store');
     Route::post('/updatePass','StudentController@update');
+    Route::post('/showStudentSchedule','StudentController@showStudentSchedule');
 });
 
 Route::prefix('professor')->group(function() {
@@ -55,6 +56,7 @@ Route::prefix('course')->group(function(){
     Route::post('/showCoursesForStudent','CourseController@showCoursesForStudent');
     Route::post('/showCoursesForTA','CourseController@showCoursesForTA');
     Route::post('/showCoursesForProf','CourseController@showCoursesForProf');
+    Route::post('/showCourseSchedule','CourseController@showscheduleforcourse');
     Route::post('/deletePost','CourseController@deletePost');
     Route::post('/delete','AdminController@deleteCourse');
     Route::post('/showCoursesOnTheSystem','CourseController@showCoursesOnTheSystem');
