@@ -51,7 +51,7 @@ class DepartmentController extends Controller
      */
     public function show()
     {
-
+/*
         $author = new Author();
         $author->AUTHORUSERNAME="abod";
         $author->AUTHORTYPE="prof";
@@ -147,6 +147,7 @@ class DepartmentController extends Controller
         $student->FACULTYID="20140192";
         $student->ISMODERATOR=1;
         $student->save();
+        */
 /*
         $ta = new TA();
         $ta->TAUSERNAME="zizo";
