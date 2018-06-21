@@ -12,51 +12,31 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'http://localhost/E-campus/public/student/login',
-        'http://10.0.2.2/E-campus/public/student/login',
-        'http://10.0.3.2/E-campus/public/student/login',
+        'http://e-campus.herokuapp.com/student/login',
 
-        'http://localhost/E-campus/public/student/signup',
-        'http://10.0.2.2/E-campus/public/student/signup',
-        'http://10.0.3.2/E-campus/public/student/signup',
+        'http://e-campus.herokuapp.com/student/signup',
+
+        'http://e-campus.herokuapp.com/professor/login',
+
+        'http://e-campus.herokuapp.com/professor/signup',
+
+        'http://e-campus.herokuapp.com/ta/login',
+
+        'http://e-campus.herokuapp.com/ta/signup',
 
 
+        'http://e-campus.herokuapp.com/ta/activate',
 
-        'http://localhost/E-campus/public/professor/login',
-        'http://10.0.2.2/E-campus/public/professor/login',
-        'http://10.0.3.2/E-campus/public/professor/login',
 
-        'http://localhost/E-campus/public/professor/signup',
-        'http://10.0.2.2/E-campus/public/professor/signup',
-        'http://10.0.3.2/E-campus/public/professor/signup',
-
-        'http://localhost/E-campus/public/ta/login',
-        'http://10.0.2.2/E-campus/public/ta/login',
-        'http://10.0.3.2/E-campus/public/ta/login',
-
-        'http://localhost/E-campus/public/ta/signup',
-        'http://10.0.2.2/E-campus/public/ta/signup',
-        'http://10.0.3.2/E-campus/public/ta/signup',
+        'http://e-campus.herokuapp.com/department/add/new',
 
 
 
-        'http://localhost/E-campus/public/ta/activate',
-        'http://10.0.2.2/E-campus/public/ta/activate',
-        'http://10.0.3.2/E-campus/public/ta/activate',
+        'http://e-campus.herokuapp.com/professor/activate',
 
 
+        'http://e-campus.herokuapp.com/admin/login',
 
-        'http://10.0.3.2/E-campus/public/department/add/new',
-
-
-
-        'http://localhost/E-campus/public/professor/activate',
-        'http://10.0.2.2/E-campus/public/professor/activate',
-        'http://10.0.3.2/E-campus/public/professor/activate',
-
-
-        'http://localhost/E-campus/public/admin/login',
-
-
+        'http://e-campus.herokuapp.com/course/showCourse'
     ];
 }
