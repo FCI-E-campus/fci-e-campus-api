@@ -56,7 +56,7 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {
+    {/*
         DB::table('Forum')->delete();
         DB::table('Post')->delete();
         DB::table('Author')->delete();
@@ -67,6 +67,7 @@ class DepartmentController extends Controller
         DB::table('Professor')->delete();
         DB::table('Department')->delete();
         DB::table('Task')->delete();
+        */
         Department::all();
         /*
         Forum::all()->delete();
