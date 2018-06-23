@@ -142,18 +142,10 @@ class Course extends Model
     {
         if(Student::find($un)=="")
         {
-            $json = array("status"=>"failed","error_msg"=>"1");
+            $json = array("status"=>"failed","error_msg"=>"this student is not exist");
             return $json;
         }
-
-
-        $sql = 'SELECT co.COURSECODE, co.COURSETITLE 
-FROM Course co join StudentCourse b 
-on co.COURSECODE = b.COURSECODE
- WHERE b.STUDUSERNAME = \''. $un. '\'';
-
-        $subJason =array("status"=>"success","result"=>DB::select($sql));
-        return  $subJason;
+        return StudentCourse::where('STUDUSERNAME',$un)->get();
 
     }
 
@@ -166,13 +158,7 @@ on co.COURSECODE = b.COURSECODE
         }
 
 
-        $sql = 'SELECT co.COURSECODE, co.COURSETITLE 
-FROM Course co join TaCourse b 
-on co.COURSECODE = b.COURSECODE
- WHERE b.TAUSERNAME = \''. $un. '\'';
-
-        $subJason =array("status"=>"success","result"=>DB::select($sql));
-        return  $subJason;
+        return TACourse::where('TAUSERNAME',$un)->get();
 
     }
 
@@ -185,12 +171,7 @@ on co.COURSECODE = b.COURSECODE
         }
 
 
-        $sql = 'SELECT co.COURSECODE, co.COURSETITLE 
-FROM Course co join TaCourse b 
-on co.COURSECODE = b.COURSECODE
- WHERE b.PROFUSERNAME = \''. $un. '\'';
-        $subJason =array("status"=>"success","result"=>DB::select($sql));
-        return  $subJason;
+        return ProfessorCourse::where('PROFUSERNAME',$un)->get();
 
     }
     public function showCourse($courseCode)
