@@ -154,8 +154,9 @@ class Student extends Model
            // array_push($allSlots,$slot);
             //array_push($allSlotsForCourses);
         }
+        $subJason =array("status"=>"success","result"=>$allSlotsForCourses);
+        return  $subJason;
 
-  return $allSlotsForCourses;
 
 
 

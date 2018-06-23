@@ -152,7 +152,8 @@ FROM Course co join StudentCourse b
 on co.COURSECODE = b.COURSECODE
  WHERE b.STUDUSERNAME = \''. $un. '\'';
 
-        return  DB::select($sql);
+        $subJason =array("status"=>"success","result"=>DB::select($sql));
+        return  $subJason;
 
     }
 
@@ -170,7 +171,8 @@ FROM Course co join TaCourse b
 on co.COURSECODE = b.COURSECODE
  WHERE b.TAUSERNAME = \''. $un. '\'';
 
-        return  DB::select($sql);
+        $subJason =array("status"=>"success","result"=>DB::select($sql));
+        return  $subJason;
 
     }
 
@@ -187,19 +189,21 @@ on co.COURSECODE = b.COURSECODE
 FROM Course co join TaCourse b 
 on co.COURSECODE = b.COURSECODE
  WHERE b.PROFUSERNAME = \''. $un. '\'';
-
-        return  DB::select($sql);
+        $subJason =array("status"=>"success","result"=>DB::select($sql));
+        return  $subJason;
 
     }
     public function showCourse($courseCode)
     {
+        //php artisan make:controller UserController --plain
         if(Course::find($courseCode)=="")
         {
             $json = array("status"=>"failed","error_msg"=>"8");
             return $json;
         }
+        $subJason =array("status"=>"success","result"=>Course::where('COURSECODE',$courseCode)->get());
+        return  $subJason;
 
-        return Course::where('COURSECODE',$courseCode)->get();
     }
     //retrieve courses on the system
     public function showCoursesOnTheSystem()
@@ -262,7 +266,9 @@ public function  showscheduleforcourse($courscode){
 
 
     $slot = Slots::where('COURSECODE',$courscode)->get();
-    return $slot;
+    $subJason =array("status"=>"success","result"=>$slot);
+    return  $subJason;
+
 
 
 }

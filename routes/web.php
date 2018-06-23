@@ -28,6 +28,7 @@ Route::prefix('professor')->group(function() {
     Route::post('/addTask','CourseController@addTask');
     Route::post('/activate','ProfessorController@activate');
     Route::post('/updatePass','ProfessorController@update');
+    Route::post('/showProfSchedule','ProfessorController@showProfSchedule');
 });
 
 Route::prefix('ta')->group(function() {
@@ -81,7 +82,12 @@ Route::prefix('forum')->group(function() {
     Route::post('/addPost','ForumController@addPost');
 });
 
-
+Route::prefix('material')->group(function() {
+    Route::post('/uploadOfficialMaterials','materialController@addOfficialMaterial');
+    Route::post('/showOfficialMaterials','materialController@showOfficialMaterials');
+    Route::post('/uploadExtraMaterial','materialController@addExtraMaterial');
+    Route::post('/showExtraMaterials','materialController@showExtraMaterials');
+});
 
 
 

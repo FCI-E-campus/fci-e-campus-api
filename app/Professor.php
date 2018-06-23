@@ -156,4 +156,41 @@ class Professor extends Model
         return $json;
 
     }
+
+
+    public function  showprofSchedule($un){
+
+        if(Professor::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>"1");
+            return $json;
+        }
+        $pr=ProfessorCource::where("PROFUSERNAME",$un)->count();
+        if ($pr==0){
+            $json = array("status"=>"failed","error_code"=>"31");
+            return $json;
+
+
+        }
+        $pr=ProfessorCource::where("PROFUSERNAME",$un)->get();
+
+        $allSlotsForCourses = array();
+
+        foreach($pr as $item)
+        {
+
+            $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","!=","1")->get();
+            $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","1")->get();
+            $subJason =array("COURSECODE"=>$item['COURSECODE'],"labs"=>$labs,
+                "lecture"=>$lec);
+            array_push($allSlotsForCourses,$subJason);
+
+        }
+        $subJason =array("status"=>"success","result"=>$allSlotsForCourses);
+        return  $subJason;
+
+
+
+
+    }
 }

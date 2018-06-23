@@ -15,6 +15,8 @@ class VerifyCsrfToken extends Middleware
         'http://e-campus.herokuapp.com/student/login',
 
         'http://localhost/E-campus/public/student/login',
+        'http://localhost/E-campus/public/professor/login',
+        'http://localhost/E-campus/public/ta/login',
         'http://localhost/E-campus/public/student/signup',
 
         'http://e-campus.herokuapp.com/student/signup',

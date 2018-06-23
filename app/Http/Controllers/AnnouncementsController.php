@@ -45,7 +45,8 @@ class AnnouncementsController extends Controller
     public function showAnnouncements(Request $request)
     {
         $announcement = new Announcement();
-        return $announcement->all();
+        $subJason =array("status"=>"success","result"=>$announcement->all());
+        return $subJason;
     }
 
 

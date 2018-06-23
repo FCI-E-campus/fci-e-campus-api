@@ -8,25 +8,7 @@ use App\Professor;
 
 class ProfessorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -62,38 +44,19 @@ class ProfessorController extends Controller
         return $professor->activate($request['PROFUSERNAME'],$request['ActivationCode']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Responsephp artisan migrate
-     */
+
+
     public function update(Request $request)
     {
         $prof = new Professor();
         return $prof->updateUser($request['PROFUSERNAME'],$request['PROFPASSWORD']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+
+    public function  showprofSchedule(Request $request){
+        $pr = new Professor();
+        return $pr->showprofSchedule($request["PROFUSERNAME"]);
+
     }
 }
