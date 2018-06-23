@@ -68,6 +68,7 @@ class DepartmentController extends Controller
         DB::table('Department')->delete();
         DB::table('Task')->delete();
         */
+        /*
         $department =  Comment::all();
         foreach($department as $dep)
         {
@@ -117,7 +118,7 @@ class DepartmentController extends Controller
         foreach($department as $dep)
         {
             $dep->delete();
-        }
+        }*/
         return Department::all();
         /*
         Forum::all()->delete();
