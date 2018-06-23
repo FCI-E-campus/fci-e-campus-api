@@ -57,6 +57,7 @@ class DepartmentController extends Controller
      */
     public function show()
     {
+        /*
         $department = new Department();
         $department->DEPARTMENTNAME="General";
         $department->DESCRIPTION="general department";
@@ -199,7 +200,7 @@ class DepartmentController extends Controller
         $post->ANSWERED=0;
         $post->DATEPUBLISHED="2018-06-21 00:00:00";
         $post->save();
-        
+        */
         /*
         $task = new Task();
         $task->COURSECODE="is123";
