@@ -68,7 +68,8 @@ class DepartmentController extends Controller
         DB::table('Department')->delete();
         DB::table('Task')->delete();
         */
-        Department::all();
+        return Department::all();
+
         /*
         Forum::all()->delete();
         Post::all()->delete();
