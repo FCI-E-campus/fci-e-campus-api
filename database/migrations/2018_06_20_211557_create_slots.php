@@ -21,7 +21,7 @@ class CreateSlots extends Migration
             $table->string('DAY',15);
             $table->time('STARTTIME');
             $table->integer('DURATION');
-            $table->integer('GROUPNUM');
+            $table->integer('GROUPNUM')->nullable();
             $table->string('SLOTTYPE', 3);
             $table->text('PLACE');
         });

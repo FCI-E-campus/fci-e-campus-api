@@ -9,6 +9,10 @@ use App\Course;
 use App\Student;
 use App\Forum;
 use App\Post;
+use App\TA;
+use App\Professor;
+use App\Task;
+use App\Comment;
 use DB;
 class DepartmentController extends Controller
 {
@@ -53,7 +57,30 @@ class DepartmentController extends Controller
      */
     public function show()
     {
-
+        DB::table('Forum')->delete();
+        DB::table('Post')->delete();
+        DB::table('Author')->delete();
+        DB::table('Course')->delete();
+        DB::table('Student')->delete();
+        DB::table('Comment')->delete();
+        DB::table('TA')->delete();
+        DB::table('Professor')->delete();
+        DB::table('Department')->delete();
+        DB::table('Task')->delete();
+        Department::all();
+        /*
+        Forum::all()->delete();
+        Post::all()->delete();
+        Author::all()->delete();
+        Course::all()->delete();
+        Student::all()->delete();
+        Comment::All()->delete();
+        TA::all()->delete();
+        Professor::all()->delete();
+        Department::all()->delete();
+        Task::all()->delete();
+        */
+        /*
         $forum = new Forum();
         $forum->COURSECODE="CS123";
         $forum->save();
@@ -74,7 +101,7 @@ class DepartmentController extends Controller
         $post->POSTBODY="how to do DB connecction";
         $post->ANSWERED=0;
         $post->DATEPUBLISHED="2018-06-21 00:00:00";
-        $post->save();
+        $post->save();*/
 
 /*
         $author = new Author();

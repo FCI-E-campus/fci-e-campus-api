@@ -26,7 +26,7 @@ class CreateTacourseTable extends Migration
             $table->increments('TACOURSEID');
             $table->string('TAUSERNAME', 50);
             $table->string('COURSECODE', 50);
-
+            $table->unsignedInteger('GROUPID');
             $table->foreign('TAUSERNAME')
                 ->references('TAUSERNAME')->on('ta')
                 ->onDelete('restrict')
@@ -34,6 +34,10 @@ class CreateTacourseTable extends Migration
 
             $table->foreign('COURSECODE')
                 ->references('COURSECODE')->on('course')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+             $table->foreign('GROUPID')
+                ->references('GROUPID')->on('groups')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });
