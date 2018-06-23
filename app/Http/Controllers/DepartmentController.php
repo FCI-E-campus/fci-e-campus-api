@@ -68,8 +68,52 @@ class DepartmentController extends Controller
         DB::table('Department')->delete();
         DB::table('Task')->delete();
         */
-
+        $department =  Comment::all();
+        foreach($department as $dep)
+        {
+            $dep->delete();
+        }
+        $department =  Post::all();
+        foreach($department as $dep)
+        {
+            $dep->delete();
+        }
+        $department =  Forum::all();
+        foreach($department as $dep)
+        {
+            $dep->delete();
+        }
+        $department =  Task::all();
+        foreach($department as $dep)
+        {
+            $dep->delete();
+        }
+        $department =  Course::all();
+        foreach($department as $dep)
+        {
+            $dep->delete();
+        }
+        $department =  Student::all();
+        foreach($department as $dep)
+        {
+            $dep->delete();
+        }
+        $department =  TA::all();
+        foreach($department as $dep)
+        {
+            $dep->delete();
+        }
+        $department =  Professor::all();
+        foreach($department as $dep)
+        {
+            $dep->delete();
+        }
         $department =  Department::all();
+        foreach($department as $dep)
+        {
+            $dep->delete();
+        }
+        $department =  Author::all();
         foreach($department as $dep)
         {
             $dep->delete();
