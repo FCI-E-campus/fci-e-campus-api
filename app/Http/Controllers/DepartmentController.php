@@ -13,6 +13,7 @@ use App\TA;
 use App\Professor;
 use App\Task;
 use App\Comment;
+use App\Admin;
 use DB;
 class DepartmentController extends Controller
 {
@@ -57,6 +58,12 @@ class DepartmentController extends Controller
      */
     public function show()
     {
+        $admin = new Admin();
+        $admin->ADMINUSERNAME="abdullah";
+        $admin->ADMINPASSWORD="123";
+        $admin->FIRSTNAME="abdullah";
+        $admin->LASTNAME="abdelazim";
+        $admin->save();
         /*
         $department = new Department();
         $department->DEPARTMENTNAME="General";
