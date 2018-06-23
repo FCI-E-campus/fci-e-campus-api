@@ -37,6 +37,7 @@ Route::prefix('ta')->group(function() {
     Route::post('/addTask','CourseController@addTask');
     Route::post('/activate','TAController@activate');
     Route::post('/updatePass','TAController@update');
+    Route::post('/showTASchedule','TAController@showTASchedule');
 });
 
 Route::prefix('department')->group(function() {

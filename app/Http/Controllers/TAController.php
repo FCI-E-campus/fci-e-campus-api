@@ -96,5 +96,9 @@ class TAController extends Controller
         //
     }
 
+    public function  showStudentSchedule(Request $request){
+        $st = new Student();
+        return $st->showStudentSchedule($request["TAUSERNAME"]);
 
+    }
 }

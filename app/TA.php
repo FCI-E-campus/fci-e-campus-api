@@ -160,4 +160,45 @@ class TA extends Model
 
     }
 
+
+    public function  showTASchedule($un){
+
+        if(TA::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>"1");
+            return $json;
+        }
+        $ta=TACourse::where("STUDUSERNAME",$un)->count();
+        if ($ta==0){
+            $json = array("status"=>"failed","error_code"=>"31");
+            return $json;
+
+
+        }
+        $ta=TACourse::where("STUDUSERNAME",$un)->get();
+
+        $allSlotsForCourses = array();
+
+        foreach($ta as $item)
+        {
+
+            $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("GROUPNUM",$item["GROUPID"])->get();
+            // $allSlots->push($slot);
+            // array_push($allSlots,$slot);
+            $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","1")->get();
+            $subJason =array("COURSECODE"=>$item['COURSECODE'],"labs"=>$labs,
+                "lecture"=>$lec);
+            array_push($allSlotsForCourses,$subJason);
+            // $allSlots->push($slot);
+            // array_push($allSlots,$slot);
+            //array_push($allSlotsForCourses);
+        }
+        $subJason =array("status"=>"success","result"=>$allSlotsForCourses);
+        return  $subJason;
+
+
+
+
+    }
+
 }
