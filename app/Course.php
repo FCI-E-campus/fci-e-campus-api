@@ -196,7 +196,7 @@ class Course extends Model
     public function showCoursesOnTheSystem()
     {
 
-        $subJason =array("status"=>"success","result"=>Course::where('COURSECODE',Course::all()));
+        $subJason =array("status"=>"success","result"=>Course::all());
         return  $subJason;
 
     }
