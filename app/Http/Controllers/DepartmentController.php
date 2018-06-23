@@ -56,119 +56,61 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {/*
-        DB::table('Forum')->delete();
-        DB::table('Post')->delete();
-        DB::table('Author')->delete();
-        DB::table('Course')->delete();
-        DB::table('Student')->delete();
-        DB::table('Comment')->delete();
-        DB::table('TA')->delete();
-        DB::table('Professor')->delete();
-        DB::table('Department')->delete();
-        DB::table('Task')->delete();
-        */
+    {
         /*
-        $department =  Comment::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }
-        $department =  Post::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }
-        $department =  Forum::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }
-        $department =  Task::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }
-        $department =  Course::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }
-        $department =  Student::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }
-        $department =  TA::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }
-        $department =  Professor::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }
-        $department =  Department::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }
-        $department =  Author::all();
-        foreach($department as $dep)
-        {
-            $dep->delete();
-        }*/
-        return Department::all();
-        /*
-        Forum::all()->delete();
-        Post::all()->delete();
-        Author::all()->delete();
-        Course::all()->delete();
-        Student::all()->delete();
-        Comment::All()->delete();
-        TA::all()->delete();
-        Professor::all()->delete();
-        Department::all()->delete();
-        Task::all()->delete();
-        */
-        /*
-        $forum = new Forum();
-        $forum->COURSECODE="CS123";
-        $forum->save();
-        $forum = new Forum();
-        $forum->COURSECODE="DS123";
-        $forum->save();
-        $forum = new Forum();
-        $forum->COURSECODE="IS123";
-        $forum->save();
-        $forum = new Forum();
-        $forum->COURSECODE="IT123";
-        $forum->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="General";
+        $department->DESCRIPTION="general department";
+        $department->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="General";
+        $department->DESCRIPTION="general department";
+        $department->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="Computer Science";
+        $department->DESCRIPTION="CS department";
+        $department->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="Information System";
+        $department->DESCRIPTION="IS department";
+        $department->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="Information Technology";
+        $department->DESCRIPTION="IT department";
+        $department->save();
+        $department = new Department();
+        $department->DEPARTMENTNAME="Decision Support";
+        $department->DESCRIPTION="DS department";
+        $department->save();
 
-        $post = new Post();
-        $post->FORUMID=1;
-        $post->AUTHORID=1;
-        $post->POSTTITLE="connection to DB";
-        $post->POSTBODY="how to do DB connecction";
-        $post->ANSWERED=0;
-        $post->DATEPUBLISHED="2018-06-21 00:00:00";
-        $post->save();*/
+        $student = new Student();
+        $student->STUDUSERNAME="abod";
+        $student->DEPTID=1;
+        $student->DEP_DEPTID=2;
+        $student->STUDPASSWORD="123";
+        $student->FIRSTNAME="abdelrahman";
+        $student->LASTNAME="mahmoud";
+        $student->EMAIL="abodMahmoud@gmail.com";
+        $student->PHONENUMBER="01156784567";
+        $student->DATEOFBIRTH="1996-06-12";
+        $student->FACULTYID="20140191";
+        $student->ISMODERATOR=0;
+        $student->save();
 
-/*
-        $author = new Author();
-        $author->AUTHORUSERNAME="abod";
-        $author->AUTHORTYPE="prof";
-        $author->save();
-        $author = new Author();
-        $author->AUTHORUSERNAME="ahmed";
-        $author->AUTHORTYPE="stud";
-        $author->save();
-        $author = new Author();
-        $author->AUTHORUSERNAME="abdullah";
-        $author->AUTHORTYPE="ta";
-        $author->save();
-        
+        $student = new Student();
+        $student->STUDUSERNAME="ahmed";
+        $student->DEPTID=3;
+        $student->DEP_DEPTID=4;
+        $student->STUDPASSWORD="123";
+        $student->FIRSTNAME="ahmed";
+        $student->LASTNAME="mohsen";
+        $student->EMAIL="ahmedMohsen@gmail.com";
+        $student->PHONENUMBER="01151234567";
+        $student->DATEOFBIRTH="1996-07-12";
+        $student->FACULTYID="20140192";
+        $student->ISMODERATOR=1;
+        $student->save();
+
         $course = new Course();
         $course->COURSECODE="CS123";
         $course->DEPTID=3;
@@ -224,34 +166,54 @@ class DepartmentController extends Controller
         $course->PASSCODE="ap123";
         $course->save();
         
-        $student = new Student();
-        $student->STUDUSERNAME="abod";
-        $student->DEPTID=1;
-        $student->DEP_DEPTID=2;
-        $student->STUDPASSWORD="123";
-        $student->FIRSTNAME="abdelrahman";
-        $student->LASTNAME="mahmoud";
-        $student->EMAIL="abodMahmoud@gmail.com";
-        $student->PHONENUMBER="01156784567";
-        $student->DATEOFBIRTH="1996-06-12";
-        $student->FACULTYID="20140191";
-        $student->ISMODERATOR=0;
-        $student->save();
+        $author = new Author();
+        $author->AUTHORUSERNAME="abod";
+        $author->AUTHORTYPE="prof";
+        $author->save();
+        $author = new Author();
+        $author->AUTHORUSERNAME="ahmed";
+        $author->AUTHORTYPE="stud";
+        $author->save();
+        $author = new Author();
+        $author->AUTHORUSERNAME="abdullah";
+        $author->AUTHORTYPE="ta";
+        $author->save();
 
-        $student = new Student();
-        $student->STUDUSERNAME="ahmed";
-        $student->DEPTID=3;
-        $student->DEP_DEPTID=4;
-        $student->STUDPASSWORD="123";
-        $student->FIRSTNAME="ahmed";
-        $student->LASTNAME="mohsen";
-        $student->EMAIL="ahmedMohsen@gmail.com";
-        $student->PHONENUMBER="01151234567";
-        $student->DATEOFBIRTH="1996-07-12";
-        $student->FACULTYID="20140192";
-        $student->ISMODERATOR=1;
-        $student->save();
+        $forum = new Forum();
+        $forum->COURSECODE="CS123";
+        $forum->save();
+        $forum = new Forum();
+        $forum->COURSECODE="DS123";
+        $forum->save();
+        $forum = new Forum();
+        $forum->COURSECODE="IS123";
+        $forum->save();
+        $forum = new Forum();
+        $forum->COURSECODE="IT123";
+        $forum->save();
+
+        $post = new Post();
+        $post->FORUMID=1;
+        $post->AUTHORID=1;
+        $post->POSTTITLE="connection to DB";
+        $post->POSTBODY="how to do DB connecction";
+        $post->ANSWERED=0;
+        $post->DATEPUBLISHED="2018-06-21 00:00:00";
+        $post->save();
         */
+        /*
+        $task = new Task();
+        $task->COURSECODE="is123";
+        $task->CREATORID=2;
+        $task->TASKNAME="assignment 3";
+        $task->DESCRIPTION="a3";
+        $task->DUEDATE="2018-06-13 00:00:00";
+        $task->DATECREATED="2018-06-13 00:00:00";
+        $task->WEIGHT=5;
+        $task->save();
+        return 1;
+        */
+
 /*
         $ta = new TA();
         $ta->TAUSERNAME="zizo";
@@ -270,45 +232,13 @@ class DepartmentController extends Controller
 
 
 
-        /*
-        $department = new Department();
-        $department->DEPARTMENTNAME="General";
-        $department->DESCRIPTION="general department";
-        $department->save();
-        $department = new Department();
-        $department->DEPARTMENTNAME="General";
-        $department->DESCRIPTION="general department";
-        $department->save();
-        $department = new Department();
-        $department->DEPARTMENTNAME="Computer Science";
-        $department->DESCRIPTION="CS department";
-        $department->save();
-        $department = new Department();
-        $department->DEPARTMENTNAME="Information System";
-        $department->DESCRIPTION="IS department";
-        $department->save();
-        $department = new Department();
-        $department->DEPARTMENTNAME="Information Technology";
-        $department->DESCRIPTION="IT department";
-        $department->save();
-        $department = new Department();
-        $department->DEPARTMENTNAME="Decision Support";
-        $department->DESCRIPTION="DS department";
-        $department->save();
+        
+        
         
         return Department::all();
-        */
-/*
-        $course = new Course();
-        $course->COURSECODE="se";
-        $course->DEPTID=5;
-        $course->COURSETITLE="se";
-        $course->DESCRIPTION="to be soft ware enineer";
-        $course->STARTDATE="2018-06-19 00:00:00";
-        $course->ENDDATE="2018-06-21 00:00:00";
-        $course->PASSCODE="123";
-        $course->save();
-        */
+        
+
+        
 /*
         $forum = new Forum();
         $forum->FORUMID=2;
@@ -346,16 +276,7 @@ class DepartmentController extends Controller
         */
         
 /*
-        $task = new Task();
-        $task->COURSECODE="is123";
-        $task->CREATORID=2;
-        $task->TASKNAME="assignment 3";
-        $task->DESCRIPTION="a3";
-        $task->DUEDATE="2018-06-13 00:00:00";
-        $task->DATECREATED="2018-06-13 00:00:00";
-        $task->WEIGHT=5;
-        $task->save();
-        return 1;
+        
         */
         }
 
