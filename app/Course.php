@@ -63,7 +63,9 @@ class Course extends Model
             }
             $allPosts->push($subJason);
         }
-        return $allPosts;
+        $subJason =array("status"=>"success","result"=>$allPosts);
+        return $subJason;
+
     }
 
     public function showAllTasksForSpecificCourse($crsCode)
@@ -88,7 +90,9 @@ class Course extends Model
             }
             $allTasks->push($subJason);
         }
-        return $allTasks;
+        $subJason =array("status"=>"success","result"=>$allTasks);
+        return $subJason;
+
     }
 
     //add task to DB
@@ -145,7 +149,8 @@ class Course extends Model
             $json = array("status"=>"failed","error_msg"=>"this student is not exist");
             return $json;
         }
-        return StudentCourse::where('STUDUSERNAME',$un)->get();
+        $subJason =array("status"=>"success","result"=>StudentCourse::where('STUDUSERNAME',$un)->get());
+        return $subJason;
 
     }
 
@@ -157,8 +162,8 @@ class Course extends Model
             return $json;
         }
 
-
-        return TACourse::where('TAUSERNAME',$un)->get();
+        $subJason =array("status"=>"success","result"=>TACourse::where('TAUSERNAME',$un)->get());
+        return $subJason;
 
     }
 
@@ -170,8 +175,9 @@ class Course extends Model
             return $json;
         }
 
+        $subJason =array("status"=>"success","result"=>ProfessorCourse::where('PROFUSERNAME',$un)->get());
+        return $subJason;
 
-        return ProfessorCourse::where('PROFUSERNAME',$un)->get();
 
     }
     public function showCourse($courseCode)
@@ -190,7 +196,8 @@ class Course extends Model
     public function showCoursesOnTheSystem()
     {
 
-        return Course::all();
+        $subJason =array("status"=>"success","result"=>Course::where('COURSECODE',Course::all()));
+        return  $subJason;
 
     }
 

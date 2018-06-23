@@ -39,7 +39,9 @@ class Post extends Model
             }
             $allComments->push($subJason);
         }
-        return $allComments;
+        $subJason =array("status"=>"success","result"=>$allComments);
+        return  $subJason;
+
 
     }
 
