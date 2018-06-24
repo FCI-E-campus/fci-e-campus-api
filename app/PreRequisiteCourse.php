@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PreRequisiteCourse extends Model
 {
-    protected $table='prerequisitecourse';
-    //public $primaryKey=['COURSECODE',COU_COURSECODE];
+    protected $table='prerequisitecourse';//prerequisitecourseID
+    public $primaryKey='prerequisitecourseID';
     public $timestamps=false;
 }
