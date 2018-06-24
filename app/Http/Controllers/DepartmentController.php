@@ -258,14 +258,12 @@ class DepartmentController extends Controller
         $groups->save();
 */
         $taCourse = new StudentCourse();
-        $taCourse->studentCourseID = 1;
         $taCourse->STUDUSERNAME="abod";
         $taCourse->COURSECODE="CS123";
         $taCourse->TOTALGRADE=5;
         $taCourse->GROUPID=1;
         $taCourse->save();
         $taCourse = new StudentCourse();
-        $taCourse->studentCourseID = 2;        
         $taCourse->STUDUSERNAME="abod";
         $taCourse->COURSECODE="G123";
         $taCourse->TOTALGRADE=5;
