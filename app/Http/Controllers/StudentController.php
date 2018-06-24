@@ -93,9 +93,14 @@ class StudentController extends Controller
         //
     }
 
-public function  showStudentSchedule(Request $request){
-   $st = new Student();
-   return $st->showStudentSchedule($request["STUDUSERNAME"]);
+    public function  showStudentSchedule(Request $request){
+        $st = new Student();
+        return $st->showStudentSchedule($request["STUDUSERNAME"]);
 
-}
+    }
+    public function getAllTasks(Request $request)
+    {
+        $student = new Student();
+        return $student->getAllTasks($request['STUDUSERNAME']);
+    }
 }

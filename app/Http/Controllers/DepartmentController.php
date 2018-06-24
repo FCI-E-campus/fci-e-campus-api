@@ -14,6 +14,9 @@ use App\Professor;
 use App\Task;
 use App\Comment;
 use App\Admin;
+use App\TaskCreator;
+use App\Groups;
+use App\StudentCourse;
 use DB;
 class DepartmentController extends Controller
 {
@@ -57,13 +60,13 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {
+    {/*
         $admin = new Admin();
         $admin->ADMINUSERNAME="abdullah";
         $admin->ADMINPASSWORD="123";
         $admin->FIRSTNAME="abdullah";
         $admin->LASTNAME="abdelazim";
-        $admin->save();
+        $admin->save();*/
         /*
         $department = new Department();
         $department->DEPARTMENTNAME="General";
@@ -208,6 +211,62 @@ class DepartmentController extends Controller
         $post->DATEPUBLISHED="2018-06-21 00:00:00";
         $post->save();
         */
+        $taskCreator = new TaskCreator();
+        $taskCreator->CREATORUSERNAME="abod";
+        $taskCreator->CREATORTYPE="stud";
+        $taskCreator->save();
+        $taskCreator = new TaskCreator();
+        $taskCreator->CREATORUSERNAME="ahmed";
+        $taskCreator->CREATORTYPE="stud";
+        $taskCreator->save();
+
+        $task = new Task();
+        $task->COURSECODE="CS123";
+        $task->CREATORID=1;
+        $task->TASKNAME="assinment1";
+        $task->DESCRIPTION="calculator app";
+        $task->DUEDATE="2018-06-30 00:00:00";
+        $task->DATECREATED="2018-06-24 00:00:00";
+        $task->WEIGHT=5;
+        $task->save();
+        
+        $task = new Task();
+        $task->COURSECODE="DS123";
+        $task->CREATORID=1;
+        $task->TASKNAME="assinment1";
+        $task->DESCRIPTION="excel app";
+        $task->DUEDATE="2018-06-30 00:00:00";
+        $task->DATECREATED="2018-06-24 00:00:00";
+        $task->WEIGHT=5;
+        $task->save();
+
+        $task = new Task();
+        $task->COURSECODE="G123";
+        $task->CREATORID=1;
+        $task->TASKNAME="assinment1";
+        $task->DESCRIPTION="mathmatics questions";
+        $task->DUEDATE="2018-06-30 00:00:00";
+        $task->DATECREATED="2018-06-24 00:00:00";
+        $task->WEIGHT=5;
+        $task->save();
+
+        $groups = new Groups();
+        $groups->COURSECODE="CS123";
+        $groups->GROUPNAME="G1";
+        $groups->save();
+
+        $taCourse = new StudentCourse();
+        $taCourse->STUDUSERNAME="abod";
+        $taCourse->COURSECODE="CS123";
+        $taCourse->TOTALGRADE=5;
+        $taCourse->GROUPID=1;
+        $taCourse->save();
+        $taCourse = new StudentCourse();
+        $taCourse->STUDUSERNAME="abod";
+        $taCourse->COURSECODE="G123";
+        $taCourse->TOTALGRADE=5;
+        $taCourse->GROUPID=1;
+        $taCourse->save();
         /*
         $task = new Task();
         $task->COURSECODE="is123";

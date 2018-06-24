@@ -156,10 +156,31 @@ class Student extends Model
         }
         $subJason =array("status"=>"success","result"=>$allSlotsForCourses);
         return  $subJason;
+    }
 
-
-
-
+    public function getAllTasks($un)
+    {
+        $crsCodes = StudentCourse::select('COURSECODE')->where('STUDUSERNAME',$un)->get();
+        $tasks = Task::all();
+        $result = new Collection();
+        foreach($crsCodes as $crsCode)
+        {
+            $subJason = array();
+            foreach($tasks as $task)
+            {
+                if($crsCode->COURSECODE == $task->COURSECODE)
+                {
+                    $creator = TaskCreator::find($task->CREATORID);
+                    $subJason = array("task_name"=>$task->TASKNAME,"description"=>$task->DESCRIPTION,
+                    "date_created"=>$task->DATECREATED,"due_date"=>$task->DUEDATE,"weight"=>$task->WEIGHT,
+                    "creator_username"=>$creator->CREATORUSERNAME,"creator_type"=>$creator->CREATORTYPE
+                );
+                }
+            }
+            $tempJason=array($crsCode=>$subJason);
+            $result->push($tempJason);
+        }
+        return $result;
     }
 
 

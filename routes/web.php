@@ -20,6 +20,7 @@ Route::prefix('student')->group(function() {
     Route::post('/signup','StudentController@store');
     Route::post('/updatePass','StudentController@update');
     Route::post('/showStudentSchedule','StudentController@showStudentSchedule');
+    Route::post('/getAllTasks','StudentController@getAllTasks');
 });
 
 Route::prefix('professor')->group(function() {
