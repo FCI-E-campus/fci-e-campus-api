@@ -62,6 +62,7 @@ class DepartmentController extends Controller
      */
     public function show()
     {
+        /*
         $admin = new Admin();
         $admin->ADMINUSERNAME="abdullah";
         $admin->ADMINPASSWORD="123";
@@ -255,14 +256,16 @@ class DepartmentController extends Controller
         $groups->COURSECODE="CS123";
         $groups->GROUPNAME="G1";
         $groups->save();
-
+*/
         $taCourse = new StudentCourse();
+        $taCourse->studentCourseID = 1;
         $taCourse->STUDUSERNAME="abod";
         $taCourse->COURSECODE="CS123";
         $taCourse->TOTALGRADE=5;
         $taCourse->GROUPID=1;
         $taCourse->save();
         $taCourse = new StudentCourse();
+        $taCourse->studentCourseID = 2;        
         $taCourse->STUDUSERNAME="abod";
         $taCourse->COURSECODE="G123";
         $taCourse->TOTALGRADE=5;
