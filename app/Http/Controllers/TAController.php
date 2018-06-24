@@ -101,4 +101,9 @@ class TAController extends Controller
         return $st->showStudentSchedule($request["TAUSERNAME"]);
 
     }
+    public function getAllTasks(Request $request)
+    {
+        $ta = new TA();
+        return $ta->getAllTasks($request['TAUSERNAME']);
+    }
 }

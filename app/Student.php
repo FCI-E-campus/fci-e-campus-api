@@ -167,9 +167,12 @@ class Student extends Model
         foreach($crsCodes as $crsCode)
         {
             $subJason = array();
+            date_default_timezone_set('Africa/Cairo');
+            $ldate = date('Y-m-d H:i:s');
             foreach($tasks as $task)
             {
-                if($crsCode->COURSECODE == $task->COURSECODE)
+                
+                if($crsCode->COURSECODE == $task->COURSECODE && $task->DUEDATE >= $ldate)
                 {
                     $creator = TaskCreator::find($task->CREATORID);
                     $subJason = array("task_name"=>$task->TASKNAME,"description"=>$task->DESCRIPTION,

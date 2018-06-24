@@ -3,8 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\PrettyPrinter\Standard;
+use Illuminate\Database\Eloquent\Collection;
 use DB;
 use Mail;
+
 class Professor extends Model
 {
     protected $table='professor';
@@ -157,6 +160,33 @@ class Professor extends Model
 
     }
 
+    
+    public function getAllTasks($un)
+    {
+        $crsCodes = ProfessorCource::select('COURSECODE')->where('PROFUSERNAME',$un)->get();   
+        $tasks = Task::all();
+        $result = new Collection();
+        foreach($crsCodes as $crsCode)
+        {
+            $subJason = array();
+            date_default_timezone_set('Africa/Cairo');
+            $ldate = date('Y-m-d H:i:s');
+            foreach($tasks as $task)
+            {
+                if($crsCode->COURSECODE == $task->COURSECODE && $task->DUEDATE >= $ldate)
+                {
+                    $creator = TaskCreator::find($task->CREATORID);
+                    $subJason = array("task_name"=>$task->TASKNAME,"description"=>$task->DESCRIPTION,
+                    "date_created"=>$task->DATECREATED,"due_date"=>$task->DUEDATE,"weight"=>$task->WEIGHT,
+                    "creator_username"=>$creator->CREATORUSERNAME,"creator_type"=>$creator->CREATORTYPE
+                );
+                }
+            }
+            $tempJason=array($crsCode->COURSECODE=>$subJason);
+            $result->push($tempJason);
+        }
+        return $result;
+    }
 
     public function  showprofSchedule($un){
 

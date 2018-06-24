@@ -30,6 +30,7 @@ Route::prefix('professor')->group(function() {
     Route::post('/activate','ProfessorController@activate');
     Route::post('/updatePass','ProfessorController@update');
     Route::post('/showProfSchedule','ProfessorController@showProfSchedule');
+    Route::post('/getAllTasks','ProfessorController@getAllTasks');
 });
 
 Route::prefix('ta')->group(function() {
@@ -38,6 +39,7 @@ Route::prefix('ta')->group(function() {
     Route::post('/addTask','CourseController@addTask');
     Route::post('/activate','TAController@activate');
     Route::post('/updatePass','TAController@update');
+    Route::post('/getAllTasks','TAController@getAllTasks');
     Route::post('/showTASchedule','TAController@showTASchedule');
 });
 

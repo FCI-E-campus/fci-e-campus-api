@@ -25,6 +25,12 @@ class ProfessorController extends Controller
         );
     }
 
+    public function getAllTasks(Request $request)
+    {
+        $professor = new Professor();
+        return $professor->getAllTasks($request['PROFUSERNAME']);
+    }
+
     /**
      * Display the specified resource.
      *

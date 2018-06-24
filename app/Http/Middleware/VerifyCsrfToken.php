@@ -13,10 +13,12 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'http://e-campus.herokuapp.com/student/login',
-
+        'http://localhost/E-campus/public/professor/signup',
         'http://localhost/E-campus/public/student/login',
         'http://localhost/E-campus/public/professor/login',
         'http://localhost/E-campus/public/ta/login',
+        'http://localhost/E-campus/public/ta/signup',
+        'http://localhost/E-campus/public/ta/activate',
         'http://localhost/E-campus/public/student/signup',
 
         'http://e-campus.herokuapp.com/student/signup',

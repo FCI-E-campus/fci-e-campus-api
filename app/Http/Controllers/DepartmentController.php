@@ -18,6 +18,8 @@ use App\TaskCreator;
 use App\Groups;
 use App\StudentCourse;
 use App\PreRequisiteCourse;
+use App\ProfessorCource;
+use App\TACourse;
 use DB;
 class DepartmentController extends Controller
 {
@@ -256,17 +258,27 @@ class DepartmentController extends Controller
         $groups->COURSECODE="CS123";
         $groups->GROUPNAME="G1";
         $groups->save();
-*//*
-        $taCourse = new StudentCourse();
-        $taCourse->STUDUSERNAME="abod";
+*/
+        /*
+        $taCourse = new ProfessorCource();
+        $taCourse->PROFUSERNAME="abod";
         $taCourse->COURSECODE="CS123";
-        $taCourse->TOTALGRADE=5;
+        $taCourse->save();
+        
+        $taCourse = new ProfessorCource();
+        $taCourse->PROFUSERNAME="abod";
+        $taCourse->COURSECODE="G123";
+        $taCourse->save();
+        */
+/*
+        $taCourse = new TACourse();
+        $taCourse->TAUSERNAME="abod";
+        $taCourse->COURSECODE="CS123";
         $taCourse->GROUPID=1;
         $taCourse->save();
-        $taCourse = new StudentCourse();
-        $taCourse->STUDUSERNAME="abod";
+        $taCourse = new TACourse();
+        $taCourse->TAUSERNAME="abod";
         $taCourse->COURSECODE="G123";
-        $taCourse->TOTALGRADE=5;
         $taCourse->GROUPID=1;
         $taCourse->save();
 */
