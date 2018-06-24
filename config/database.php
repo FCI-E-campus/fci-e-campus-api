@@ -1,6 +1,6 @@
 <?php
 
-$url = parse_url("postgres://tpwprcqaiosyga:fe4ad65e92e80b3a81b8e253edb2bb914894bc4696cfe9c2385946bf1e9c6ec4@ec2-54-225-96-191.compute-1.amazonaws.com:5432/dkopbvumivi7");
+$url = parse_url(getenv("DATABASE_URL"));
 $host = $url['host']??null;
 $username = $url['user']??null;
 $password = $url['pass']??null;

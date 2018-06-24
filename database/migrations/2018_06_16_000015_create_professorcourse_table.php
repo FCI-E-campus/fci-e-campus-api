@@ -23,6 +23,7 @@ class CreateProfessorcourseTable extends Migration
         if (Schema::hasTable($this->set_schema_table)) return;
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
+            $table->increments('professorcourseID');
             $table->string('COURSECODE',50);
             $table->string('PROFUSERNAME', 50);
 

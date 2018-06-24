@@ -61,14 +61,14 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {/*
+    {
         $admin = new Admin();
         $admin->ADMINUSERNAME="abdullah";
         $admin->ADMINPASSWORD="123";
         $admin->FIRSTNAME="abdullah";
         $admin->LASTNAME="abdelazim";
-        $admin->save();*/
-        /*
+        $admin->save();
+        
         $department = new Department();
         $department->DEPARTMENTNAME="General";
         $department->DESCRIPTION="general department";
@@ -211,7 +211,7 @@ class DepartmentController extends Controller
         $post->ANSWERED=0;
         $post->DATEPUBLISHED="2018-06-21 00:00:00";
         $post->save();
-        *//*
+        
         $taskCreator = new TaskCreator();
         $taskCreator->CREATORUSERNAME="abod";
         $taskCreator->CREATORTYPE="stud";
@@ -255,7 +255,7 @@ class DepartmentController extends Controller
         $groups->COURSECODE="CS123";
         $groups->GROUPNAME="G1";
         $groups->save();
-*//*
+
         $taCourse = new StudentCourse();
         $taCourse->STUDUSERNAME="abod";
         $taCourse->COURSECODE="CS123";
@@ -267,11 +267,7 @@ class DepartmentController extends Controller
         $taCourse->COURSECODE="G123";
         $taCourse->TOTALGRADE=5;
         $taCourse->GROUPID=1;
-        $taCourse->save();*/
-        $pre = new PreRequisiteCourse();
-        $pre->COURSECODE="se";
-        $pre->COU_COURSECODE="CS123";
-        $pre->save();
+        $taCourse->save();
 
         /*
         $task = new Task();
