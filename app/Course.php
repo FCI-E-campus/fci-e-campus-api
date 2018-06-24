@@ -154,7 +154,7 @@ class Course extends Model
         foreach ($x as $item){
 
             $z=Course::where('COURSECODE',$item["COURSECODE"])->get();
-            $s=array("COURSECODE"=>$z["COURSECODE"],"COURSETITLE"=>$z["COURSETITLE"]);
+            $s=array("COURSECODE"=>$item["COURSECODE"],"COURSETITLE"=>$z["COURSETITLE"]);
             $course->push($s);
         }
         $subJason =array("status"=>"success","result"=>$course);
