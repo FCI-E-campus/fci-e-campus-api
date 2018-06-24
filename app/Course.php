@@ -196,7 +196,7 @@ class Course extends Model
     public function showCoursesOnTheSystem()
     {
 
-        $c=Course::all();
+        $c=DB::select('select * from course');;
         $subJason =array("status"=>"success","result"=>$c);
         return  $subJason;
 
