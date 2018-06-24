@@ -169,9 +169,17 @@ class Course extends Model
             $json = array("status"=>"failed","error_msg"=>"1");
             return $json;
         }
+        $course=new Collection();
+        $x=TACourse::where('TAUSERNAME',$un)->get();
+        foreach ($x as $item){
 
-        $subJason =array("status"=>"success","result"=>TACourse::where('TAUSERNAME',$un)->get());
+            $z=Course::where('COURSECODE',$item["COURSECODE"])->get();
+            $s=array("COURSECODE"=>$item["COURSECODE"],"COURSETITLE"=>$z[0]["COURSETITLE"]);
+            $course->push($s);
+        }
+        $subJason =array("status"=>"success","result"=>$course);
         return $subJason;
+
 
     }
 
@@ -183,7 +191,16 @@ class Course extends Model
             return $json;
         }
 
-        $subJason =array("status"=>"success","result"=>ProfessorCourse::where('PROFUSERNAME',$un)->get());
+        
+        $course=new Collection();
+        $x=ProfessorCourse::where('PROFUSERNAME',$un)->get();
+        foreach ($x as $item){
+
+            $z=Course::where('COURSECODE',$item["COURSECODE"])->get();
+            $s=array("COURSECODE"=>$item["COURSECODE"],"COURSETITLE"=>$z[0]["COURSETITLE"]);
+            $course->push($s);
+        }
+        $subJason =array("status"=>"success","result"=>$course);
         return $subJason;
 
 
