@@ -149,7 +149,15 @@ class Course extends Model
             $json = array("status"=>"failed","error_msg"=>"this student is not exist");
             return $json;
         }
-        $subJason =array("status"=>"success","result"=>StudentCourse::where('STUDUSERNAME',$un)->get());
+        $course=new Collection();
+        $x=StudentCourse::where('STUDUSERNAME',$un)->get();
+        foreach ($x as $item){
+
+            $z=Course::where('COURSECODE',$item["COURSECODE"])->get();
+            $s=array("COURSECODE"=>$z["COURSECODE"],"COURSETITLE"=>$z["COURSETITLE"]);
+            $course->push($s);
+        }
+        $subJason =array("status"=>"success","result"=>$course);
         return $subJason;
 
     }
