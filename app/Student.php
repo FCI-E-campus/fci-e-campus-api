@@ -161,6 +161,7 @@ class Student extends Model
     public function getAllTasks($un)
     {
         $crsCodes = StudentCourse::select('COURSECODE')->where('STUDUSERNAME',$un)->get();
+        
         $tasks = Task::all();
         $result = new Collection();
         foreach($crsCodes as $crsCode)
@@ -177,7 +178,7 @@ class Student extends Model
                 );
                 }
             }
-            $tempJason=array($crsCode=>$subJason);
+            $tempJason=array($crsCode->COURSECODE=>$subJason);
             $result->push($tempJason);
         }
         return $result;

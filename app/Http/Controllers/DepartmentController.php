@@ -256,7 +256,7 @@ class DepartmentController extends Controller
         $groups->COURSECODE="CS123";
         $groups->GROUPNAME="G1";
         $groups->save();
-*/
+*//*
         $taCourse = new StudentCourse();
         $taCourse->STUDUSERNAME="abod";
         $taCourse->COURSECODE="CS123";
@@ -269,7 +269,7 @@ class DepartmentController extends Controller
         $taCourse->TOTALGRADE=5;
         $taCourse->GROUPID=1;
         $taCourse->save();
-
+*/
         /*
         $task = new Task();
         $task->COURSECODE="is123";
