@@ -62,7 +62,7 @@ class DepartmentController extends Controller
      */
     public function show()
     {
-        /*$admin = new Admin();
+        $admin = new Admin();
         $admin->ADMINUSERNAME="abdullah";
         $admin->ADMINPASSWORD="123";
         $admin->FIRSTNAME="abdullah";
@@ -121,7 +121,7 @@ class DepartmentController extends Controller
         $student->FACULTYID="20140192";
         $student->ISMODERATOR=1;
         $student->save();
-*/
+
         $course = new Course();
         $course->COURSECODE="CS123";
         $course->DEPTID=3;
