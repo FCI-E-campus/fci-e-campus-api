@@ -210,7 +210,7 @@ class DepartmentController extends Controller
         $post->ANSWERED=0;
         $post->DATEPUBLISHED="2018-06-21 00:00:00";
         $post->save();
-        */
+        *//*
         $taskCreator = new TaskCreator();
         $taskCreator->CREATORUSERNAME="abod";
         $taskCreator->CREATORTYPE="stud";
@@ -254,7 +254,7 @@ class DepartmentController extends Controller
         $groups->COURSECODE="CS123";
         $groups->GROUPNAME="G1";
         $groups->save();
-
+*/
         $taCourse = new StudentCourse();
         $taCourse->STUDUSERNAME="abod";
         $taCourse->COURSECODE="CS123";
