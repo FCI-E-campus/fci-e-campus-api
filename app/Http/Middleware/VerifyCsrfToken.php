@@ -37,7 +37,7 @@ class VerifyCsrfToken extends Middleware
 
         'http://e-campus.herokuapp.com/department/add/new',
 
-
+         'http://localhost/E-campus/public/admin',
 
         'http://e-campus.herokuapp.com/professor/activate',
 

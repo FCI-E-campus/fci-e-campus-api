@@ -251,7 +251,7 @@ class Course extends Model
             $json = array("status"=>"failed","error_code"=>"1");
             return $json;
         }
-        $co=Course::where('PASSCODE',$passCode)->count();
+        $co=Course::where('PASSCODE',$passCode)->where('COURSECODE',$courseCode)->count();
 
         if ($co == 0){
             $json = array("status"=>"failed","error_code"=>"28");
