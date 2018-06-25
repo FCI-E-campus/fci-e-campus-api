@@ -23,7 +23,8 @@ class CreateCourseTable extends Migration
         if (Schema::hasTable($this->set_schema_table)) return;
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('COURSECODE',50)->primary();
+            $table->increments('id');
+            $table->string('COURSECODE',50);
             $table->unsignedInteger('DEPTID');
             $table->string('COURSETITLE', 100);
             $table->text('DESCRIPTION')->nullable()->default(null);

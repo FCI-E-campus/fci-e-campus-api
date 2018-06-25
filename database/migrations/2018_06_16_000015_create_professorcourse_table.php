@@ -27,15 +27,15 @@ class CreateProfessorcourseTable extends Migration
             $table->string('COURSECODE',50);
             $table->string('PROFUSERNAME', 50);
 
-            $table->foreign('COURSECODE')
-                ->references('COURSECODE')->on('course')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+//            $table->foreign('COURSECODE')
+//                ->references('COURSECODE')->on('course')
+//                ->onDelete('restrict')
+//                ->onUpdate('restrict');
 
-            $table->foreign('PROFUSERNAME')
-                ->references('PROFUSERNAME')->on('professor')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+//            $table->foreign('PROFUSERNAME')
+//                ->references('PROFUSERNAME')->on('professor')
+//                ->onDelete('restrict')
+//                ->onUpdate('restrict');
         });
     }
 

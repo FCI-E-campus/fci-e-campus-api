@@ -23,7 +23,8 @@ class CreateTaTable extends Migration
         if (Schema::hasTable($this->set_schema_table)) return;
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('TAUSERNAME',150)->primary();
+	        $table->increments('id');
+	        $table->string('TAUSERNAME',150);
             $table->unsignedInteger('DEPTID');
             $table->string('TAPASSWORD', 50);
             $table->string('FIRSTNAME', 50);

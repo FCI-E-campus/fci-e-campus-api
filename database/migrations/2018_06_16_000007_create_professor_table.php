@@ -23,7 +23,8 @@ class CreateProfessorTable extends Migration
         if (Schema::hasTable($this->set_schema_table)) return;
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('PROFUSERNAME',50)->primary();
+            $table->increments('id');
+            $table->string('PROFUSERNAME',50);
             $table->unsignedInteger('DEPTID');
             $table->string('PROFPASSWORD', 50);
             $table->string('FIRSTNAME', 50);

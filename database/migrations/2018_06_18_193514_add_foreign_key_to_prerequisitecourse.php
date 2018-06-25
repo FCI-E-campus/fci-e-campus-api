@@ -16,8 +16,8 @@ class AddForeignKeyToPrerequisitecourse extends Migration
         Schema::table('prerequisitecourse', function (Blueprint $table) {
             $table->string('COU_COURSECODE',50);
 
-            $table->foreign('COU_COURSECODE')
-                ->references('COURSECODE')->on('course');
+//            $table->foreign('COU_COURSECODE')
+//                ->references('COURSECODE')->on('course');
         });
     }
 
