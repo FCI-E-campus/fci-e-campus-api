@@ -186,7 +186,9 @@ class TA extends Model
             $tempJason=array($crsCode->COURSECODE=>$subJason);
             $result->push($tempJason);
         }
-        return $result;
+        $subJason =array("status"=>"success","result"=>$result);
+        return  $subJason;
+
     }
 
 
