@@ -191,7 +191,7 @@ class Course extends Model
             return $json;
         }
 
-        
+
         $course=new Collection();
         $x=ProfessorCourse::where('PROFUSERNAME',$un)->get();
         foreach ($x as $item){
@@ -213,7 +213,11 @@ class Course extends Model
             $json = array("status"=>"failed","error_msg"=>"8");
             return $json;
         }
-        $subJason =array("status"=>"success","result"=>Course::where('COURSECODE',$courseCode)->get());
+        $courses=Course::where('COURSECODE',$courseCode)->get();
+        $profe=ProfessorCource::select('PROFUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
+        $ta=TACource::select('TAUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
+        $res=array("prof"=>$profe,"ta"=>$ta);
+        $subJason =array("status"=>"success","result"=>$res);
         return  $subJason;
 
     }
