@@ -216,7 +216,7 @@ class Course extends Model
         $courses=Course::where('COURSECODE',$courseCode)->get();
         $profe=ProfessorCource::select('PROFUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
         $ta=TACourse::select('TAUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
-        $res=array("prof"=>$profe,"ta"=>$ta);
+        $res=array("Course"=>$courses,"prof"=>$profe,"ta"=>$ta);
         $subJason =array("status"=>"success","result"=>$res);
         return  $subJason;
 
