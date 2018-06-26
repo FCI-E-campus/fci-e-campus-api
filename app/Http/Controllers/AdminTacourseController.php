@@ -30,33 +30,31 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"TACOURSEID","name"=>"TACOURSEID"];
-			$this->col[] = ["label"=>"TAUSERNAME","name"=>"TAUSERNAME"];
-			$this->col[] = ["label"=>"COURSECODE","name"=>"COURSECODE"];
-			$this->col[] = ["label"=>"GROUPID","name"=>"GROUPID",'join'=>'groups,GROUPNAME'];
+			$this->col[] = ["label"=>"TAUSERNAME","name"=>"TAUSERNAME","join"=>"ta,TAUSERNAME"];
+			$this->col[] = ["label"=>"COURSECODE","name"=>"COURSECODE","join"=>"course,COURSETITLE"];
+			$this->col[] = ["label"=>"GROUPID","name"=>"GROUPID","join"=>"groups,GROUPNAME"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
-		    $courses = '';
-		    DB::table('course')->get()->map(function ($item)use (&$courses){
-			    $courses .= $item->COURSECODE . '|' . $item->COURSETITLE .';';
-			    return $item;
-		    });
-
-		    $courses = rtrim($courses,';');
-
-		    $this->form = [];
-			$this->form[] = ['label'=>'TAUSERNAME','name'=>'TAUSERNAME','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-		    $this->form[] = ['label'=>'COURSECODE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$courses];
+			$this->form = [];
+			$this->form[] = ['label'=>'TAUSERNAME','name'=>'TAUSERNAME','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'COURSECODE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'GROUPID','name'=>'GROUPID','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'groups,GROUPNAME'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
+			//$courses = '';
+			//DB::table('course')->get()->map(function ($item)use (&$courses){
+			//$courses .= $item->COURSECODE . '|' . $item->COURSETITLE .';';
+			//return $item;
+			//});
+			//
+			//$courses = rtrim($courses,';');
+			//
 			//$this->form = [];
-			//$this->form[] = ["label"=>"TACOURSEID","name"=>"TACOURSEID","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"TAUSERNAME","name"=>"TAUSERNAME","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"COURSECODE","name"=>"COURSECODE","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"GROUPID","name"=>"GROUPID","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ['label'=>'TAUSERNAME','name'=>'TAUSERNAME','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'COURSECODE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$courses];
+			//$this->form[] = ['label'=>'GROUPID','name'=>'GROUPID','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'groups,GROUPNAME'];
 			# OLD END FORM
 
 			/* 

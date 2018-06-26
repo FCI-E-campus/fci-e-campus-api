@@ -31,7 +31,7 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"COURSECODE","name"=>"COURSECODE"];
-			$this->col[] = ["label"=>"DEPTID","name"=>"DEPTID","join"=>"department,DEPARTMENTNAME"];
+			$this->col[] = ["label"=>"DEPTTITLE","name"=>"DEPTID","join"=>"department,DEPARTMENTNAME"];
 			$this->col[] = ["label"=>"COURSETITLE","name"=>"COURSETITLE"];
 			$this->col[] = ["label"=>"DESCRIPTION","name"=>"DESCRIPTION"];
 			$this->col[] = ["label"=>"STARTDATE","name"=>"STARTDATE"];
@@ -42,7 +42,7 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'COURSECODE','name'=>'COURSECODE','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'DEPTID','name'=>'DEPTID','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'department,DEPARTMENTNAME'];
+			$this->form[] = ['label'=>'DEPTTITLE','name'=>'DEPTID','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'department,DEPARTMENTNAME'];
 			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSETITLE','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'DESCRIPTION','name'=>'DESCRIPTION','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'STARTDATE','name'=>'STARTDATE','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
