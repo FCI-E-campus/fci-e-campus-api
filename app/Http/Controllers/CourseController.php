@@ -149,14 +149,6 @@ class CourseController extends Controller
         //
     }
 
-
-    /*{
-    "_token":"token of this user",
-    "username":"ahmed",
-    "course_code": "CS123",
-    "course_pass_code":"21312311"
-}*/
-
     public function  joinCourse(Request $request){
 
    $course = new Course();
