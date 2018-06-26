@@ -64,13 +64,7 @@ class DepartmentController extends Controller
      */
     public function show()
     {
-        /*
-        $admin = new Admin();
-        $admin->ADMINUSERNAME="abdullah";
-        $admin->ADMINPASSWORD="123";
-        $admin->FIRSTNAME="abdullah";
-        $admin->LASTNAME="abdelazim";
-        $admin->save();
+        
         
         $department = new Department();
         $department->DEPARTMENTNAME="General";
@@ -258,8 +252,8 @@ class DepartmentController extends Controller
         $groups->COURSECODE="CS123";
         $groups->GROUPNAME="G1";
         $groups->save();
-*/
-        /*
+
+        
         $taCourse = new ProfessorCource();
         $taCourse->PROFUSERNAME="abod";
         $taCourse->COURSECODE="CS123";
@@ -269,8 +263,8 @@ class DepartmentController extends Controller
         $taCourse->PROFUSERNAME="abod";
         $taCourse->COURSECODE="G123";
         $taCourse->save();
-        */
-/*
+        
+
         $taCourse = new TACourse();
         $taCourse->TAUSERNAME="abod";
         $taCourse->COURSECODE="CS123";
@@ -281,7 +275,7 @@ class DepartmentController extends Controller
         $taCourse->COURSECODE="G123";
         $taCourse->GROUPID=1;
         $taCourse->save();
-*/
+
         /*
         $task = new Task();
         $task->COURSECODE="is123";
