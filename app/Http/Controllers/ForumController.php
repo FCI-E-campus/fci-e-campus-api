@@ -11,6 +11,7 @@ class ForumController extends Controller
     public function addPost(Request $request)
     {
         $forum = new Forum();
+        
         return $forum->addPost($request['author_username'],$request['author_type'],$request['course_code'],
         $request['post_title'],$request['post_body']
     );

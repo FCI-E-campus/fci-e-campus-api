@@ -21,7 +21,7 @@ class CreatePrerequisitecourse extends Migration
             $table->engine = 'InnoDB';
             $table->increments('prerequisitecourseID');
             $table->string('COURSECODE',50);
-
+            $table->string('COU_COURSECODE',50);
         });
     }
 

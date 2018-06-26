@@ -24,15 +24,9 @@ class CreateAnnouncementTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('ANNOUNCEMENTID');
-            $table->string('ADMINUSERNAME', 50);
             $table->string('ANNOUNCEMENTTITLE', 200);
             $table->text('ANNOUNCEMENTBODY');
             $table->dateTime('DATEPUBLISHED');
-
-            $table->foreign('ADMINUSERNAME')
-                ->references('ADMINUSERNAME')->on('admin')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
         });
     }
 

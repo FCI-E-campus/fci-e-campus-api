@@ -16,8 +16,8 @@ class AddForeignKeyToSlots extends Migration
         Schema::table('slots', function (Blueprint $table) {
             $table->string('COURSECODE',50);
 
-//            $table->foreign('COURSECODE')
-//                ->references('COURSECODE')->on('course');
+            $table->foreign('COURSECODE')
+                ->references('COURSECODE')->on('course');
         });
     }
 
