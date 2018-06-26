@@ -166,7 +166,7 @@ class Student extends Model
         $result = new Collection();
         foreach($crsCodes as $crsCode)
         {
-            $subJason = array();
+            $subJason2=new Collection();
             date_default_timezone_set('Africa/Cairo');
             $ldate = date('Y-m-d H:i:s');
             foreach($tasks as $task)
@@ -179,9 +179,10 @@ class Student extends Model
                     "date_created"=>$task->DATECREATED,"due_date"=>$task->DUEDATE,"weight"=>$task->WEIGHT,
                     "creator_username"=>$creator->CREATORUSERNAME,"creator_type"=>$creator->CREATORTYPE
                 );
+                    $subJason2->push($subJason);
                 }
             }
-            $tempJason=array($crsCode->COURSECODE=>$subJason);
+            $tempJason=array($crsCode->COURSECODE=>$subJason2);
             $result->push($tempJason);
         }
         $subJason =array("status"=>"success","result"=>$result);

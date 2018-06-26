@@ -9,4 +9,6 @@ class Groups extends Model
     protected $table='groups';
     public $primaryKey='GROUPID';
     public $timestamps=false;
+
+
 }
