@@ -24,7 +24,7 @@ class CreateTaskcreatorTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('CREATORID');
-            $table->string('CREATORUSERNAME', 50);
+            $table->string('CREATORUSERNAME', 50)->unique();
             $table->string('CREATORTYPE', 4);
         });
     }

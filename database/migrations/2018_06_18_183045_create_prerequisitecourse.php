@@ -22,6 +22,8 @@ class CreatePrerequisitecourse extends Migration
             $table->increments('prerequisitecourseID');
             $table->string('COURSECODE',50);
             $table->string('COU_COURSECODE',50);
+            $table->foreign('COURSECODE')->references('COURSECODE')->on('course');
+            $table->foreign('COU_COURSECODE')->references('COURSECODE')->on('course');
         });
     }
 

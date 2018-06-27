@@ -248,9 +248,38 @@ class DepartmentController extends Controller
         $task->WEIGHT=5;
         $task->save();
 
+        $ta = new TA();
+        $ta->TAUSERNAME="abod";
+        $ta->DEPTID=1;
+        $ta->TAPASSWORD="123";
+        $ta->FIRSTNAME="abod";
+        $ta->LASTNAME="mahmoud";
+        $ta->EMAIL="abod.mahmoud92@gmail.com";
+        $ta->PHONENUMBER="01000495565";
+        $ta->DATEOFBIRTH="2018-06-27";
+        $ta->ActivationCode="5098654";
+        $ta->isActiveted=1;
+        $ta->save();
+
+        $ta = new Professor();
+        $ta->PROFUSERNAME="abod";
+        $ta->DEPTID=1;
+        $ta->PROFPASSWORD="123";
+        $ta->FIRSTNAME="abod";
+        $ta->LASTNAME="mahmoud";
+        $ta->EMAIL="abod.mahmoud92@gmail.com";
+        $ta->PHONENUMBER="01000495565";
+        $ta->DATEOFBIRTH="2018-06-27";
+        $ta->ActivationCode="5098654";
+        $ta->isActiveted=1;
+        $ta->save();
+
+        
+
         $groups = new Groups();
         $groups->COURSECODE="CS123";
-        $groups->GROUPNAME="G1";
+        $groups->TAUSERNAME="abod";
+        $groups->GROUPNUM=1;
         $groups->save();
 
         

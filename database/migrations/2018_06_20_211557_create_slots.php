@@ -24,6 +24,10 @@ class CreateSlots extends Migration
             $table->integer('GROUPNUM')->nullable();
             $table->string('SLOTTYPE', 3);
             $table->text('PLACE');
+            $table->string('COURSECODE',50);
+            $table->foreign('GROUPNUM')->references('GROUPNUM')->on('groups');
+            $table->foreign('COURSECODE')->references('COURSECODE')->on('course');
+
         });
     }
 

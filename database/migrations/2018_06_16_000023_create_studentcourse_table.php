@@ -29,10 +29,10 @@ class CreateStudentcourseTable extends Migration
             $table->string('COURSECODE', 50);
             $table->float('TOTALGRADE')->nullable()->default(null);
 
-//            $table->foreign('COURSECODE')
-//                ->references('COURSECODE')->on('course')
-//                ->onDelete('restrict')
-//                ->onUpdate('restrict');
+            $table->foreign('COURSECODE')
+                ->references('COURSECODE')->on('course')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
 
             $table->foreign('STUDUSERNAME')
                 ->references('STUDUSERNAME')->on('student')

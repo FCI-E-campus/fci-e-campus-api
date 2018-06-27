@@ -39,10 +39,10 @@ class CreateExtramaterialsTable extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
 
-//            $table->foreign('COURSECODE')
-//                ->references('COURSECODE')->on('course')
-//                ->onDelete('restrict')
-//                ->onUpdate('restrict');
+            $table->foreign('COURSECODE')
+                ->references('COURSECODE')->on('course')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
         });
     }
 

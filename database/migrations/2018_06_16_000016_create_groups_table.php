@@ -25,9 +25,10 @@ class CreateGroupsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('GROUPID');
             $table->string('COURSECODE', 50);
-            $table->integer('GROUPNUM')->nullable();
+            $table->integer('GROUPNUM')->nullable()->unique();
             $table->string('TAUSERNAME',150);
-          //  $table->foreign('TAUSERNAME')->references('TAUSERNAME')->on('ta');            
+            $table->foreign('TAUSERNAME')->references('TAUSERNAME')->on('ta');
+            $table->foreign('COURSECODE')->references('COURSECODE')->on('course');            
 
         });
     }

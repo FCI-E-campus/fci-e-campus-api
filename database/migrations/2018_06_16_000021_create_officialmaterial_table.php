@@ -35,10 +35,10 @@ class CreateOfficialmaterialTable extends Migration
 
 
 
-//            $table->foreign('COURSECODE')
-//                ->references('COURSECODE')->on('course')
-//                ->onDelete('restrict')
-//                ->onUpdate('restrict');
+            $table->foreign('COURSECODE')
+                ->references('COURSECODE')->on('course')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
 
             $table->foreign('TASKID')
                 ->references('TASKID')->on('task')

@@ -24,7 +24,7 @@ class CreateAuthorTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('AUTHORID');
-            $table->string('AUTHORUSERNAME', 50);
+            $table->string('AUTHORUSERNAME', 50)->unique();
             $table->string('AUTHORTYPE', 4);
         });
     }
