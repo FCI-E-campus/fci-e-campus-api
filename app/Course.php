@@ -210,6 +210,8 @@ class Course extends Model
             $json = array("status"=>"failed","error_msg"=>"8");
             return $json;
         }
+
+        //zizomody 
         $courses=Course::where('COURSECODE',$courseCode)->get();
         return $courses;
         $c=$courses[0];
