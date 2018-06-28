@@ -8,8 +8,6 @@ use App\Professor;
 
 class ProfessorController extends Controller
 {
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -24,7 +22,7 @@ class ProfessorController extends Controller
             $request['FIRSTNAME'],$request['LASTNAME'],$request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH']
         );
     }
-
+    //call getAllTasks from professor class model
     public function getAllTasks(Request $request)
     {
         $professor = new Professor();
@@ -43,26 +41,28 @@ class ProfessorController extends Controller
         $professor = new Professor();
         return $professor->showProfessor($request['PROFUSERNAME'],$request['PROFPASSWORD']);
     }
-
+    //call activate from professor class model
     public function activate(Request $request)
     {
         $professor = new Professor();
         return $professor->activate($request['PROFUSERNAME'],$request['ActivationCode']);
     }
-
-
-
-
+    //call update from professor class model
     public function update(Request $request)
     {
         $prof = new Professor();
         return $prof->updateUser($request['PROFUSERNAME'],$request['PROFPASSWORD']);
     }
-
-
+    //call showprofSchedule from professor class model
     public function  showprofSchedule(Request $request){
         $pr = new Professor();
         return $pr->showprofSchedule($request["PROFUSERNAME"]);
 
+    }
+    //call overview from professor class model
+    public function overview(Request $request)
+    {
+        $prof = new Professor();
+        return $prof->overview($request["PROFUSERNAME"]);
     }
 }

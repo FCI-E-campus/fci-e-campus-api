@@ -21,6 +21,7 @@ Route::prefix('student')->group(function() {
     Route::post('/updatePass','StudentController@update');
     Route::post('/showStudentSchedule','StudentController@showStudentSchedule');
     Route::post('/getAllTasks','StudentController@getAllTasks');
+    Route::post('/overview','StudentController@overview');
 });
 
 Route::prefix('professor')->group(function() {
@@ -31,6 +32,7 @@ Route::prefix('professor')->group(function() {
     Route::post('/updatePass','ProfessorController@update');
     Route::post('/showProfSchedule','ProfessorController@showProfSchedule');
     Route::post('/getAllTasks','ProfessorController@getAllTasks');
+    Route::post('/overview','ProfessorController@overview');
 });
 
 Route::prefix('ta')->group(function() {
@@ -41,6 +43,7 @@ Route::prefix('ta')->group(function() {
     Route::post('/updatePass','TAController@update');
     Route::post('/getAllTasks','TAController@getAllTasks');
     Route::post('/showTASchedule','TAController@showTASchedule');
+    Route::post('/overview','TAController@overview');
 });
 
 Route::prefix('department')->group(function() {

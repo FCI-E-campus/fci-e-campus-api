@@ -9,7 +9,7 @@ class Forum extends Model
     protected $table='forum';
     public $primaryKey='FORUMID';
     public $timestamps=false;
-
+    //add post to specific forum
     public function addPost($author_username,$author_type,$course_code,$post_title,$post_body)
     {
         $author = new Author();

@@ -25,7 +25,5 @@ class Department extends Model
         }
         $json = array("status"=>"failed","error_msg"=>"this department id is exist");
         return $json;
-
-
     }
 }

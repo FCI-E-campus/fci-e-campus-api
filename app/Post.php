@@ -11,8 +11,7 @@ class Post extends Model
     public $primaryKey='POSTID';
     public $timestamps=false;
 
-
-
+    //retrieve specific post from the DB then show all its comments
     public function showSpecificPostComments($postID)
     {
         $num = Post::where('POSTID',$postID)->count();
@@ -41,11 +40,9 @@ class Post extends Model
         }
         $subJason =array("status"=>"success","result"=>$allComments);
         return  $subJason;
-
-
     }
 
-
+    //add comment to specific post
     public function addComment($author_username,$author_type,$post_id,$comment_text)
     {
         $num = Post::where('POSTID',$post_id)->count();
@@ -66,8 +63,5 @@ class Post extends Model
         $comment->save();
         $jason = array("status"=>"success","comment_id"=>$comment->COMMENTID);
         return $jason;
-
     }
-
-
 }

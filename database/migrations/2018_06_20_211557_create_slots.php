@@ -21,11 +21,11 @@ class CreateSlots extends Migration
             $table->string('DAY',15);
             $table->time('STARTTIME');
             $table->integer('DURATION');
-            $table->integer('GROUPNUM')->nullable();
+            $table->unsignedInteger('GROUPID');
             $table->string('SLOTTYPE', 3);
             $table->text('PLACE');
             $table->string('COURSECODE',50);
-            $table->foreign('GROUPNUM')->references('GROUPNUM')->on('groups');
+            $table->foreign('GROUPID')->references('GROUPID')->on('groups');
             $table->foreign('COURSECODE')->references('COURSECODE')->on('course');
 
         });

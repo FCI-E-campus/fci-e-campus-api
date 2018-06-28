@@ -21,7 +21,7 @@ class OfficialMaterial extends Model
     "uploader_type": "prof"
 }
   * */
-
+    //add official material to the DB
     public function addMaterial($COURSECODE,$un,$MATERIALNAME,$MATERIALDESCRIPTION,$link,$MATERIALTYPE,$usertype)
     {
         if(Course::find($COURSECODE)=="")
@@ -34,7 +34,6 @@ class OfficialMaterial extends Model
             if ($count == 0) {
                 $json = array("status"=>"failed","error_code"=>"1");
                 return $json;
-
         }
         }
         else if ($usertype=="prof") {
@@ -42,12 +41,11 @@ class OfficialMaterial extends Model
             if ($count == 0) {
                 $json = array("status" => "failed", "error_code" => "1");
                 return $json;
-
             }
         }
         $upload= new OfficialMaterialUploader();
         $id=$upload->addUploader($usertype,$un);
-         $matrial= new OfficialMaterial();
+        $matrial= new OfficialMaterial();
         $matrial->COURSECODE=$COURSECODE;
         $matrial->UPLOADERID=$id;
         $matrial->MATERIALNAME=$MATERIALNAME;
@@ -55,24 +53,19 @@ class OfficialMaterial extends Model
         $matrial->MATERIALFILEPATH=$link;
         $matrial->MATERIALTYPE=$MATERIALTYPE;
         $matrial->save();
-            $json = array("status"=>"success");
-            return $json;
-
+        $json = array("status"=>"success");
+        return $json;
     }
-
+    //retreive official material from the DB
     public function  showOfficialMaterials($coursecode){
         if(Course::find($coursecode)=="")
         {
             $json = array("status"=>"failed","error_code"=>"8");
             return $json;
         }
-
-
         $Materials = OfficialMaterial::where('COURSECODE',$coursecode)->get();
         $subJason =array("status"=>"success","result"=>$Materials);
         return  $subJason;
-
-
     }
 
 

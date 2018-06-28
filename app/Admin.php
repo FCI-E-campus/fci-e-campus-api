@@ -124,7 +124,7 @@ class Admin extends Model
             return $json;
         }
     }
-
+    //show admin from DB
     public function showAdmin($un,$pass)
     {
         if(Admin::find($un)=="")

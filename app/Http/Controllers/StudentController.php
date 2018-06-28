@@ -41,7 +41,6 @@ class StudentController extends Controller
             $request['STUDPASSWORD'],$request['FIRSTNAME'],$request['LASTNAME'],
             $request['EMAIL'],$request['PHONENUMBER'],$request['DATEOFBIRTH'],$request['FACULTYID']
             );
-
     }
 
     /**
@@ -65,7 +64,7 @@ class StudentController extends Controller
      */
     public function edit()
     {
-
+        //
     }
 
     /**
@@ -75,6 +74,7 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //call update from student class model
     public function update(Request $request)
     {
 
@@ -92,15 +92,22 @@ class StudentController extends Controller
     {
         //
     }
-
+    //call showStudentSchedule from student class model
     public function  showStudentSchedule(Request $request){
         $st = new Student();
         return $st->showStudentSchedule($request["STUDUSERNAME"]);
 
     }
+    //call getAllTasks from student class model
     public function getAllTasks(Request $request)
     {
         $student = new Student();
         return $student->getAllTasks($request['STUDUSERNAME']);
+    }
+    //call overview from student class model
+    public function overview(Request $request)
+    {
+        $student = new Student();
+        return $student->overview($request['STUDUSERNAME']);
     }
 }

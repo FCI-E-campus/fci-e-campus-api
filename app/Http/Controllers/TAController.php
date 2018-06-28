@@ -54,7 +54,7 @@ class TAController extends Controller
         $ta = new TA();
         return $ta->showTA($request['TAUSERNAME'],$request['TAPASSWORD']);
     }
-
+    //call activate from TA class model
     public function activate(Request $request)
     {
         $ta = new TA();
@@ -79,6 +79,7 @@ class TAController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //call update from TA class model
     public function update(Request $request)
     {
         $ta = new TA();
@@ -95,15 +96,22 @@ class TAController extends Controller
     {
         //
     }
-
+    //call showStudentSchedule from TA class model
     public function  showStudentSchedule(Request $request){
         $st = new Student();
         return $st->showStudentSchedule($request["TAUSERNAME"]);
 
     }
+    //call getAllTasks from TA class model
     public function getAllTasks(Request $request)
     {
         $ta = new TA();
         return $ta->getAllTasks($request['TAUSERNAME']);
+    }
+    //call overview from TA class model
+    public function overview(Request $request)
+    {
+        $ta = new TA();
+        return $ta->overview($request['TAUSERNAME']);
     }
 }

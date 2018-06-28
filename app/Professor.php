@@ -84,7 +84,7 @@ class Professor extends Model
             $json = array("status"=>"success");
             return $json;
     }
-
+    //send the activation code to verify its account
     public function sendMail($ActivationCode , $to){
         $date = ["code"=>$ActivationCode,"to"=>$to];
         Mail::send("Email",$date,function ($message)use($date){
@@ -94,6 +94,7 @@ class Professor extends Model
         });
     }
 
+    //activate the user if he/she send its activation code correct
     public function activate($un,$code){
         if(Professor::find($un)=="")
         {
@@ -144,9 +145,8 @@ class Professor extends Model
             return $json;
         }
     }
-
+    //update password to specific user
     public function updateUser($un,$pass){
-
         $prof =Professor::find($un);
         if($pass=="")
         {
@@ -157,10 +157,9 @@ class Professor extends Model
         $prof->save();
         $json = array("status"=>"success");
         return $json;
-
     }
 
-    
+    //retrieve all tasks for specific user
     public function getAllTasks($un)
     {
         $crsCodes = ProfessorCource::select('COURSECODE')->where('PROFUSERNAME',$un)->get();   
@@ -189,9 +188,8 @@ class Professor extends Model
         $subJason =array("status"=>"success","result"=>$result);
         return  $subJason;
     }
-
+    //show the schedule for the professor
     public function  showprofSchedule($un){
-
         if(Professor::find($un)=="")
         {
             $json = array("status"=>"failed","error_code"=>"1");
@@ -201,28 +199,68 @@ class Professor extends Model
         if ($pr==0){
             $json = array("status"=>"failed","error_code"=>"31");
             return $json;
-
-
         }
         $pr=ProfessorCource::where("PROFUSERNAME",$un)->get();
-
         $allSlotsForCourses = array();
-
         foreach($pr as $item)
         {
-
             $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","!=","1")->get();
             $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","1")->get();
             $subJason =array("COURSECODE"=>$item['COURSECODE'],"labs"=>$labs,
                 "lecture"=>$lec);
             array_push($allSlotsForCourses,$subJason);
-
         }
         $subJason =array("status"=>"success","result"=>$allSlotsForCourses);
         return  $subJason;
-
-
-
-
+    }
+    //show to the doctor the lectures which he/she has today abd tomorrow
+    public function overview($un)
+    {
+        $todaySlots=new Collection();
+        $tomorrowSlots=new Collection();
+        $today=strtolower(date('l'));
+        $tomorrow=strtolower(date('l',strtotime("+1 days")));
+        $professorCourses = ProfessorCource::select('COURSECODE')->where('PROFUSERNAME',$un)->get();
+        $slots = Slots::all();
+        foreach($slots as $slot)
+        {
+            $inCourse=0;
+            foreach($professorCourses as $professorCourse)
+            {
+                if($professorCourse->COURSECODE==$slot->COURSECODE)
+                {
+                    $inCourse=1;
+                    break;
+                }
+            }
+            if($inCourse)
+            {
+                if(strtolower($slot->DAY)==$today)
+                {
+                    if(strtolower($slot->SLOTTYPE)=="lec")
+                    {
+                            $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
+                            $courseName=$courseName." Lecture";
+                            $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
+                            "place"=>$slot->PLACE);
+                            $todaySlots->push($subJason);                
+                    }
+                }
+                elseif(strtolower($slot->DAY)==$tomorrow)
+                {
+                    if(strtolower($slot->SLOTTYPE)=="lec")
+                    {
+                            $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
+                            $courseName=$courseName." Lecture";
+                            $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
+                            "place"=>$slot->PLACE);
+                            $tomorrowSlots->push($subJason);                
+                    }
+                }
+            }
+        }
+        $result=array("today"=>$todaySlots,"tomorrow"=>$tomorrowSlots);
+        $temp=array("status"=>"success","result"=>$result);
+        return $temp;
     }
 }

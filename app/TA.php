@@ -63,7 +63,6 @@ class TA extends Model
             $json = array("status"=>"failed","error_code"=>27);
             return $json;
         }
-
             $ta = new TA();
             $ta->TAUSERNAME = $un;
             $ta->DEPTID=$dID;
@@ -85,7 +84,7 @@ class TA extends Model
             $json = array("status"=>"success");
             return $json;
     }
-
+    //send the activation code to the ta to verifiy his account
     public function sendMail($ActivationCode , $to){
         $date = ["code"=>$ActivationCode,"to"=>$to];
         Mail::send("Email",$date,function ($message)use($date){
@@ -95,6 +94,7 @@ class TA extends Model
         });
     }
 
+    //if the activation code of this ta is correct activate his/her account
     public function activate($un,$code){
         if(TA::find($un)=="")
         {
@@ -114,7 +114,6 @@ class TA extends Model
         $ta->save();
         $json = array("status"=>"success","token"=>csrf_token());
         return $json;
-
     }
 
     //select ta from DB
@@ -125,7 +124,6 @@ class TA extends Model
             $json = array("status"=>"failed","error_code"=>1);
             return $json;
         }
-
         $temp = 0;
         $temp= DB::table('ta')->where('TAUSERNAME',$un)->where('TAPASSWORD' , $pass)->count();
         if($temp==0)
@@ -147,8 +145,8 @@ class TA extends Model
         }
     }
 
+    //update the password for specific ta
     public function updateUser($un,$pass){
-
         $ta =TA::find($un);
         if($pass=="")
         {
@@ -159,9 +157,9 @@ class TA extends Model
         $ta->save();
         $json = array("status"=>"success");
         return $json;
-
     }
 
+    //retrieve all tasks for specific ta
     public function getAllTasks($un)
     {
         $crsCodes = TACourse::select('COURSECODE')->where('TAUSERNAME',$un)->get();   
@@ -169,7 +167,6 @@ class TA extends Model
         $result = new Collection();
         foreach($crsCodes as $crsCode)
         {
-
             $subJason2=new Collection();
             date_default_timezone_set('Africa/Cairo');
             $ldate = date('Y-m-d H:i:s');
@@ -190,12 +187,10 @@ class TA extends Model
         }
         $subJason =array("status"=>"success","result"=>$result);
         return  $subJason;
-
     }
 
-
+    //show the schedule to the ta
     public function  showTASchedule($un){
-
         if(TA::find($un)=="")
         {
             $json = array("status"=>"failed","error_code"=>"1");
@@ -205,16 +200,11 @@ class TA extends Model
         if ($ta==0){
             $json = array("status"=>"failed","error_code"=>"31");
             return $json;
-
-
         }
         $ta=TACourse::where("STUDUSERNAME",$un)->get();
-
         $allSlotsForCourses = array();
-
         foreach($ta as $item)
         {
-
             $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("GROUPNUM",$item["GROUPID"])->get();
             // $allSlots->push($slot);
             // array_push($allSlots,$slot);
@@ -228,10 +218,86 @@ class TA extends Model
         }
         $subJason =array("status"=>"success","result"=>$allSlotsForCourses);
         return  $subJason;
-
-
-
-
     }
 
+    //show the labs and section to specific ta for today and tomorrow
+    public function overview($un)
+    {
+        $todaySlots=new Collection();
+        $tomorrowSlots=new Collection();
+        $today=strtolower(date('l'));
+        $tomorrow=strtolower(date('l',strtotime("+1 days")));
+        $taCourses = TACourse::select('COURSECODE','GROUPID')->where('TAUSERNAME',$un)->get();
+        $slots = Slots::all();
+        foreach($slots as $slot)
+        {
+            $inCourse=0;
+            $groupID;
+            foreach($taCourses as $taCourse)
+            {
+                if($taCourse->COURSECODE==$slot->COURSECODE)
+                {
+                    $groupID=groups::find($taCourse->GROUPID)->GROUPID;
+                    $inCourse=1;
+                    break;
+                }
+            }
+            if($inCourse)
+            {
+                if(strtolower($slot->DAY)==$today)
+                {
+                    if(strtolower($slot->SLOTTYPE)=="sec")
+                    {
+                        if($groupID==$slot->GROUPID)
+                        {
+                            $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
+                            $courseName=$courseName." Section";
+                            $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
+                            "place"=>$slot->PLACE);
+                            $todaySlots->push($subJason);
+                        } 
+                    }
+                    elseif(strtolower($slot->SLOTTYPE)=="lab")
+                    {
+                        if($groupID==$slot->GROUPID)
+                        {
+                            $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
+                            $courseName=$courseName." Lab";
+                            $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
+                            "place"=>$slot->PLACE);
+                            $todaySlots->push($subJason);
+                        }
+                    }
+                }
+                elseif(strtolower($slot->DAY)==$tomorrow)
+                {
+                    if(strtolower($slot->SLOTTYPE)=="sec")
+                    {
+                        if($groupID==$slot->GROUPID)
+                        {
+                            $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
+                            $courseName=$courseName." Section";
+                            $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
+                            "place"=>$slot->PLACE);
+                            $tomorrowSlots->push($subJason);
+                        } 
+                    }
+                    elseif(strtolower($slot->SLOTTYPE)=="lab")
+                    {
+                        if($groupID==$slot->GROUPID)
+                        {
+                            $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
+                            $courseName=$courseName." Lab";
+                            $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
+                            "place"=>$slot->PLACE);
+                            $tomorrowSlots->push($subJason);
+                        }
+                    }
+                }
+            }
+        }
+        $result=array("today"=>$todaySlots,"tomorrow"=>$tomorrowSlots);
+        $temp=array("status"=>"success","result"=>$result);
+        return $temp;
+    }
 }

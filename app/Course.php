@@ -30,14 +30,15 @@ class Course extends Model
         $json = array("status"=>"failed","error_msg"=>"this course id is exist");
         return $json;
     }
-    //get All Forum Posts For Specific Course
 
     /**
      * @param $crsCode
      * @return array|Collection
      */
+    //get All Forum Posts For Specific Course by fetching the 
+    //forum of this course then fetching the posts of this forum then return them
     public function getAllForumPostsForSpecificCourse($crsCode)
-    {
+    {   
         $num = Course::where('COURSECODE',$crsCode)->count();
         if($num==0)
         {
@@ -67,7 +68,10 @@ class Course extends Model
         return $subJason;
 
     }
-
+    //show All Tasks For Specific Course looping on tasking table 
+    //then if the course code of this task the course code that i search for 
+    //go to task creator then fetch the name of creator of this task
+    //then return the task with the name of its creator
     public function showAllTasksForSpecificCourse($crsCode)
     {
         $num = Course::where('COURSECODE',$crsCode)->count();
@@ -92,7 +96,6 @@ class Course extends Model
         }
         $subJason =array("status"=>"success","result"=>$allTasks);
         return $subJason;
-
     }
 
     //add task to DB
@@ -120,8 +123,6 @@ class Course extends Model
             $task->save();
             $json = array("status"=>"success");
             return $json;
-
-
     }
 
     //delete post from DB
@@ -136,13 +137,12 @@ class Course extends Model
         return $json;
     }
 
-    //retrieve courses for specific student
-
     /**
      * @param $un
      * @return array
      */
-    public function showCoursesForStudent($un)
+    //retrieve courses for specific student then retreive them
+     public function showCoursesForStudent($un)
     {
         if(Student::find($un)=="")
         {
@@ -159,9 +159,9 @@ class Course extends Model
         }
         $subJason =array("status"=>"success","result"=>$course);
         return $subJason;
-
     }
 
+    //retrieve courses for specific ta then retreive them
     public function showCoursesForTA($un)
     {
         if(TA::find($un)=="")
@@ -179,10 +179,9 @@ class Course extends Model
         }
         $subJason =array("status"=>"success","result"=>$course);
         return $subJason;
-
-
     }
 
+    //retrieve courses for specific professor then retreive them
     public function showCoursesForProf($un)
     {
         if(Professor::find($un)=="")
@@ -190,8 +189,6 @@ class Course extends Model
             $json = array("status"=>"failed","error_msg"=>"1");
             return $json;
         }
-
-
         $course=new Collection();
         $x=ProfessorCourse::where('PROFUSERNAME',$un)->get();
         foreach ($x as $item){
@@ -202,9 +199,9 @@ class Course extends Model
         }
         $subJason =array("status"=>"success","result"=>$course);
         return $subJason;
-
-
     }
+
+    //go to the course table then retreive the course which have this code
     public function showCourse($courseCode)
     {
         //php artisan make:controller UserController --plain
@@ -214,13 +211,13 @@ class Course extends Model
             return $json;
         }
         $courses=Course::where('COURSECODE',$courseCode)->get();
+        return $courses;
         $c=$courses[0];
         $profe=ProfessorCource::select('PROFUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
         $ta=TACourse::select('TAUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
         $res=array("Course"=>$c,"prof"=>$profe,"ta"=>$ta);
         $subJason =array("status"=>"success","result"=>$res);
         return  $subJason;
-
     }
     //retrieve courses on the system
     public function showCoursesOnTheSystem()
@@ -229,7 +226,6 @@ class Course extends Model
         $c=DB::select('select * from course');;
         $subJason =array("status"=>"success","result"=>$c);
         return  $subJason;
-
     }
 
     /**
@@ -275,26 +271,16 @@ class Course extends Model
             return $json;
 
     }
-
-public function  showscheduleforcourse($courscode){
-    if(Course::find($courscode)=="")
-    {
-        $json = array("status"=>"failed","error_code"=>"8");
-        return $json;
+    //retreive slots which have this course
+    public function  showscheduleforcourse($courscode){
+        if(Course::find($courscode)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>"8");
+            return $json;
+        }
+        $slot = Slots::where('COURSECODE',$courscode)->get();
+        $subJason =array("status"=>"success","result"=>$slot);
+        return  $subJason;
     }
-
-
-    $slot = Slots::where('COURSECODE',$courscode)->get();
-    $subJason =array("status"=>"success","result"=>$slot);
-    return  $subJason;
-
-
-
-}
-
-
-
-
-
 
 }

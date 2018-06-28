@@ -20,6 +20,7 @@ use App\StudentCourse;
 use App\PreRequisiteCourse;
 use App\ProfessorCource;
 use App\TACourse;
+use App\Slots;
 use DB;
 class DepartmentController extends Controller
 {
@@ -63,9 +64,9 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {
-        
-        
+    {   
+
+        //we are using this function to fill the DB        
         $department = new Department();
         $department->DEPARTMENTNAME="General";
         $department->DESCRIPTION="general department";
@@ -282,6 +283,90 @@ class DepartmentController extends Controller
         $groups->GROUPNUM=1;
         $groups->save();
 
+         $groups = new Groups();
+        $groups->COURSECODE="CS123";
+        $groups->TAUSERNAME="abod";
+        $groups->GROUPNUM=2;
+        $groups->save();
+
+        $groups = new Groups();
+        $groups->COURSECODE="IT123";
+        $groups->TAUSERNAME="abod";
+        $groups->GROUPNUM=1;
+        $groups->save();
+
+        $groups = new Groups();
+        $groups->COURSECODE="IT123";
+        $groups->TAUSERNAME="abod";
+        $groups->GROUPNUM=2;
+        $groups->save();
+
+        $studentCourse = new StudentCourse();
+        $studentCourse->GROUPID=4;
+        $studentCourse->STUDUSERNAME="abod";
+        $studentCourse->COURSECODE="IT123";
+        $studentCourse->save();
+
+        $slot = new Slots();
+        $slot->DAY="thursday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lab";
+        $slot->PLACE="lab 8";
+        $slot->COURSECODE="CS123";
+        $slot->save();
+        
+        $slot = new Slots();
+        $slot->DAY="thursday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=2;
+        $slot->SLOTTYPE="lab";
+        $slot->PLACE="lab 8";
+        $slot->COURSECODE="CS123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="thursday";
+        $slot->STARTTIME="10:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lec";
+        $slot->PLACE="modarag 7";
+        $slot->COURSECODE="CS123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="friday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=3;
+        $slot->SLOTTYPE="sec";
+        $slot->PLACE="modarag 5";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="friday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=4;
+        $slot->SLOTTYPE="sec";
+        $slot->PLACE="modarag 6";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="friday";
+        $slot->STARTTIME="10:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lec";
+        $slot->PLACE="modarag 8";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
         
         $taCourse = new ProfessorCource();
         $taCourse->PROFUSERNAME="abod";
@@ -304,6 +389,16 @@ class DepartmentController extends Controller
         $taCourse->COURSECODE="G123";
         $taCourse->GROUPID=1;
         $taCourse->save();
+        
+        $studentCourse = new StudentCourse();
+        $studentCourse->GROUPID=1;
+        $studentCourse->STUDUSERNAME="abod";
+        $studentCourse->COURSECODE="CS123";
+        $studentCourse->save();
+        
+        
+
+        
 
         /*
         $task = new Task();
