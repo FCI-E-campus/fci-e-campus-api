@@ -211,7 +211,7 @@ class Course extends Model
             return $json;
         }
 
-        //zizomody 
+        //zizomody
         $courses=Course::where('COURSECODE',$courseCode)->get();
         return $courses;
         $c=$courses[0];
@@ -219,7 +219,8 @@ class Course extends Model
         $ta=TACourse::select('TAUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
         $res=array("Course"=>$c,"prof"=>$profe,"ta"=>$ta);
         $subJason =array("status"=>"success","result"=>$res);
-        return  $subJason;
+      //  return  $subJason;
+        return null;
     }
     //retrieve courses on the system
     public function showCoursesOnTheSystem()
