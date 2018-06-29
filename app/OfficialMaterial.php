@@ -2,7 +2,9 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class OfficialMaterial extends Model
 {
@@ -22,7 +24,7 @@ class OfficialMaterial extends Model
 }
   * */
     //add official material to the DB
-    public function addMaterial($COURSECODE,$un,$MATERIALNAME,$MATERIALDESCRIPTION,$link,$MATERIALTYPE,$usertype)
+    public function addMaterial($COURSECODE,$un,$MATERIALNAME,$MATERIALDESCRIPTION,$link,$MATERIALTYPE,$usertype,$date)
     {
         if(Course::find($COURSECODE)=="")
         {
@@ -49,6 +51,7 @@ class OfficialMaterial extends Model
         $matrial->COURSECODE=$COURSECODE;
         $matrial->UPLOADERID=$id;
         $matrial->MATERIALNAME=$MATERIALNAME;
+        $matrial->DATEADDED=$date;
         $matrial->MATERIALDESCRIPTION=$MATERIALDESCRIPTION;
         $matrial->MATERIALFILEPATH=$link;
         $matrial->MATERIALTYPE=$MATERIALTYPE;
@@ -63,8 +66,22 @@ class OfficialMaterial extends Model
             $json = array("status"=>"failed","error_code"=>"8");
             return $json;
         }
+
+
         $Materials = OfficialMaterial::where('COURSECODE',$coursecode)->get();
-        $subJason =array("status"=>"success","result"=>$Materials);
+        $res= new Collection();
+        foreach ($Materials as $item){
+            $uploader=  OfficialMaterialUploader::where('UPLOADERID',$item['UPLOADERID'])->get();
+            $row=array("UPLOADERUSERNAME"=> $uploader[0]['UPLOADERUSERNAME'],
+            "MATERIALNAME"=> $item["MATERIALNAME"],
+            "MATERIALDESCRIPTION"=>$item["MATERIALDESCRIPTION"],
+            "MATERIALFILEPATH"=> $item["MATERIALFILEPATH"],
+            "DATEADDED"=>$item["DATEADDED"],
+            "MATERIALTYPE"=> $item["MATERIALTYPE"]);
+            $res->push($row);
+
+        }
+        $subJason =array("status"=>"success","result"=>$res);
         return  $subJason;
     }
 

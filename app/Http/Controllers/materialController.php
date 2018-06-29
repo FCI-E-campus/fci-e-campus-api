@@ -14,7 +14,7 @@ class materialController extends Controller
     $material = new OfficialMaterial();
   return   $material->addMaterial($request["COURSECODE"],$request["USERNAME"],
       $request["MATERIALNAME"],$request["MATERIALDESCRIPTION"],
-      $request ["MATERIALFILEPATH"],$request["MATERIALTYPE"],$request["USERTYPE"]);
+      $request ["MATERIALFILEPATH"],$request["MATERIALTYPE"],$request["USERTYPE"],$request["DATE"]);
 
 }
 
