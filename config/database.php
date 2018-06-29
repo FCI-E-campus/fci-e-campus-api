@@ -58,7 +58,7 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-/*
+
         'mysql_production' => [
             'driver' => 'mysql',
             'host' => $host,
@@ -71,7 +71,7 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-*/
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
