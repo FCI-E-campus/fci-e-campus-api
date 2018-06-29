@@ -1,6 +1,6 @@
 <?php
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$url = parse_url(getenv("DATABASE_URL"));
 $host = $url['host']??null;
 $username = $url['user']??null;
 $password = $url['pass']??null;
@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql_production'),
+    'default' => env('DB_CONNECTION', 'pgsql_production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
+/*
         'mysql_production' => [
             'driver' => 'mysql',
             'host' => $host,
@@ -71,7 +71,7 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
+*/
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
