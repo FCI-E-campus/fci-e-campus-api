@@ -33,7 +33,7 @@ class CreateExtramaterialsTable extends Migration
 
 
 
-
+                /*
             $table->foreign('STUDUSERNAME')
                 ->references('STUDUSERNAME')->on('student')
                 ->onDelete('restrict')
@@ -43,6 +43,7 @@ class CreateExtramaterialsTable extends Migration
                 ->references('COURSECODE')->on('course')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
+                */
         });
     }
 

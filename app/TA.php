@@ -275,7 +275,6 @@ class TA extends Model
                     {
                         if($groupID==$slot->GROUPID)
                         {
-                            
                             $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
                             $courseName=$courseName." Section";
                             $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,

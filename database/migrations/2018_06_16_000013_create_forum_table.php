@@ -25,12 +25,14 @@ class CreateForumTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('FORUMID');
             $table->string('COURSECODE', 50);
-
+            /*
             $table->foreign('COURSECODE')
                 ->references('COURSECODE')->on('course')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-        });
+        
+            */
+            });
     }
 
     /**

@@ -27,9 +27,10 @@ class CreateGroupsTable extends Migration
             $table->string('COURSECODE', 50);
             $table->integer('GROUPNUM')->nullable();
             $table->string('TAUSERNAME',150);
+            /*
             $table->foreign('TAUSERNAME')->references('TAUSERNAME')->on('ta');
             $table->foreign('COURSECODE')->references('COURSECODE')->on('course');            
-
+            */
         });
     }
 

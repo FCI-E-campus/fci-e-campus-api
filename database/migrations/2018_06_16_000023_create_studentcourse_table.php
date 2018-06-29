@@ -29,6 +29,7 @@ class CreateStudentcourseTable extends Migration
             $table->string('COURSECODE', 50);
             $table->float('TOTALGRADE')->nullable()->default(null);
             $table->foreign('GROUPID')->references('GROUPID')->on('groups');
+            /*
             $table->foreign('COURSECODE')
                 ->references('COURSECODE')->on('course')
                 ->onDelete('restrict')
@@ -38,7 +39,7 @@ class CreateStudentcourseTable extends Migration
                 ->references('STUDUSERNAME')->on('student')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-
+            */
         });
     }
 
