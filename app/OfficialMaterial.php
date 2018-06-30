@@ -57,7 +57,7 @@ class OfficialMaterial extends Model
         $matrial->MATERIALTYPE=$MATERIALTYPE;
         $matrial->save();
         $json = array("status"=>"success");
-        return $date;
+        return $json;
     }
     //retreive official material from the DB
     public function  showOfficialMaterials($coursecode){
