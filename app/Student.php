@@ -7,6 +7,8 @@ use PhpParser\PrettyPrinter\Standard;
 use Illuminate\Database\Eloquent\Collection;
 use DB;
 use Mail;
+use Svg\Tag\Group;
+
 class Student extends Model
 {
     protected $table='student';
@@ -141,16 +143,14 @@ class Student extends Model
         $allSlotsForCourses = array();
         foreach($st as $item)
         {
-            $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("GROUPNUM",$item["GROUPID"])->get();
-           // $allSlots->push($slot);
-           // array_push($allSlots,$slot);
+            $group=Group::where("GROUPID",$item["GROUPID"])->get();
+            $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("GROUPNUM",$group[0]["GROUPNUM"])->get();
+
             $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","1")->get();
             $subJason =array("COURSECODE"=>$item['COURSECODE'],"labs"=>$labs,
                 "lecture"=>$lec);
             array_push($allSlotsForCourses,$subJason);
-           // $allSlots->push($slot);
-           // array_push($allSlots,$slot);
-           //array_push($allSlotsForCourses);
+
         }
         $subJason =array("status"=>"success","result"=>$allSlotsForCourses);
         return  $subJason;
@@ -199,7 +199,7 @@ class Student extends Model
         foreach($slots as $slot)
         {
             $inCourse=0;
-            $groupID;
+            $groupID=array();
             foreach($studentCourses as $studentCourse)
             {
                 if($studentCourse->COURSECODE==$slot->COURSECODE)
