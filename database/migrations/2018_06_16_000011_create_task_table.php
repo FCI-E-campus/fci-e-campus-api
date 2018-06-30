@@ -36,11 +36,12 @@ class CreateTaskTable extends Migration
                 ->references('CREATORID')->on('taskcreator')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-
+                /*
             $table->foreign('COURSECODE')
                 ->references('COURSECODE')->on('course')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
+                */
         });
     }
 

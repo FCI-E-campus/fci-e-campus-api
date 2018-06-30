@@ -34,7 +34,7 @@ class CreateOfficialmaterialTable extends Migration
             $table->string('MATERIALTYPE', 10)->nullable()->default(null);
 
 
-
+            /*
             $table->foreign('COURSECODE')
                 ->references('COURSECODE')->on('course')
                 ->onDelete('restrict')
@@ -49,6 +49,7 @@ class CreateOfficialmaterialTable extends Migration
                 ->references('UPLOADERID')->on('officialmaterialuploader')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
+            */
         });
     }
 

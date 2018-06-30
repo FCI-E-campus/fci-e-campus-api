@@ -26,7 +26,7 @@ class CreateSlots extends Migration
             $table->text('PLACE');
             $table->string('COURSECODE',50);
             $table->foreign('GROUPID')->references('GROUPID')->on('groups');
-            $table->foreign('COURSECODE')->references('COURSECODE')->on('course');
+          /*  $table->foreign('COURSECODE')->references('COURSECODE')->on('course'); */
 
         });
     }

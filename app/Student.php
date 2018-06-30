@@ -204,7 +204,7 @@ class Student extends Model
             {
                 if($studentCourse->COURSECODE==$slot->COURSECODE)
                 {
-                    $groupID=groups::find($studentCourse->GROUPID)->GROUPID;
+                    $groupID=Groups::find($studentCourse->GROUPID)->GROUPID;
                     $inCourse=1;
                     break;
                 }
