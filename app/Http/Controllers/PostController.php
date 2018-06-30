@@ -31,6 +31,18 @@ class PostController extends Controller
         $request['post_id'],$request['comment_text']);
     }
 
+
+    public function answered(Request $request)
+    {
+        $post = new Post();
+        return $post->answered($request['post_id']);
+    }
+
+    public function notAnswered(Request $request)
+    {
+        $post = new Post();
+        return $post->notAnswered($request['post_id']);
+    }
     /**
      * Show the form for creating a new resource.
      *

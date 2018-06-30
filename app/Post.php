@@ -64,4 +64,37 @@ class Post extends Model
         $jason = array("status"=>"success","comment_id"=>$comment->COMMENTID);
         return $jason;
     }
+
+    //make post answered
+    public function answered($postID)
+    {
+        $num = Post::where('POSTID',$postID)->count();
+        if($num==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>16);
+            return $json;
+        }
+        $post = Post::find($postID);
+        $post->ANSWERED=1;
+        $post->save();
+        $jason = array("status"=>"success");
+        return $jason;
+    }
+
+    //make post not answered
+    public function notAnswered($postID)
+    {
+        $num = Post::where('POSTID',$postID)->count();
+        if($num==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>16);
+            return $json;
+        }
+        $post = Post::find($postID);
+        $post->ANSWERED=0;
+        $post->save();
+        $jason = array("status"=>"success");
+        return $jason;
+    }
+
 }

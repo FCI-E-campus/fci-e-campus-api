@@ -83,6 +83,8 @@ Route::prefix('announcement')->group(function() {
 Route::prefix('post')->group(function() {
     Route::post('/showSpecificPostComments','PostController@showSpecificPostComments');
     Route::post('/addComment','PostController@addComment');
+    Route::post('/answered','PostController@answered');
+    Route::post('/notAnswered','PostController@notAnswered');
 });
 
 Route::prefix('forum')->group(function() {
