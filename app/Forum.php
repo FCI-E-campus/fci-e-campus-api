@@ -12,10 +12,14 @@ class Forum extends Model
     //add post to specific forum
     public function addPost($author_username,$author_type,$course_code,$post_title,$post_body)
     {
-        $author = new Author();
-        $author->AUTHORUSERNAME=$author_username;
-        $author->AUTHORTYPE=$author_type;
-        $author->save();
+        $num1 = Author::where('AUTHORUSERNAME',$author_username)->count();
+        if($num1==0)
+        {
+            $author = new Author();
+            $author->AUTHORUSERNAME=$author_username;
+            $author->AUTHORTYPE=$author_type;
+            $author->save();
+        }
         $num = Forum::where('COURSECODE',$course_code)->count();
         if($num==0)
         {
