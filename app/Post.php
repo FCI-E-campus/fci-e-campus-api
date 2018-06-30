@@ -51,12 +51,23 @@ class Post extends Model
             $json = array("status"=>"failed","error_msg"=>16);
             return $json;
         }
-        $author = new Author();
-        $author->AUTHORUSERNAME=$author_username;
-        $author->AUTHORTYPE=$author_type;
-        $author->save();
+        $num1 = Author::where('AUTHORUSERNAME',$author_username)->count();
+        $author_id;
+        if($num1==0)
+        {
+            $author = new Author();
+            $author->AUTHORUSERNAME=$author_username;
+            $author->AUTHORTYPE=$author_type;
+            $author->save();
+            $author_id=$author->AUTHORID;
+        }
+        else
+        {
+            $oldAuthor=Author::where('AUTHORUSERNAME',$author_username)->get();
+            $author_id=$oldAuthor[0]->AUTHORID;
+        }
         $comment = new Comment();
-        $comment->AUTHORID=$author->AUTHORID;
+        $comment->AUTHORID=$author_id;
         $comment->POSTID=$post_id;
         $comment->COMMENTTEXT=$comment_text;
         $comment->COMMENTTIME=date('Y-m-d H:i:s');
