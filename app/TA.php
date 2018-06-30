@@ -205,7 +205,7 @@ class TA extends Model
         $allSlotsForCourses = array();
         foreach($ta as $item)
         {
-            $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("GROUPNUM",$item["GROUPID"])->get();
+            $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("GROUPID",$item["GROUPID"])->get();
             // $allSlots->push($slot);
             // array_push($allSlots,$slot);
             $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","1")->get();
