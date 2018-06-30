@@ -51,12 +51,23 @@ class Post extends Model
             $json = array("status"=>"failed","error_msg"=>16);
             return $json;
         }
-        $author = new Author();
-        $author->AUTHORUSERNAME=$author_username;
-        $author->AUTHORTYPE=$author_type;
-        $author->save();
+        $num1 = Author::where('AUTHORUSERNAME',$author_username)->count();
+        $author_id;
+        if($num1==0)
+        {
+            $author = new Author();
+            $author->AUTHORUSERNAME=$author_username;
+            $author->AUTHORTYPE=$author_type;
+            $author->save();
+            $author_id=$author->AUTHORID;
+        }
+        else
+        {
+            $oldAuthor=Author::where('AUTHORUSERNAME',$author_username)->get();
+            $author_id=$oldAuthor[0]->AUTHORID;
+        }
         $comment = new Comment();
-        $comment->AUTHORID=$author->AUTHORID;
+        $comment->AUTHORID=$author_id;
         $comment->POSTID=$post_id;
         $comment->COMMENTTEXT=$comment_text;
         $comment->COMMENTTIME=date('Y-m-d H:i:s');
@@ -64,4 +75,37 @@ class Post extends Model
         $jason = array("status"=>"success","comment_id"=>$comment->COMMENTID);
         return $jason;
     }
+
+    //make post answered
+    public function answered($postID)
+    {
+        $num = Post::where('POSTID',$postID)->count();
+        if($num==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>16);
+            return $json;
+        }
+        $post = Post::find($postID);
+        $post->ANSWERED=1;
+        $post->save();
+        $jason = array("status"=>"success");
+        return $jason;
+    }
+
+    //make post not answered
+    public function notAnswered($postID)
+    {
+        $num = Post::where('POSTID',$postID)->count();
+        if($num==0)
+        {
+            $json = array("status"=>"failed","error_msg"=>16);
+            return $json;
+        }
+        $post = Post::find($postID);
+        $post->ANSWERED=0;
+        $post->save();
+        $jason = array("status"=>"success");
+        return $jason;
+    }
+
 }
