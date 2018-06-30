@@ -51,13 +51,13 @@ class OfficialMaterial extends Model
         $matrial->COURSECODE=$COURSECODE;
         $matrial->UPLOADERID=$id;
         $matrial->MATERIALNAME=$MATERIALNAME;
-        $matrial->DATEADDED=$date;
         $matrial->MATERIALDESCRIPTION=$MATERIALDESCRIPTION;
         $matrial->MATERIALFILEPATH=$link;
+        $matrial->DATEADDED=$date;
         $matrial->MATERIALTYPE=$MATERIALTYPE;
         $matrial->save();
         $json = array("status"=>"success");
-        return $json;
+        return $date;
     }
     //retreive official material from the DB
     public function  showOfficialMaterials($coursecode){
