@@ -147,6 +147,11 @@ class Professor extends Model
     }
     //update password to specific user
     public function updateUser($un,$pass){
+        if(Professor::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>1);
+            return $json;
+        }
         $prof =Professor::find($un);
         if($pass=="")
         {
@@ -162,6 +167,11 @@ class Professor extends Model
     //retrieve all tasks for specific user
     public function getAllTasks($un)
     {
+        if(Professor::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>1);
+            return $json;
+        }
         $crsCodes = ProfessorCource::select('COURSECODE')->where('PROFUSERNAME',$un)->get();   
         $tasks = Task::all();
         $result = new Collection();
@@ -216,6 +226,11 @@ class Professor extends Model
     //show to the doctor the lectures which he/she has today abd tomorrow
     public function overview($un)
     {
+        if(Professor::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>1);
+            return $json;
+        }
         $todaySlots=new Collection();
         $tomorrowSlots=new Collection();
         $today=strtolower(date('l'));

@@ -159,8 +159,12 @@ class Student extends Model
     //retrieve all tasf for specific student
     public function getAllTasks($un)
     {
+        if(Student::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>"1");
+            return $json;
+        }
         $crsCodes = StudentCourse::select('COURSECODE')->where('STUDUSERNAME',$un)->get();
-        
         $tasks = Task::all();
         $result = new Collection();
         foreach($crsCodes as $crsCode)
@@ -190,6 +194,11 @@ class Student extends Model
     //retieve all lectures, labs , and sections that this user has today and tomorrow
     public function overview($un)
     {
+        if(Student::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>"1");
+            return $json;
+        }
         $todaySlots=new Collection();
         $tomorrowSlots=new Collection();
         $today=strtolower(date('l'));

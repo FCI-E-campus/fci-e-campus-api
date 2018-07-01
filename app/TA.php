@@ -147,6 +147,11 @@ class TA extends Model
 
     //update the password for specific ta
     public function updateUser($un,$pass){
+        if(TA::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>1);
+            return $json;
+        }
         $ta =TA::find($un);
         if($pass=="")
         {
@@ -162,6 +167,11 @@ class TA extends Model
     //retrieve all tasks for specific ta
     public function getAllTasks($un)
     {
+        if(TA::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>1);
+            return $json;
+        }
         $crsCodes = TACourse::select('COURSECODE')->where('TAUSERNAME',$un)->get();   
         $tasks = Task::all();
         $result = new Collection();
@@ -223,6 +233,11 @@ class TA extends Model
     //show the labs and section to specific ta for today and tomorrow
     public function overview($un)
     {
+        if(TA::find($un)=="")
+        {
+            $json = array("status"=>"failed","error_code"=>1);
+            return $json;
+        }
         $todaySlots=new Collection();
         $tomorrowSlots=new Collection();
         $today=strtolower(date('l'));
