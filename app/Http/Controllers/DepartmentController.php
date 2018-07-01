@@ -65,7 +65,7 @@ class DepartmentController extends Controller
      */
     public function show()
     {   
-
+        return 1;
         //we are using this function to fill the DB        
         $department = new Department();
         $department->DEPARTMENTNAME="General";
@@ -487,7 +487,10 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $department = new Department();
+        $department->DEPARTMENTNAME="General";
+        $department->DESCRIPTION="general department";
+        $department->save();
     }
 
     /**
