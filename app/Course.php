@@ -190,7 +190,7 @@ class Course extends Model
             return $json;
         }
         $course=new Collection();
-        $x=ProfessorCourse::where('PROFUSERNAME',$un)->get();
+        $x=ProfessorCource::where('PROFUSERNAME',$un)->get();
         foreach ($x as $item){
 
             $z=Course::where('COURSECODE',$item["COURSECODE"])->get();
