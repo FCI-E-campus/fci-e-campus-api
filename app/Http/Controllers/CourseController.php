@@ -89,7 +89,7 @@ class CourseController extends Controller
     {
         $course = new Course();
 
-        return $course->showCoursesForTA($request['PROFUSERNAME']);
+        return $course->showCoursesForProf($request['PROFUSERNAME']);
     }
 
     public function showCoursebycode(Request $request)
