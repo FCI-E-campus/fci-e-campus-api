@@ -219,7 +219,9 @@ class Course extends Model
         foreach ($profe as $item){
             $prof= Professor::where("PROFUSERNAME",$item["PROFUSERNAME"]);
             //FIRSTNAME	LASTNAME
-            $z=array("PROFUSERNAME"=>$prof["PROFUSERNAME"],"FIRSTNAME"=>$prof["FIRSTNAME"],"LASTNAME"=>$prof["LASTNAME"]);
+            foreach ($prof as $item2){
+                $z=array("PROFUSERNAME"=>$item2["PROFUSERNAME"],"FIRSTNAME"=>$item2["FIRSTNAME"],"LASTNAME"=>$item2["LASTNAME"]);
+            }
             $row->push($z);
         }
         $ta=TACourse::select('TAUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
