@@ -65,8 +65,8 @@ class DepartmentController extends Controller
      */
     public function show()
     {   
-        return 1;
-        //we are using this function to fill the DB        
+        //we are using this function to fill the DB
+        /*        
         $department = new Department();
         $department->DEPARTMENTNAME="General";
         $department->DESCRIPTION="general department";
@@ -395,7 +395,158 @@ class DepartmentController extends Controller
         $studentCourse->STUDUSERNAME="abod";
         $studentCourse->COURSECODE="CS123";
         $studentCourse->save();
+        */
         
+        $slot = new Slots();
+        $slot->DAY="saturday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lab";
+        $slot->PLACE="lab 8";
+        $slot->COURSECODE="CS123";
+        $slot->save();
+        
+        $slot = new Slots();
+        $slot->DAY="saturday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=2;
+        $slot->SLOTTYPE="lab";
+        $slot->PLACE="lab 8";
+        $slot->COURSECODE="CS123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="saturday";
+        $slot->STARTTIME="10:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lec";
+        $slot->PLACE="modarag 7";
+        $slot->COURSECODE="CS123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="sunday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=3;
+        $slot->SLOTTYPE="sec";
+        $slot->PLACE="modarag 5";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="sunday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=4;
+        $slot->SLOTTYPE="sec";
+        $slot->PLACE="modarag 6";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="sunday";
+        $slot->STARTTIME="10:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lec";
+        $slot->PLACE="modarag 8";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="monday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lab";
+        $slot->PLACE="lab 8";
+        $slot->COURSECODE="CS123";
+        $slot->save();
+        
+        $slot = new Slots();
+        $slot->DAY="monday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=2;
+        $slot->SLOTTYPE="lab";
+        $slot->PLACE="lab 8";
+        $slot->COURSECODE="CS123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="monday";
+        $slot->STARTTIME="10:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lec";
+        $slot->PLACE="modarag 7";
+        $slot->COURSECODE="CS123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="tuesday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=3;
+        $slot->SLOTTYPE="sec";
+        $slot->PLACE="modarag 5";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="tuesday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=4;
+        $slot->SLOTTYPE="sec";
+        $slot->PLACE="modarag 6";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="tuesday";
+        $slot->STARTTIME="10:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lec";
+        $slot->PLACE="modarag 8";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="wednesday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=3;
+        $slot->SLOTTYPE="sec";
+        $slot->PLACE="modarag 5";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="wednesday";
+        $slot->STARTTIME="08:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=4;
+        $slot->SLOTTYPE="sec";
+        $slot->PLACE="modarag 6";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
+        $slot = new Slots();
+        $slot->DAY="wednesday";
+        $slot->STARTTIME="10:00:00";
+        $slot->DURATION=2;
+        $slot->GROUPID=1;
+        $slot->SLOTTYPE="lec";
+        $slot->PLACE="modarag 8";
+        $slot->COURSECODE="IT123";
+        $slot->save();
+
         
 
         
