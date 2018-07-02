@@ -30,16 +30,33 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"TAUSERNAME","name"=>"TAUSERNAME","join"=>"ta,TAUSERNAME"];
+			$this->col[] = ["label"=>"TAUSERNAME","name"=>"TAUSERNAME"];
 			$this->col[] = ["label"=>"GROUPID","name"=>"GROUPID","join"=>"groups,GROUPID"];
-			$this->col[] = ["label"=>"COURSETITLE","name"=>"COURSECODE","join"=>"course,COURSETITLE"];
+			$this->col[] = ["label"=>"COURSECODE","name"=>"COURSECODE"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
+
+            $courses = '';
+            DB::table('course')->get()->map(function ($item)use (&$courses){
+                $courses .= $item->COURSECODE . '|' . $item->COURSETITLE .';';
+                return $item;
+            });
+
+            $courses = rtrim($courses,';');
+
+            $ta = '';
+            DB::table('ta')->get()->map(function ($item)use (&$ta){
+                $ta .= $item->TAUSERNAME.';';
+                return $item;
+            });
+
+            $ta = rtrim($ta,';');
+
 			$this->form = [];
-			$this->form[] = ['label'=>'TAUSERNAME','name'=>'TAUSERNAME','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'ta,TAUSERNAME'];
+			$this->form[] = ['label'=>'TAUSERNAME','name'=>'TAUSERNAME','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$ta];
 			$this->form[] = ['label'=>'GROUPID','name'=>'GROUPID','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'groups,GROUPID'];
-			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'course,COURSETITLE'];
+			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>$courses];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM

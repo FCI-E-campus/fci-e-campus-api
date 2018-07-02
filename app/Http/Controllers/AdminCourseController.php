@@ -4,8 +4,9 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+    use App\Course;
 
-	class AdminCourseController extends \crocodicstudio\crudbooster\controllers\CBController {
+    class AdminCourseController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -316,8 +317,9 @@
 	    | 
 	    */
 	    public function hook_before_delete($id) {
-	        //Your code here
-
+            $code = DB::table('course')->where('id', $id)->pluck('COURSECODE')->first();
+            $course = new Course();
+            $course->deleteRelatives($code);
 	    }
 
 	    /* 

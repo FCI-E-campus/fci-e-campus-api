@@ -36,10 +36,19 @@
 			$this->col[] = ["label"=>"GROUPID","name"=>"GROUPID","join"=>"groups,GROUPID"];
 			$this->col[] = ["label"=>"SLOTTYPE","name"=>"SLOTTYPE"];
 			$this->col[] = ["label"=>"PLACE","name"=>"PLACE"];
-			$this->col[] = ["label"=>"COURSETITLE","name"=>"COURSECODE","join"=>"course,COURSETITLE"];
+			$this->col[] = ["label"=>"COURSETITLE","name"=>"COURSECODE"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
+
+            $courses = '';
+            DB::table('course')->get()->map(function ($item)use (&$courses){
+                $courses .= $item->COURSECODE . '|' . $item->COURSETITLE .';';
+                return $item;
+            });
+
+            $courses = rtrim($courses,';');
+
 			$this->form = [];
 			$this->form[] = ['label'=>'DAY','name'=>'DAY','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'STARTTIME','name'=>'STARTTIME','type'=>'time','validation'=>'required|date_format:H:i:s','width'=>'col-sm-10'];
@@ -47,20 +56,9 @@
 			$this->form[] = ['label'=>'GROUPID','name'=>'GROUPID','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'groups,GROUPID'];
 			$this->form[] = ['label'=>'SLOTTYPE','name'=>'SLOTTYPE','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'PLACE','name'=>'PLACE','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'course,COURSETITLE'];
+			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$courses];
 			# END FORM DO NOT REMOVE THIS LINE
 
-			# OLD START FORM
-			//$this->form = [];
-			//$this->form[] = ["label"=>"SLOTID","name"=>"SLOTID","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"DAY","name"=>"DAY","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"STARTTIME","name"=>"STARTTIME","type"=>"time","required"=>TRUE,"validation"=>"required|date_format:H:i:s"];
-			//$this->form[] = ["label"=>"DURATION","name"=>"DURATION","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"GROUPID","name"=>"GROUPID","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"SLOTTYPE","name"=>"SLOTTYPE","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"PLACE","name"=>"PLACE","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
-			//$this->form[] = ["label"=>"COURSECODE","name"=>"COURSECODE","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			# OLD END FORM
 
 			/* 
 	        | ---------------------------------------------------------------------- 

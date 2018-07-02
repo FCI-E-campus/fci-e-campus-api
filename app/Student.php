@@ -293,6 +293,19 @@ class Student extends Model
         return $temp;
     }
 
+    public function deleteRelatives_($id)
+    {
+        $rows = DB::table('student')->where('DEPTID', $id)->orWhere('DEP_DEPTID', $id);
 
+        foreach ($rows as $i)
+            $this->deleteRelatives($i->STUDUSERNAME);
 
+        DB::table('student')->where('DEPTID', $id)->orWhere('DEP_DEPTID', $id)->delete();
+    }
+
+    public function deleteRelatives($code)
+    {
+        DB::table('studentcourse')->where('STUDUSERNAME', $code)->delete();
+        DB::table('extramaterials')->where('STUDUSERNAME', $code)->delete();
+    }
 }

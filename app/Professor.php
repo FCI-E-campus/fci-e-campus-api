@@ -50,39 +50,39 @@ class Professor extends Model
             $json = array("status"=>"failed","error_code"=>4);
             return $json;
         }
-       /* $email=$em;
-        $check = substr($email, strpos($email, '@') , 14);
-        if(strcmp($check,"@fci-cu.edu.eg")!=0)
-        {
-            $json = array("status"=>"failed","error_code"=>5);
-            return $json;
-        }
-        */
+        /* $email=$em;
+         $check = substr($email, strpos($email, '@') , 14);
+         if(strcmp($check,"@fci-cu.edu.eg")!=0)
+         {
+             $json = array("status"=>"failed","error_code"=>5);
+             return $json;
+         }
+         */
         if(Department::find($dID)=="")
         {
             $json = array("status"=>"failed","error_code"=>27);
             return $json;
         }
-            $professor = new Professor();
-            $professor->PROFUSERNAME = $un;
-            $professor->DEPTID=$dID;
-            $professor->PROFPASSWORD = $pass;
-            $professor->FIRSTNAME = $fn;
-            $professor->LASTNAME = $ln;
-            $professor->EMAIL = $em;
-            $professor->PHONENUMBER = $pn;
-            $professor->DATEOFBIRTH = $DB;
-            $code="";
-            for ($i=0 ; $i < 7 ; $i++)
-            {
-                $code = $code.mt_rand(0,9);
-            }
-            $professor->ActivationCode=$code;
-            $professor->isActiveted = 0;
-            $this->sendMail($code,$em);
-            $professor->save();
-            $json = array("status"=>"success");
-            return $json;
+        $professor = new Professor();
+        $professor->PROFUSERNAME = $un;
+        $professor->DEPTID=$dID;
+        $professor->PROFPASSWORD = $pass;
+        $professor->FIRSTNAME = $fn;
+        $professor->LASTNAME = $ln;
+        $professor->EMAIL = $em;
+        $professor->PHONENUMBER = $pn;
+        $professor->DATEOFBIRTH = $DB;
+        $code="";
+        for ($i=0 ; $i < 7 ; $i++)
+        {
+            $code = $code.mt_rand(0,9);
+        }
+        $professor->ActivationCode=$code;
+        $professor->isActiveted = 0;
+        $this->sendMail($code,$em);
+        $professor->save();
+        $json = array("status"=>"success");
+        return $json;
     }
     //send the activation code to verify its account
     public function sendMail($ActivationCode , $to){
@@ -172,7 +172,7 @@ class Professor extends Model
             $json = array("status"=>"failed","error_code"=>1);
             return $json;
         }
-        $crsCodes = ProfessorCource::select('COURSECODE')->where('PROFUSERNAME',$un)->get();   
+        $crsCodes = ProfessorCource::select('COURSECODE')->where('PROFUSERNAME',$un)->get();
         $tasks = Task::all();
         $result = new Collection();
         foreach($crsCodes as $crsCode)
@@ -186,9 +186,9 @@ class Professor extends Model
                 {
                     $creator = TaskCreator::find($task->CREATORID);
                     $subJason = array("task_name"=>$task->TASKNAME,"description"=>$task->DESCRIPTION,
-                    "date_created"=>$task->DATECREATED,"due_date"=>$task->DUEDATE,"weight"=>$task->WEIGHT,
-                    "creator_username"=>$creator->CREATORUSERNAME,"creator_type"=>$creator->CREATORTYPE
-                );
+                        "date_created"=>$task->DATECREATED,"due_date"=>$task->DUEDATE,"weight"=>$task->WEIGHT,
+                        "creator_username"=>$creator->CREATORUSERNAME,"creator_type"=>$creator->CREATORTYPE
+                    );
                     $subJason2->push($subJason);
                 }
             }
@@ -254,22 +254,22 @@ class Professor extends Model
                 {
                     if(strtolower($slot->SLOTTYPE)=="lec")
                     {
-                            $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
-                            $courseName=$courseName." Lecture";
-                            $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
+                        $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
+                        $courseName=$courseName." Lecture";
+                        $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
                             "place"=>$slot->PLACE);
-                            $todaySlots->push($subJason);                
+                        $todaySlots->push($subJason);
                     }
                 }
                 elseif(strtolower($slot->DAY)==$tomorrow)
                 {
                     if(strtolower($slot->SLOTTYPE)=="lec")
                     {
-                            $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
-                            $courseName=$courseName." Lecture";
-                            $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
+                        $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
+                        $courseName=$courseName." Lecture";
+                        $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
                             "place"=>$slot->PLACE);
-                            $tomorrowSlots->push($subJason);                
+                        $tomorrowSlots->push($subJason);
                     }
                 }
             }
@@ -278,4 +278,20 @@ class Professor extends Model
         $temp=array("status"=>"success","result"=>$result);
         return $temp;
     }
+
+    public function deleteRelatives_($id)
+    {
+        $rows = DB::table('professor')->where('DEPTID', $id);
+
+        foreach ($rows as $i)
+            $this->deleteRelatives($i->PROFUSERNAME);
+
+        DB::table('professor')->where('DEPTID', $id)->delete();
+    }
+
+    public function deleteRelatives($code)
+    {
+        DB::table('professorcourse')->where('PROFUSERNAME', $code)->delete();
+    }
+
 }

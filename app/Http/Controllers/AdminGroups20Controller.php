@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-	use Session;
+	use App\Groups;
+    use Session;
 	use Request;
 	use DB;
 	use CRUDBooster;
@@ -31,16 +32,32 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"GROUPID","name"=>"GROUPID"];
-			$this->col[] = ["label"=>"COURSETITLE","name"=>"COURSECODE","join"=>"course,COURSETITLE"];
+			$this->col[] = ["label"=>"COURSECODE","name"=>"COURSECODE"];
 			$this->col[] = ["label"=>"GROUPNUM","name"=>"GROUPNUM"];
-			$this->col[] = ["label"=>"TAUSERNAME","name"=>"TAUSERNAME","join"=>"ta,TAUSERNAME"];
+			$this->col[] = ["label"=>"TAUSERNAME","name"=>"TAUSERNAME",];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
-			$this->form = [];
-			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'course,COURSETITLE'];
+            $courses = '';
+            DB::table('course')->get()->map(function ($item)use (&$courses){
+                $courses .= $item->COURSECODE . '|' . $item->COURSETITLE .';';
+                return $item;
+            });
+
+            $courses = rtrim($courses,';');
+
+            $ta = '';
+            DB::table('ta')->get()->map(function ($item)use (&$ta){
+                $ta .= $item->TAUSERNAME.';';
+                return $item;
+            });
+
+            $ta = rtrim($ta,';');
+
+            $this->form = [];
+			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$courses];
 			$this->form[] = ['label'=>'GROUPNUM','name'=>'GROUPNUM','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'TAUSERNAME','name'=>'TAUSERNAME','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'ta,TAUSERNAME'];
+			$this->form[] = ['label'=>'TAUSERNAME','name'=>'TAUSERNAME','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$ta];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -267,12 +284,12 @@
 	    | @id = last insert id
 	    | 
 	    */
-	    public function hook_after_add($id) {        
+	    public function hook_after_add($id) {
 	        //Your code here
 
 	    }
 
-	    /* 
+	    /*
 	    | ---------------------------------------------------------------------- 
 	    | Hook for manipulate data input before update data is execute
 	    | ---------------------------------------------------------------------- 
@@ -305,7 +322,8 @@
 	    | 
 	    */
 	    public function hook_before_delete($id) {
-	        //Your code here
+	        $group = new Groups();
+	        $group->deleteRelatives($id);
 
 	    }
 

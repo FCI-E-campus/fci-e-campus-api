@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-	use Session;
+	use App\Department;
+    use Session;
 	use Request;
 	use DB;
 	use CRUDBooster;
@@ -303,8 +304,8 @@
 	    | 
 	    */
 	    public function hook_before_delete($id) {
-	        //Your code here
-
+	        $dep = new Department();
+	        $dep->deleteRelatives($id);
 	    }
 
 	    /* 

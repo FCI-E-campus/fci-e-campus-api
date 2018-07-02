@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-	use Session;
+	use App\Professor;
+    use Session;
 	use Request;
 	use DB;
 	use CRUDBooster;
@@ -322,8 +323,9 @@
 	    | 
 	    */
 	    public function hook_before_delete($id) {
-	        //Your code here
-
+            $code = DB::table('professor')->where('id', $id)->pluck('PROFUSERNAME')->first();
+            $pro = new Professor();
+	        $pro->deleteRelatives($code);
 	    }
 
 	    /* 

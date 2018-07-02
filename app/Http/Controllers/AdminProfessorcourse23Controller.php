@@ -30,22 +30,32 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"COURSETITLE","name"=>"COURSECODE","join"=>"course,COURSETITLE"];
-			$this->col[] = ["label"=>"PROFUSERNAME","name"=>"PROFUSERNAME","join"=>"professor,PROFUSERNAME"];
+			$this->col[] = ["label"=>"COURSECODE","name"=>"COURSECODE"];
+			$this->col[] = ["label"=>"PROFUSERNAME","name"=>"PROFUSERNAME"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
-			$this->form = [];
-			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'course,COURSETITLE'];
-			$this->form[] = ['label'=>'PROFUSERNAME','name'=>'PROFUSERNAME','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'professor,PROFUSERNAME'];
+            $courses = '';
+            DB::table('course')->get()->map(function ($item)use (&$courses){
+                $courses .= $item->COURSECODE . '|' . $item->COURSETITLE .';';
+                return $item;
+            });
+
+            $courses = rtrim($courses,';');
+
+            $professors = '';
+            DB::table('professor')->get()->map(function ($item)use (&$professors){
+                $professors .= $item->PROFUSERNAME.';';
+                return $item;
+            });
+
+            $professors = rtrim($professors,';');
+
+            $this->form = [];
+            $this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$courses];
+            $this->form[] = ['label'=>'PROFUSERNAME','name'=>'PROFUSERNAME','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$professors];
 			# END FORM DO NOT REMOVE THIS LINE
 
-			# OLD START FORM
-			//$this->form = [];
-			//$this->form[] = ["label"=>"ProfessorcourseID","name"=>"professorcourseID","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"COURSECODE","name"=>"COURSECODE","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"PROFUSERNAME","name"=>"PROFUSERNAME","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			# OLD END FORM
 
 			/* 
 	        | ---------------------------------------------------------------------- 
