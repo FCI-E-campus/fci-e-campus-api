@@ -217,8 +217,7 @@ class Course extends Model
         $profe=ProfessorCource::where('COURSECODE', $courseCode)->get();
         $row=new Collection();
         foreach ($profe as $item){
-            $prof= Professor::where("PROFUSERNAME",$item["PROFUSERNAME"]);
-            return $prof;
+            $prof= Professor::where("PROFUSERNAME",$item["PROFUSERNAME"])->get();
             //FIRSTNAME	LASTNAME
             foreach ($prof as $item2){
                 $z=array("PROFUSERNAME"=>$item2["PROFUSERNAME"],"FIRSTNAME"=>$item2["FIRSTNAME"],"LASTNAME"=>$item2["LASTNAME"]);
