@@ -215,8 +215,15 @@ class Course extends Model
         $courses=Course::where('COURSECODE',$courseCode)->get();
         $c=$courses[0];
         $profe=ProfessorCource::where('COURSECODE', $courseCode)->get();
+        $row=new Collection();
+        foreach ($profe as $item){
+            $prof= Professor::where("PROFUSERNAME",$item["PROFUSERNAME"]);
+            //FIRSTNAME	LASTNAME
+            $z=array("PROFUSERNAME"=>$prof[0]["PROFUSERNAME"],"FIRSTNAME"=>$prof[0]["FIRSTNAME"],"LASTNAME"=>$prof[0]["LASTNAME"]);
+            $row->push($z);
+        }
         $ta=TACourse::select('TAUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
-        $res=array("Course"=>$c,"prof"=>$profe,"ta"=>$ta);
+        $res=array("Course"=>$c,"prof"=>$row,"ta"=>$ta);
         $subJason =array("status"=>"success","result"=>$res);
        return  $subJason;
 
