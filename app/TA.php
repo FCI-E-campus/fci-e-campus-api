@@ -249,7 +249,7 @@ class TA extends Model
             {
                 if($taCourse->COURSECODE==$slot->COURSECODE)
                 {
-                    $groupID=groups::find($taCourse->GROUPID)->GROUPID;
+                    $groupID=Groups::find($taCourse->GROUPID)->GROUPID;
                     $inCourse=1;
                     break;
                 }
