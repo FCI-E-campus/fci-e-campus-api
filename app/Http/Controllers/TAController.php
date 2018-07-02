@@ -97,9 +97,9 @@ class TAController extends Controller
         //
     }
     //call showStudentSchedule from TA class model
-    public function  showStudentSchedule(Request $request){
-        $st = new Student();
-        return $st->showStudentSchedule($request["TAUSERNAME"]);
+    public function  showTASchedule(Request $request){
+        $st = new TA();
+        return $st->showTASchedule($request["TAUSERNAME"]);
 
     }
     //call getAllTasks from TA class model

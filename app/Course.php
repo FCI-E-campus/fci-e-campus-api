@@ -99,7 +99,7 @@ class Course extends Model
     }
 
     //add task to DB
-    public function addTask($crsCode,$cId,$tN,$desc,$DD,$DC,$W)
+    public function addTask($crsCode,$tN,$desc,$DD,$DC,$W,$un,$usertype)
     {
 
             if(Course::find($crsCode)=="")
@@ -107,14 +107,26 @@ class Course extends Model
                 $json = array("status"=>"failed","error_msg"=>"8");
                 return $json;
             }
-            if(TaskCreator::find($cId)=="")
-            {
-                return "this task creator not exist";
+        if ($usertype=="ta") {
+            $count = TA::where('TAUSERNAME', $un)->count();
+            if ($count == 0) {
+                $json = array("status"=>"failed","error_code"=>"1");
+                return $json;
             }
+        }
+        else if ($usertype=="prof") {
+            $count = Professor::where('PROFUSERNAME', $un)->count();
+            if ($count == 0) {
+                $json = array("status" => "failed", "error_code" => "1");
+                return $json;
+            }
+        }
+        $upload= new TaskCreator();
+        $id=$upload->addUploader($usertype,$un);
             $task = new Task();
 
             $task->COURSECODE = $crsCode;
-            $task->CREATORID = $cId;
+            $task->CREATORID = $id;
             $task->TASKNAME = $tN;
             $task->DESCRIPTION = $desc;
             $task->DUEDATE = $DD;
@@ -214,9 +226,27 @@ class Course extends Model
         //zizomody
         $courses=Course::where('COURSECODE',$courseCode)->get();
         $c=$courses[0];
-        $profe=ProfessorCource::select('PROFUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
-        $ta=TACourse::select('TAUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
-        $res=array("Course"=>$c,"prof"=>$profe,"ta"=>$ta);
+        $profe=ProfessorCource::where('COURSECODE', $courseCode)->get();
+        $row=new Collection();
+        foreach ($profe as $item){
+            $prof= Professor::where("PROFUSERNAME",$item["PROFUSERNAME"])->get();
+            //FIRSTNAME	LASTNAME
+            foreach ($prof as $item2){
+                $z=array("PROFUSERNAME"=>$item["PROFUSERNAME"],"FIRSTNAME"=>$item2["FIRSTNAME"],"LASTNAME"=>$item2["LASTNAME"]);
+            }
+            $row->push($z);
+        }
+        $ta=TACourse::where('COURSECODE', $courses[0]["COURSECODE"])->get();
+        $row2=new Collection();
+        foreach ($ta as $item){
+            $prof= TA::where("TAUSERNAME",$item["TAUSERNAME"])->get();
+            //FIRSTNAME	LASTNAME
+            foreach ($prof as $item2){
+                $z=array("TAUSERNAME"=>$item["TAUSERNAME"],"FIRSTNAME"=>$item2["FIRSTNAME"],"LASTNAME"=>$item2["LASTNAME"]);
+            }
+            $row2->push($z);
+        }
+        $res=array("Course"=>$c,"prof"=>$row,"ta"=>$row2);
         $subJason =array("status"=>"success","result"=>$res);
        return  $subJason;
 
