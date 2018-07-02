@@ -214,9 +214,10 @@ class Professor extends Model
         $allSlotsForCourses = array();
         foreach($pr as $item)
         {
-            $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","!=","1")->get();
-            $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","1")->get();
-            $subJason =array("COURSECODE"=>$item['COURSECODE'],"labs"=>$labs,
+           // $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","!=","1")->get();
+            $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","lec")->get();
+            $cou=Course::where("COURSECODE",$item['COURSECODE'])->get();
+            $subJason =array("COURSETITLE"=>$cou[0]["COURSETITLE"],
                 "lecture"=>$lec);
             array_push($allSlotsForCourses,$subJason);
         }
