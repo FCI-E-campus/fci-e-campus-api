@@ -239,8 +239,10 @@ class TA extends Model
         $tomorrowSlots=new Collection();
         $today=strtolower(date('l'));
         $tomorrow=strtolower(date('l',strtotime("+1 days")));
+       echo "1";
         $taCourses = TACourse::select('COURSECODE','GROUPID')->where('TAUSERNAME',$un)->get();
-        $slots = Slots::get();
+        echo "2";
+        $slots = Slots::all();
         foreach($slots as $slot)
         {
             $inCourse=0;
@@ -249,6 +251,7 @@ class TA extends Model
             {
                 if($taCourse->COURSECODE==$slot->COURSECODE)
                 {
+                    echo "3";
                     $groupID=groups::find($taCourse->GROUPID)->GROUPID;
                     $inCourse=1;
                     break;
@@ -306,7 +309,7 @@ class TA extends Model
                         }
                     }
                 }
-            }
+            } echo "5";
         }
         $result=array("today"=>$todaySlots,"tomorrow"=>$tomorrowSlots);
         $temp=array("status"=>"success","result"=>$result);
