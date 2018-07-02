@@ -13,7 +13,7 @@ class Groups extends Model
 
     public function deleteRelatives_($code)
     {
-        $rows = DB::table('groups')->where('COURSECODE', $code);
+        $rows = DB::table('groups')->where('COURSECODE', $code)->get();
 
         foreach($rows as $i)
             $this->deleteRelatives($i->GROUPID);
@@ -23,7 +23,7 @@ class Groups extends Model
 
     public function deleteRelatives__($code)
     {
-        $rows = DB::table('groups')->where('TAUSERNAME', $code);
+        $rows = DB::table('groups')->where('TAUSERNAME', $code)->get();
 
         foreach($rows as $i)
             $this->deleteRelatives($i->GROUPID);

@@ -52,7 +52,7 @@ class Forum extends Model
 
     public function deleteRelatives_($code)
     {
-        $rows = DB::table('forum')->where('COURSECODE', $code);
+        $rows = DB::table('forum')->where('COURSECODE', $code)->get();
 
         foreach($rows as $i)
             $this->deleteRelatives($i->FORUMID);

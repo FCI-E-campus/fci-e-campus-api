@@ -110,7 +110,7 @@ class Post extends Model
 
     public function deleteRelatives_($id)
     {
-        $rows = DB::table('post')->where('FORUMID', $id);
+        $rows = DB::table('post')->where('FORUMID', $id)->get();
 
         foreach($rows as $i)
             $this->deleteRelatives($i->POSTID);

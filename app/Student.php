@@ -295,7 +295,7 @@ class Student extends Model
 
     public function deleteRelatives_($id)
     {
-        $rows = DB::table('student')->where('DEPTID', $id)->orWhere('DEP_DEPTID', $id);
+        $rows = DB::table('student')->where('DEPTID', $id)->orWhere('DEP_DEPTID', $id)->get();
 
         foreach ($rows as $i)
             $this->deleteRelatives($i->STUDUSERNAME);

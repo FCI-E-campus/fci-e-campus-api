@@ -36,7 +36,7 @@
 			$this->col[] = ["label"=>"GROUPID","name"=>"GROUPID","join"=>"groups,GROUPID"];
 			$this->col[] = ["label"=>"SLOTTYPE","name"=>"SLOTTYPE"];
 			$this->col[] = ["label"=>"PLACE","name"=>"PLACE"];
-			$this->col[] = ["label"=>"COURSETITLE","name"=>"COURSECODE"];
+			$this->col[] = ["label"=>"COURSECODE","name"=>"COURSECODE"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE

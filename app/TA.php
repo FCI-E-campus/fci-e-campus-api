@@ -315,7 +315,7 @@ class TA extends Model
 
     public function deleteRelatives_($id)
     {
-        $rows = DB::table('ta')->where('DEPTID', $id);
+        $rows = DB::table('ta')->where('DEPTID', $id)->get();
 
         foreach ($rows as $i)
             $this->deleteRelatives($i->TAUSERNAME);

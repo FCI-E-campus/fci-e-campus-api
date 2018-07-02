@@ -317,7 +317,7 @@ class Course extends Model
 
     public function deleteRelatives_($id)
     {
-        $rows = DB::table('course')->where('DEPTID', $id);
+        $rows = DB::table('course')->where('DEPTID', $id)->get();
 
         foreach($rows as $i)
             $this->deleteRelatives($i->COURSECODE);

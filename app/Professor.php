@@ -281,7 +281,7 @@ class Professor extends Model
 
     public function deleteRelatives_($id)
     {
-        $rows = DB::table('professor')->where('DEPTID', $id);
+        $rows = DB::table('professor')->where('DEPTID', $id)->get();
 
         foreach ($rows as $i)
             $this->deleteRelatives($i->PROFUSERNAME);
