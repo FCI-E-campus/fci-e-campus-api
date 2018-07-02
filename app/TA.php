@@ -253,6 +253,7 @@ class TA extends Model
                 {
                     echo "3";
                     $groupID=groups::find($taCourse->GROUPID)->GROUPID;
+                    echo "4";
                     $inCourse=1;
                     break;
                 }
@@ -265,6 +266,7 @@ class TA extends Model
                     {
                         if($groupID==$slot->GROUPID)
                         {
+                            echo "5";
                             $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
                             $courseName=$courseName." Section";
                             $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
@@ -276,6 +278,7 @@ class TA extends Model
                     {
                         if($groupID==$slot->GROUPID)
                         {
+                            echo "6";
                             $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
                             $courseName=$courseName." Lab";
                             $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
@@ -290,6 +293,7 @@ class TA extends Model
                     {
                         if($groupID==$slot->GROUPID)
                         {
+                            echo "7";
                             $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
                             $courseName=$courseName." Section";
                             $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
@@ -301,6 +305,7 @@ class TA extends Model
                     {
                         if($groupID==$slot->GROUPID)
                         {
+                            echo "8";
                             $courseName = Course::find($slot->COURSECODE)->COURSETITLE;
                             $courseName=$courseName." Lab";
                             $subJason = array("name"=>$courseName,"duetime"=>$slot->STARTTIME,
@@ -309,7 +314,7 @@ class TA extends Model
                         }
                     }
                 }
-            } echo "5";
+            } echo "9";
         }
         $result=array("today"=>$todaySlots,"tomorrow"=>$tomorrowSlots);
         $temp=array("status"=>"success","result"=>$result);
