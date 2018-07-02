@@ -206,12 +206,12 @@ class TA extends Model
             $json = array("status"=>"failed","error_code"=>"1");
             return $json;
         }
-        $ta=TACourse::where("STUDUSERNAME",$un)->count();
+        $ta=TACourse::where("TAUSERNAME",$un)->count();
         if ($ta==0){
             $json = array("status"=>"failed","error_code"=>"31");
             return $json;
         }
-        $ta=TACourse::where("STUDUSERNAME",$un)->get();
+        $ta=TACourse::where("TAUSERNAME",$un)->get();
         $allSlotsForCourses = array();
         foreach($ta as $item)
         {
@@ -221,7 +221,7 @@ class TA extends Model
             $subJason =array("COURSECODE"=>$item['COURSECODE'],"labs"=>$labs,
                 "lecture"=>$lec);
             array_push($allSlotsForCourses,$subJason);
-           
+
         }
         $subJason =array("status"=>"success","result"=>$allSlotsForCourses);
         return  $subJason;
