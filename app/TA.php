@@ -240,7 +240,7 @@ class TA extends Model
         $today=strtolower(date('l'));
         $tomorrow=strtolower(date('l',strtotime("+1 days")));
         $taCourses = TACourse::select('COURSECODE','GROUPID')->where('TAUSERNAME',$un)->get();
-        $slots = Slots::all();
+        $slots = Slots::get();
         foreach($slots as $slot)
         {
             $inCourse=0;
