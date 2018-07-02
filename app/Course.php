@@ -214,7 +214,7 @@ class Course extends Model
         //zizomody
         $courses=Course::where('COURSECODE',$courseCode)->get();
         $c=$courses[0];
-        $profe=ProfessorCource::select('PROFUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
+        $profe=ProfessorCource::where('COURSECODE', $courseCode)->get();
         $ta=TACourse::select('TAUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
         $res=array("Course"=>$c,"prof"=>$profe,"ta"=>$ta);
         $subJason =array("status"=>"success","result"=>$res);
