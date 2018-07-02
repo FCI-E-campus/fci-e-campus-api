@@ -216,15 +216,12 @@ class TA extends Model
         foreach($ta as $item)
         {
             $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("GROUPID",$item["GROUPID"])->get();
-            // $allSlots->push($slot);
-            // array_push($allSlots,$slot);
+
             $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","1")->get();
             $subJason =array("COURSECODE"=>$item['COURSECODE'],"labs"=>$labs,
                 "lecture"=>$lec);
             array_push($allSlotsForCourses,$subJason);
-            // $allSlots->push($slot);
-            // array_push($allSlots,$slot);
-            //array_push($allSlotsForCourses);
+           
         }
         $subJason =array("status"=>"success","result"=>$allSlotsForCourses);
         return  $subJason;
