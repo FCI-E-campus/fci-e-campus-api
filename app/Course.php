@@ -220,12 +220,21 @@ class Course extends Model
             $prof= Professor::where("PROFUSERNAME",$item["PROFUSERNAME"])->get();
             //FIRSTNAME	LASTNAME
             foreach ($prof as $item2){
-                $z=array("PROFUSERNAME"=>$item2["PROFUSERNAME"],"FIRSTNAME"=>$item2["FIRSTNAME"],"LASTNAME"=>$item2["LASTNAME"]);
+                $z=array("PROFUSERNAME"=>$item["PROFUSERNAME"],"FIRSTNAME"=>$item2["FIRSTNAME"],"LASTNAME"=>$item2["LASTNAME"]);
             }
             $row->push($z);
         }
-        $ta=TACourse::select('TAUSERNAME')->where('COURSECODE', $courses[0]["COURSECODE"])->get();
-        $res=array("Course"=>$c,"prof"=>$row,"ta"=>$ta);
+        $ta=TACourse::where('COURSECODE', $courses[0]["COURSECODE"])->get();
+        $row2=new Collection();
+        foreach ($ta as $item){
+            $prof= TA::where("TAUSERNAME",$item["TAUSERNAME"])->get();
+            //FIRSTNAME	LASTNAME
+            foreach ($prof as $item2){
+                $z=array("TAUSERNAME"=>$item["TAUSERNAME"],"FIRSTNAME"=>$item2["FIRSTNAME"],"LASTNAME"=>$item2["LASTNAME"]);
+            }
+            $row2->push($z);
+        }
+        $res=array("Course"=>$c,"prof"=>$row,"ta"=>$row2);
         $subJason =array("status"=>"success","result"=>$res);
        return  $subJason;
 
