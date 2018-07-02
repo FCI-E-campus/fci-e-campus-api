@@ -236,7 +236,7 @@ class Course extends Model
             }
             $row->push($z);
         }
-        $ta=TACourse::where('COURSECODE', $courses[0]["COURSECODE"])->get();
+        $ta=TACourse::where('COURSECODE', $courseCode)->get();
         $row2=new Collection();
         foreach ($ta as $item){
             $prof= TA::where("TAUSERNAME",$item["TAUSERNAME"])->get();
