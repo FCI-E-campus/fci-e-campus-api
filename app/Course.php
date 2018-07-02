@@ -99,7 +99,7 @@ class Course extends Model
     }
 
     //add task to DB
-    public function addTask($crsCode,$cId,$tN,$desc,$DD,$DC,$W)
+    public function addTask($crsCode,$tN,$desc,$DD,$DC,$W,$un,$usertype)
     {
 
             if(Course::find($crsCode)=="")
@@ -107,14 +107,26 @@ class Course extends Model
                 $json = array("status"=>"failed","error_msg"=>"8");
                 return $json;
             }
-            if(TaskCreator::find($cId)=="")
-            {
-                return "this task creator not exist";
+        if ($usertype=="ta") {
+            $count = TA::where('TAUSERNAME', $un)->count();
+            if ($count == 0) {
+                $json = array("status"=>"failed","error_code"=>"1");
+                return $json;
             }
+        }
+        else if ($usertype=="prof") {
+            $count = Professor::where('PROFUSERNAME', $un)->count();
+            if ($count == 0) {
+                $json = array("status" => "failed", "error_code" => "1");
+                return $json;
+            }
+        }
+        $upload= new TaskCreator();
+        $id=$upload->addUploader($usertype,$un);
             $task = new Task();
 
             $task->COURSECODE = $crsCode;
-            $task->CREATORID = $cId;
+            $task->CREATORID = $id;
             $task->TASKNAME = $tN;
             $task->DESCRIPTION = $desc;
             $task->DUEDATE = $DD;

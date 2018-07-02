@@ -60,8 +60,8 @@ class CourseController extends Controller
     public function addTask(Request $request)
     {
         $course = new Course();
-        return $course->addTask($request['COURSECODE'],$request['CREATORID'],$request['TASKNAME'],
-            $request['DESCRIPTION'],$request['DUEDATE'],$request['DATECREATED'],$request['WEIGHT']);
+        return $course->addTask($request['COURSECODE'],$request['TASKNAME'],
+            $request['DESCRIPTION'],$request['DUEDATE'],$request['DATECREATED'],$request['WEIGHT'],$request['USERNAME'],$request['USERTYPE']);
 
     }
     //call delete post from course class model
