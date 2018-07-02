@@ -143,7 +143,7 @@ class Student extends Model
         $allSlotsForCourses = array();
         foreach($st as $item)
         {
-             $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","!=","lec")->get();
+             $labs=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","!=","lec")->where("GROUPID",$item["GROUPID"])->get();
             $lec=Slots::where("COURSECODE" , $item['COURSECODE'])->where("SLOTTYPE","lec")->get();
             $cou=Course::where("COURSECODE",$item['COURSECODE'])->get();
             $subJason =array("COURSETITLE"=>$cou[0]["COURSETITLE"],"lab"=>$labs,
