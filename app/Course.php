@@ -315,4 +315,29 @@ class Course extends Model
         return  $subJason;
     }
 
+    public function deleteRelatives_($id)
+    {
+        $rows = DB::table('course')->where('DEPTID', $id)->get();
+
+        foreach($rows as $i)
+            $this->deleteRelatives($i->COURSECODE);
+
+        DB::table('course')->where('DEPTID', $id)->delete();
+    }
+
+    public function deleteRelatives($code)
+    {
+        DB::table('extramaterials')->where('COURSECODE',$code)->delete();
+        DB::table('officialmaterial')->where('COURSECODE',$code)->delete();
+        DB::table('prerequisitecourse')->where('COURSECODE',$code)->delete();
+        DB::table('prerequisitecourse')->where('COU_COURSECODE',$code)->delete();
+        DB::table('professorcourse')->where('COURSECODE',$code)->delete();
+        DB::table('task')->where('COURSECODE',$code)->delete();
+
+        $forum = new Forum();
+        $forum->deleteRelatives_($code);
+
+        $group = new Groups();
+        $group->deleteRelatives_($code);
+    }
 }

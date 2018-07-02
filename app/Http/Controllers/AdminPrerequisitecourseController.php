@@ -30,14 +30,23 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"COURSETITLE","name"=>"COURSECODE","join"=>"course,COURSETITLE"];
-			$this->col[] = ["label"=>"COU COURSETITLE","name"=>"COU_COURSECODE","join"=>"course,COURSETITLE"];
+			$this->col[] = ["label"=>"COURSECODE","name"=>"COURSECODE"];
+			$this->col[] = ["label"=>"COU COURSECODE","name"=>"COU_COURSECODE"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
+
+            $courses = '';
+            DB::table('course')->get()->map(function ($item)use (&$courses){
+                $courses .= $item->COURSECODE . '|' . $item->COURSETITLE .';';
+                return $item;
+            });
+
+            $courses = rtrim($courses,';');
+
 			$this->form = [];
-			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'course,COURSETITLE'];
-			$this->form[] = ['label'=>'COU COURSETITLE','name'=>'COU_COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'course,COURSETITLE'];
+			$this->form[] = ['label'=>'COURSETITLE','name'=>'COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$courses];
+			$this->form[] = ['label'=>'COU COURSETITLE','name'=>'COU_COURSECODE','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>$courses];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM

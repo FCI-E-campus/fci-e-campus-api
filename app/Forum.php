@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use DB;
 class Forum extends Model
 {
     protected $table='forum';
@@ -49,4 +49,21 @@ class Forum extends Model
         $jason = array("status"=>"success","post_id"=>$post->POSTID);
         return $jason;
     }
+
+    public function deleteRelatives_($code)
+    {
+        $rows = DB::table('forum')->where('COURSECODE', $code)->get();
+
+        foreach($rows as $i)
+            $this->deleteRelatives($i->FORUMID);
+
+        DB::table('forum')->where('COURSECODE',$code)->delete();
+    }
+
+    public function deleteRelatives($id)
+    {
+        $post = new Post();
+        $post->deleteRelatives_($id);
+    }
+
 }

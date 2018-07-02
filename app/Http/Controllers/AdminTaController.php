@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-	use Session;
+	use App\TA;
+    use Session;
 	use Request;
 	use DB;
 	use CRUDBooster;
@@ -322,8 +323,9 @@
 	    | 
 	    */
 	    public function hook_before_delete($id) {
-	        //Your code here
-
+            $code = DB::table('ta')->where('id', $id)->pluck('TAUSERNAME')->first();
+            $ta = new TA();
+            $ta->deleteRelatives($code);
 	    }
 
 	    /* 

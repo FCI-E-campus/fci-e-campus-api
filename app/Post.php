@@ -33,8 +33,8 @@ class Post extends Model
             foreach($temp as $tetemp)
             {
                 $subJason =array("comment_text"=>$comment->COMMENTTEXT,"comment_time"=>$comment->COMMENTTIME,
-                "author_username"=>$tetemp->AUTHORUSERNAME,
-                "author_type"=>$tetemp->AUTHORTYPE,"comment_id"=>$comment->COMMENTID);
+                    "author_username"=>$tetemp->AUTHORUSERNAME,
+                    "author_type"=>$tetemp->AUTHORTYPE,"comment_id"=>$comment->COMMENTID);
             }
             $allComments->push($subJason);
         }
@@ -107,5 +107,21 @@ class Post extends Model
         $jason = array("status"=>"success");
         return $jason;
     }
+
+    public function deleteRelatives_($id)
+    {
+        $rows = DB::table('post')->where('FORUMID', $id)->get();
+
+        foreach($rows as $i)
+            $this->deleteRelatives($i->POSTID);
+
+        DB::table('post')->where('FORUMID', $id)->delete();
+    }
+
+    public function deleteRelatives($id)
+    {
+        DB::table('comment')->where('POSTID', $id)->delete();
+    }
+
 
 }

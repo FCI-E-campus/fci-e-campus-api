@@ -312,4 +312,24 @@ class TA extends Model
         $temp=array("status"=>"success","result"=>$result);
         return $temp;
     }
+
+    public function deleteRelatives_($id)
+    {
+        $rows = DB::table('ta')->where('DEPTID', $id)->get();
+
+        foreach ($rows as $i)
+            $this->deleteRelatives($i->TAUSERNAME);
+
+        DB::table('ta')->where('DEPTID', $id)->delete();
+    }
+
+    public function deleteRelatives($code)
+    {
+        DB::table('tacourse')->where('TAUSERNAME', $code)->delete();
+
+        $group = new Groups();
+
+        $group->deleteRelatives__($code);
+    }
+
 }
