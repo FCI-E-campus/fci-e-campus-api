@@ -17,7 +17,7 @@ class TaskCreator extends Model
         $upload-> CREATORUSERNAME= $un;
         $upload-> CREATORTYPE= $type;
         $upload->save();
-        $x= OfficialMaterialUploader::where('CREATORUSERNAME', $un)->get();
+        $x= TaskCreator::where('CREATORUSERNAME', $un)->get();
         return $x[0]["CREATORID"];
 
     }
