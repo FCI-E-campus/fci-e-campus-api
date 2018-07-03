@@ -521,7 +521,7 @@ class DepartmentController extends Controller
         $slot->PLACE="modarag 8";
         $slot->COURSECODE="IT123";
         $slot->save();
-*/
+
         
 
         $anouncement = new Announcement();
@@ -541,6 +541,10 @@ class DepartmentController extends Controller
         $taCourse->PROFUSERNAME="mnassef";
         $taCourse->COURSECODE="IT123";
         $taCourse->save();
+*/
+DB::table('professorcourse')->where('professorcourseID', '=', 3)->delete();
+DB::table('announcement')->where('ANNOUNCEMENTID', '=', 2)->delete();
+DB::table('announcement')->where('ANNOUNCEMENTID', '=', 4)->delete();
 
 
         /*
