@@ -36,8 +36,8 @@ class CreateProfessorTable extends Migration
             $table->date('DATEOFBIRTH')->nullable()->default(null);
 
 
-            $table->foreign('DEPTID')
-                ->references('DEPTID')->on('department');
+           // $table->foreign('DEPTID')
+             //   ->references('DEPTID')->on('department');
         });
     }
 

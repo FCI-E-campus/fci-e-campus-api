@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaTable extends Migration
+class CreateStudentTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $set_schema_table = 'ta';
+    public $set_schema_table = 'student';
 
     /**
      * Run the migrations.
-     * @table ta
+     * @table student
      *
      * @return void
      */
@@ -23,24 +23,31 @@ class CreateTaTable extends Migration
         if (Schema::hasTable($this->set_schema_table)) return;
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-	        $table->increments('id');
-	        $table->string('TAUSERNAME',150)->unique();
-            $table->unsignedInteger('DEPTID');
-            $table->string('TAPASSWORD', 50);
+            $table->string('STUDUSERNAME',50)->primary();
+            $table->unsignedInteger('DEPTID')->nullable()->default(null);
+            $table->unsignedInteger('DEP_DEPTID')->nullable()->default(null);
+            $table->string('STUDPASSWORD', 50);
             $table->string('FIRSTNAME', 50);
             $table->string('LASTNAME', 50);
             $table->string('EMAIL', 150);
             $table->string('PHONENUMBER', 50)->nullable()->default(null);
             $table->date('DATEOFBIRTH')->nullable()->default(null);
-            $table->string('ActivationCode',20);
-            $table->boolean('isActiveted')->default(0);
+            $table->string('FACULTYID', 15);
+            $table->tinyInteger('ISMODERATOR');
+
 
 
 /*
             $table->foreign('DEPTID')
                 ->references('DEPTID')->on('department')
                 ->onDelete('restrict')
-                ->onUpdate('restrict');*/
+                ->onUpdate('restrict');
+
+            $table->foreign('DEP_DEPTID')
+                ->references('DEPTID')->on('department')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+                */
         });
     }
 
