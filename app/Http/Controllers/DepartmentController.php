@@ -66,7 +66,7 @@ class DepartmentController extends Controller
     public function show()
     {   
         //we are using this function to fill the DB
-        /*        
+               
         $department = new Department();
         $department->DEPARTMENTNAME="General";
         $department->DESCRIPTION="general department";
@@ -107,12 +107,12 @@ class DepartmentController extends Controller
         $student->save();
 
         $student = new Student();
-        $student->STUDUSERNAME="ahmed";
+        $student->STUDUSERNAME="abdallah1";
         $student->DEPTID=3;
         $student->DEP_DEPTID=4;
-        $student->STUDPASSWORD="123";
-        $student->FIRSTNAME="ahmed";
-        $student->LASTNAME="mohsen";
+        $student->STUDPASSWORD="123456789";
+        $student->FIRSTNAME="Abdallah";
+        $student->LASTNAME="Abdelazim";
         $student->EMAIL="ahmedMohsen@gmail.com";
         $student->PHONENUMBER="01151234567";
         $student->DATEOFBIRTH="1996-07-12";
@@ -123,8 +123,8 @@ class DepartmentController extends Controller
         $course = new Course();
         $course->COURSECODE="CS123";
         $course->DEPTID=3;
-        $course->COURSETITLE="algorithms";
-        $course->DESCRIPTION="how to build more algorithms";
+        $course->COURSETITLE="Compilers";
+        $course->DESCRIPTION="How to build more efficient compilers.";
         $course->STARTDATE="2018-09-21 00:00:00";
         $course->ENDDATE="2019-01-03 00:00:00";
         $course->PASSCODE="ag123";
@@ -132,8 +132,8 @@ class DepartmentController extends Controller
         $course = new Course();
         $course->COURSECODE="IT123";
         $course->DEPTID=5;
-        $course->COURSETITLE="networks";
-        $course->DESCRIPTION="how to build more networks";
+        $course->COURSETITLE="Networks";
+        $course->DESCRIPTION="how to build networks";
         $course->STARTDATE="2018-09-21 00:00:00";
         $course->ENDDATE="2019-01-03 00:00:00";
         $course->PASSCODE="ad123";
@@ -141,8 +141,8 @@ class DepartmentController extends Controller
         $course = new Course();
         $course->COURSECODE="IS123";
         $course->DEPTID=4;
-        $course->COURSETITLE="analysis";
-        $course->DESCRIPTION="how to build more analysis to data";
+        $course->COURSETITLE="Analysis";
+        $course->DESCRIPTION="how to analyze to data";
         $course->STARTDATE="2018-09-21 00:00:00";
         $course->ENDDATE="2019-01-03 00:00:00";
         $course->PASSCODE="as123";
@@ -150,8 +150,8 @@ class DepartmentController extends Controller
         $course = new Course();
         $course->COURSECODE="DS123";
         $course->DEPTID=6;
-        $course->COURSETITLE="excel";
-        $course->DESCRIPTION="how to build more excel operations";
+        $course->COURSETITLE="Excel";
+        $course->DESCRIPTION="how to use excel operations";
         $course->STARTDATE="2018-09-21 00:00:00";
         $course->ENDDATE="2019-01-03 00:00:00";
         $course->PASSCODE="aw123";
@@ -159,7 +159,7 @@ class DepartmentController extends Controller
         $course = new Course();
         $course->COURSECODE="G123";
         $course->DEPTID=1;
-        $course->COURSETITLE="english";
+        $course->COURSETITLE="English";
         $course->DESCRIPTION="how to speak english";
         $course->STARTDATE="2018-09-21 00:00:00";
         $course->ENDDATE="2019-01-03 00:00:00";
@@ -168,7 +168,7 @@ class DepartmentController extends Controller
         $course = new Course();
         $course->COURSECODE="G124";
         $course->DEPTID=2;
-        $course->COURSETITLE="math";
+        $course->COURSETITLE="Math 1";
         $course->DESCRIPTION="how to make math operations";
         $course->STARTDATE="2018-09-21 00:00:00";
         $course->ENDDATE="2019-01-03 00:00:00";
@@ -201,15 +201,6 @@ class DepartmentController extends Controller
         $forum->COURSECODE="IT123";
         $forum->save();
 
-        $post = new Post();
-        $post->FORUMID=1;
-        $post->AUTHORID=1;
-        $post->POSTTITLE="connection to DB";
-        $post->POSTBODY="how to do DB connecction";
-        $post->ANSWERED=0;
-        $post->DATEPUBLISHED="2018-06-21 00:00:00";
-        $post->save();
-        
         $taskCreator = new TaskCreator();
         $taskCreator->CREATORUSERNAME="abod";
         $taskCreator->CREATORTYPE="stud";
@@ -219,40 +210,11 @@ class DepartmentController extends Controller
         $taskCreator->CREATORTYPE="stud";
         $taskCreator->save();
 
-        $task = new Task();
-        $task->COURSECODE="CS123";
-        $task->CREATORID=1;
-        $task->TASKNAME="assinment1";
-        $task->DESCRIPTION="calculator app";
-        $task->DUEDATE="2018-06-30 00:00:00";
-        $task->DATECREATED="2018-06-24 00:00:00";
-        $task->WEIGHT=5;
-        $task->save();
         
-        $task = new Task();
-        $task->COURSECODE="DS123";
-        $task->CREATORID=1;
-        $task->TASKNAME="assinment1";
-        $task->DESCRIPTION="excel app";
-        $task->DUEDATE="2018-06-30 00:00:00";
-        $task->DATECREATED="2018-06-24 00:00:00";
-        $task->WEIGHT=5;
-        $task->save();
-
-        $task = new Task();
-        $task->COURSECODE="G123";
-        $task->CREATORID=1;
-        $task->TASKNAME="assinment1";
-        $task->DESCRIPTION="mathmatics questions";
-        $task->DUEDATE="2018-06-30 00:00:00";
-        $task->DATECREATED="2018-06-24 00:00:00";
-        $task->WEIGHT=5;
-        $task->save();
-
         $ta = new TA();
         $ta->TAUSERNAME="abod";
         $ta->DEPTID=1;
-        $ta->TAPASSWORD="123";
+        $ta->TAPASSWORD="123456789";
         $ta->FIRSTNAME="abod";
         $ta->LASTNAME="mahmoud";
         $ta->EMAIL="abod.mahmoud92@gmail.com";
@@ -263,18 +225,30 @@ class DepartmentController extends Controller
         $ta->save();
 
         $ta = new Professor();
-        $ta->PROFUSERNAME="abod";
+        $ta->PROFUSERNAME="mnassef";
         $ta->DEPTID=1;
-        $ta->PROFPASSWORD="123";
-        $ta->FIRSTNAME="abod";
-        $ta->LASTNAME="mahmoud";
-        $ta->EMAIL="abod.mahmoud92@gmail.com";
+        $ta->PROFPASSWORD="123456789";
+        $ta->FIRSTNAME="Mohammed";
+        $ta->LASTNAME="Nassef";
+        $ta->EMAIL="m.nassef@fci-cu.edu.eg";
         $ta->PHONENUMBER="01000495565";
         $ta->DATEOFBIRTH="2018-06-27";
         $ta->ActivationCode="5098654";
         $ta->isActiveted=1;
         $ta->save();
 
+        $ta = new Professor();
+        $ta->PROFUSERNAME="abod";
+        $ta->DEPTID=1;
+        $ta->PROFPASSWORD="123456789";
+        $ta->FIRSTNAME="Abood";
+        $ta->LASTNAME="Mahmoud";
+        $ta->EMAIL="abod@gmail.com";
+        $ta->PHONENUMBER="01000495565";
+        $ta->DATEOFBIRTH="2018-06-27";
+        $ta->ActivationCode="5098654";
+        $ta->isActiveted=1;
+        $ta->save();
         
 
         $groups = new Groups();
@@ -308,39 +282,39 @@ class DepartmentController extends Controller
         $studentCourse->save();
 
         $slot = new Slots();
-        $slot->DAY="thursday";
+        $slot->DAY="wednesday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=90;
         $slot->GROUPID=1;
         $slot->SLOTTYPE="lab";
-        $slot->PLACE="lab 8";
+        $slot->PLACE="Lab 8";
         $slot->COURSECODE="CS123";
         $slot->save();
         
         $slot = new Slots();
         $slot->DAY="thursday";
-        $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->STARTTIME="09:30:00";
+        $slot->DURATION=75;
         $slot->GROUPID=2;
-        $slot->SLOTTYPE="lab";
-        $slot->PLACE="lab 8";
+        $slot->SLOTTYPE="lec";
+        $slot->PLACE="The big hall.";
         $slot->COURSECODE="CS123";
         $slot->save();
 
         $slot = new Slots();
-        $slot->DAY="thursday";
+        $slot->DAY="tuesday";
         $slot->STARTTIME="10:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=1;
         $slot->SLOTTYPE="lec";
-        $slot->PLACE="modarag 7";
+        $slot->PLACE="Modarag 7";
         $slot->COURSECODE="CS123";
         $slot->save();
 
         $slot = new Slots();
-        $slot->DAY="friday";
-        $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DAY="tuesday";
+        $slot->STARTTIME="11:15:00";
+        $slot->DURATION=75;
         $slot->GROUPID=3;
         $slot->SLOTTYPE="sec";
         $slot->PLACE="modarag 5";
@@ -348,20 +322,20 @@ class DepartmentController extends Controller
         $slot->save();
 
         $slot = new Slots();
-        $slot->DAY="friday";
+        $slot->DAY="wednesday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=90;
         $slot->GROUPID=4;
-        $slot->SLOTTYPE="sec";
+        $slot->SLOTTYPE="lec";
         $slot->PLACE="modarag 6";
         $slot->COURSECODE="IT123";
         $slot->save();
 
         $slot = new Slots();
-        $slot->DAY="friday";
+        $slot->DAY="sunday";
         $slot->STARTTIME="10:00:00";
-        $slot->DURATION=2;
-        $slot->GROUPID=1;
+        $slot->DURATION=75;
+        $slot->GROUPID=3;
         $slot->SLOTTYPE="lec";
         $slot->PLACE="modarag 8";
         $slot->COURSECODE="IT123";
@@ -369,20 +343,20 @@ class DepartmentController extends Controller
 
         
         $taCourse = new ProfessorCource();
-        $taCourse->PROFUSERNAME="abod";
+        $taCourse->PROFUSERNAME="mnassef";
         $taCourse->COURSECODE="CS123";
         $taCourse->save();
         
         $taCourse = new ProfessorCource();
         $taCourse->PROFUSERNAME="abod";
-        $taCourse->COURSECODE="G123";
+        $taCourse->COURSECODE="CS123";
         $taCourse->save();
         
 
         $taCourse = new TACourse();
         $taCourse->TAUSERNAME="abod";
-        $taCourse->COURSECODE="CS123";
-        $taCourse->GROUPID=1;
+        $taCourse->COURSECODE="IT123";
+        $taCourse->GROUPID=3;
         $taCourse->save();
         $taCourse = new TACourse();
         $taCourse->TAUSERNAME="abod";
@@ -395,12 +369,12 @@ class DepartmentController extends Controller
         $studentCourse->STUDUSERNAME="abod";
         $studentCourse->COURSECODE="CS123";
         $studentCourse->save();
-        */
+        
         
         $slot = new Slots();
         $slot->DAY="saturday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=90;
         $slot->GROUPID=1;
         $slot->SLOTTYPE="lab";
         $slot->PLACE="lab 8";
@@ -409,18 +383,18 @@ class DepartmentController extends Controller
         
         $slot = new Slots();
         $slot->DAY="saturday";
-        $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->STARTTIME="09:30:00";
+        $slot->DURATION=90;
         $slot->GROUPID=2;
-        $slot->SLOTTYPE="lab";
-        $slot->PLACE="lab 8";
+        $slot->SLOTTYPE="lec";
+        $slot->PLACE="modarg 8";
         $slot->COURSECODE="CS123";
         $slot->save();
 
         $slot = new Slots();
         $slot->DAY="saturday";
         $slot->STARTTIME="10:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=1;
         $slot->SLOTTYPE="lec";
         $slot->PLACE="modarag 7";
@@ -430,7 +404,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="sunday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=3;
         $slot->SLOTTYPE="sec";
         $slot->PLACE="modarag 5";
@@ -440,7 +414,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="sunday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=4;
         $slot->SLOTTYPE="sec";
         $slot->PLACE="modarag 6";
@@ -450,7 +424,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="sunday";
         $slot->STARTTIME="10:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=1;
         $slot->SLOTTYPE="lec";
         $slot->PLACE="modarag 8";
@@ -460,7 +434,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="monday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=1;
         $slot->SLOTTYPE="lab";
         $slot->PLACE="lab 8";
@@ -470,7 +444,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="monday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=2;
         $slot->SLOTTYPE="lab";
         $slot->PLACE="lab 8";
@@ -480,7 +454,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="monday";
         $slot->STARTTIME="10:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=1;
         $slot->SLOTTYPE="lec";
         $slot->PLACE="modarag 7";
@@ -490,7 +464,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="tuesday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=3;
         $slot->SLOTTYPE="sec";
         $slot->PLACE="modarag 5";
@@ -500,7 +474,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="tuesday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=4;
         $slot->SLOTTYPE="sec";
         $slot->PLACE="modarag 6";
@@ -510,7 +484,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="tuesday";
         $slot->STARTTIME="10:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=1;
         $slot->SLOTTYPE="lec";
         $slot->PLACE="modarag 8";
@@ -520,7 +494,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="wednesday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=3;
         $slot->SLOTTYPE="sec";
         $slot->PLACE="modarag 5";
@@ -530,7 +504,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="wednesday";
         $slot->STARTTIME="08:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=4;
         $slot->SLOTTYPE="sec";
         $slot->PLACE="modarag 6";
@@ -540,7 +514,7 @@ class DepartmentController extends Controller
         $slot = new Slots();
         $slot->DAY="wednesday";
         $slot->STARTTIME="10:00:00";
-        $slot->DURATION=2;
+        $slot->DURATION=75;
         $slot->GROUPID=1;
         $slot->SLOTTYPE="lec";
         $slot->PLACE="modarag 8";
