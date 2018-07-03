@@ -21,6 +21,7 @@ use App\PreRequisiteCourse;
 use App\ProfessorCource;
 use App\TACourse;
 use App\Slots;
+use App\Announcement;
 use DB;
 class DepartmentController extends Controller
 {
@@ -66,7 +67,7 @@ class DepartmentController extends Controller
     public function show()
     {   
         //we are using this function to fill the DB
-               
+               /*
         $department = new Department();
         $department->DEPARTMENTNAME="General";
         $department->DESCRIPTION="general department";
@@ -520,10 +521,27 @@ class DepartmentController extends Controller
         $slot->PLACE="modarag 8";
         $slot->COURSECODE="IT123";
         $slot->save();
-
+*/
         
 
+        $anouncement = new Announcement();
+        $anouncement->ANNOUNCEMENTTITLE="Official holiday";
+        $anouncement->ANNOUNCEMENTBODY="This wednesday is an official holidy.";
+        $anouncement->DATEPUBLISHED="2018-05-06 00:00:00";
+        $anouncement->save();
+
         
+        $anouncement = new Announcement();
+        $anouncement->ANNOUNCEMENTTITLE="Summer term starts today.";
+        $anouncement->ANNOUNCEMENTBODY="Today 3rd of July s the beginnin of summer term.";
+        $anouncement->DATEPUBLISHED="2018-05-06 00:00:00";
+        $anouncement->save();
+
+        $taCourse = new ProfessorCource();
+        $taCourse->PROFUSERNAME="mnassef";
+        $taCourse->COURSECODE="IT123";
+        $taCourse->save();
+
 
         /*
         $task = new Task();
